@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chart.js Showcase — Mapfre Design System</title>
+  <link rel="stylesheet" href="charts.css" />
+</head>
+<body>
+
+  <!-- ─── HEADER ─────────────────────────────────────────────────────────── -->
+  <header class="page-header">
+    <div class="page-header__logo">
+      <span class="page-header__logo-badge">M</span>
+      <div>
+        <h1 class="page-header__title">Chart.js Showcase</h1>
+        <p class="page-header__subtitle">Mapfre Design System — Gráficos Interactivos</p>
+      </div>
+    </div>
+    <div class="page-header__rule"></div>
+    <a href="documentation.html" class="btn btn--sm btn--secondary" style="margin-left: auto; margin-right: 0;">
+      📖 Documentación
+    </a>
+  </header>
+
+  <!-- ─── ALIAS LEGEND ────────────────────────────────────────────────────── -->
+  <section class="alias-legend">
+    <div class="alias-legend__inner">
+      <span class="alias-swatch alias-swatch--brand-primary">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-brand-primary (botones de acción)</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-1">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-1: support-blue-05</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-2">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-2: pink-400</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-3">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-3: support-green-05</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-4">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-4: support-yellow-05</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-5">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-5: support-blue-06</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-6">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-6: pink-500</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-7">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-7: support-green-06</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-8">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-8: support-yellow-06</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-9">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-9: pink-600</span>
+      </span>
+      <span class="alias-swatch alias-swatch--chart-10">
+        <span class="alias-swatch__dot"></span>
+        <span class="alias-swatch__label">—color-chart-10: support-blue-07</span>
+      </span>
+    </div>
+  </section>
+
+  <!-- ─── CHARTS GRID ─────────────────────────────────────────────────────── -->
+  <main class="charts-grid">
+
+    <!-- 1. Bar Chart -->
+    <article class="chart-card" id="card-bar">
+      <header class="chart-card__header">
+        <span class="chart-card__icon">📊</span>
+        <div>
+          <h2 class="chart-card__title">Bar Chart</h2>
+          <p class="chart-card__desc">Barras verticales</p>
+        </div>
+      </header>
+      <div class="chart-card__body">
+        <canvas id="barChart"></canvas>
+      </div>
+      <footer class="chart-card__footer">
+        <button class="btn btn--primary btn--sm btn--active" data-chart="bar" data-mode="basic">Básico</button>
+        <button class="btn btn--ghost btn--sm" data-chart="bar" data-mode="multi">Multi-Dataset</button>
+        <button class="btn btn--ghost btn--sm" data-chart="bar" data-mode="stacked">Apilado</button>
+      </footer>
+    </article>
+
+    <!-- 2. Line Chart -->
+    <article class="chart-card" id="card-line">
+      <header class="chart-card__header">
+        <span class="chart-card__icon">📈</span>
+        <div>
+          <h2 class="chart-card__title">Line Chart</h2>
+          <p class="chart-card__desc">Gráfico de líneas</p>
+        </div>
+      </header>
+      <div class="chart-card__body">
+        <canvas id="lineChart"></canvas>
+      </div>
+      <footer class="chart-card__footer">
+        <button class="btn btn--primary btn--sm btn--active" data-chart="line" data-mode="basic">Básico</button>
+        <button class="btn btn--ghost btn--sm" data-chart="line" data-mode="multiline">Multi-Línea</button>
+        <button class="btn btn--ghost btn--sm" data-chart="line" data-mode="area">Áreas</button>
+      </footer>
+    </article>
+
+    <!-- 3. Pie Chart -->
+    <article class="chart-card" id="card-pie">
+      <header class="chart-card__header">
+        <span class="chart-card__icon">🥧</span>
+        <div>
+          <h2 class="chart-card__title">Pie Chart</h2>
+          <p class="chart-card__desc">Proporciones circulares</p>
+        </div>
+      </header>
+      <div class="chart-card__body">
+        <canvas id="pieChart"></canvas>
+      </div>
+      <footer class="chart-card__footer">
+        <button class="btn btn--primary btn--sm btn--active" data-chart="pie" data-mode="right">Leyenda derecha</button>
+        <button class="btn btn--ghost btn--sm" data-chart="pie" data-mode="bottom">Leyenda abajo</button>
+      </footer>
+    </article>
+
+    <!-- 4. Doughnut Chart -->
+    <article class="chart-card" id="card-doughnut">
+      <header class="chart-card__header">
+        <span class="chart-card__icon">🍩</span>
+        <div>
+          <h2 class="chart-card__title">Doughnut Chart</h2>
+          <p class="chart-card__desc">Gráfico de donut</p>
+        </div>
+      </header>
+      <div class="chart-card__body">
+        <canvas id="doughnutChart"></canvas>
+      </div>
+      <footer class="chart-card__footer">
+        <label for="doughnutSelect" class="chart-card__caption">Datos de:</label>
+        <select class="select-control" id="doughnutSelect">
+          <option value="seguros">Seguros</option>
+          <option value="inversiones">Inversiones</option>
+        </select>
+      </footer>
+    </article>
+
+    <!-- 5. Radar Chart -->
+    <article class="chart-card" id="card-radar">
+      <header class="chart-card__header">
+        <span class="chart-card__icon">🕸️</span>
+        <div>
+          <h2 class="chart-card__title">Radar Chart</h2>
+          <p class="chart-card__desc">Multidimensional</p>
+        </div>
+      </header>
+      <div class="chart-card__body">
+        <canvas id="radarChart"></canvas>
+      </div>
+      <footer class="chart-card__footer">
+        <button class="btn btn--primary btn--sm btn--active" data-chart="radar" data-mode="simple">Simple</button>
+        <button class="btn btn--ghost btn--sm" data-chart="radar" data-mode="comparative">Comparativo</button>
+      </footer>
+    </article>
+
+    <!-- 6. Scatter Chart -->
+    <article class="chart-card" id="card-scatter">
+      <header class="chart-card__header">
+        <span class="chart-card__icon">🔵</span>
+        <div>
+          <h2 class="chart-card__title">Scatter Chart</h2>
+          <p class="chart-card__desc">Dispersión de puntos</p>
+        </div>
+      </header>
+      <div class="chart-card__body">
+        <canvas id="scatterChart"></canvas>
+      </div>
+      <footer class="chart-card__footer">
+        <button class="btn btn--primary btn--sm btn--active" data-chart="scatter" data-mode="basic">Básico</button>
+        <button class="btn btn--ghost btn--sm" data-chart="scatter" data-mode="multi">Multi-Dataset</button>
+      </footer>
+    </article>
+
+    <!-- 7. Area Chart -->
+    <article class="chart-card" id="card-area">
+      <header class="chart-card__header">
+        <span class="chart-card__icon">📉</span>
+        <div>
+          <h2 class="chart-card__title">Area Chart</h2>
+          <p class="chart-card__desc">Área bajo la Curva</p>
+        </div>
+      </header>
+      <div class="chart-card__body">
+        <canvas id="areaChart"></canvas>
+      </div>
+      <footer class="chart-card__footer">
+        <button class="btn btn--primary btn--sm btn--active" data-chart="area" data-mode="simple">Simple</button>
+        <button class="btn btn--ghost btn--sm" data-chart="area" data-mode="stacked">Apilada</button>
+      </footer>
+    </article>
+
+    <!-- 8. Horizontal Bar -->
+    <article class="chart-card" id="card-hbar">
+      <header class="chart-card__header">
+        <span class="chart-card__icon">📊</span>
+        <div>
+          <h2 class="chart-card__title">Horizontal Bar</h2>
+          <p class="chart-card__desc">Barras horizontales</p>
+        </div>
+      </header>
+      <div class="chart-card__body">
+        <canvas id="hbarChart"></canvas>
+      </div>
+      <footer class="chart-card__footer">
+        <button class="btn btn--primary btn--sm btn--active" data-chart="hbar" data-mode="simple">Simple</button>
+        <button class="btn btn--ghost btn--sm" data-chart="hbar" data-mode="comparative">Comparativo</button>
+      </footer>
+    </article>
+
+  </main>
+
+  <!-- ─── CODE LAB ─────────────────────────────────────────────────────────── -->
+  <section class="code-lab">
+    <h2 class="code-lab__title">Laboratorio de código</h2>
+    <p class="code-lab__desc">Edita y pulsa <strong>Renderizar</strong>. Usa el objeto <code>ALIAS</code> para los colores del sistema.<br>
+      Ej: <code>ALIAS.chart_c1</code> → <code>--color-chart-1</code> (azul Mapfre)</p>
+    <div class="code-lab__toolbar">
+      <button class="btn btn--primary btn--sm" id="btnRender">▶ Renderizar</button>
+      <button class="btn btn--ghost btn--sm" id="btnRestore">↺ Restaurar</button>
+      <button class="btn btn--ghost btn--sm" id="btnDownload">⬇ Descargar</button>
+    </div>
+    <div class="code-lab__workspace">
+      <div class="code-lab__editor-wrap">
+        <textarea class="code-lab__editor" id="codeEditor" spellcheck="false"></textarea>
+      </div>
+      <div class="code-lab__preview">
+        <canvas id="labChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="charts.js"></script>
+</body>
+</html>

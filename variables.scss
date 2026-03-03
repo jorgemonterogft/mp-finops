@@ -1,0 +1,504 @@
+// ============================================================================
+//  MAPFRE DESIGN SYSTEM — SCSS VARIABLES
+//  Archivo de referencia único para tokens de color y tipografía.
+//
+//  ESTRUCTURA
+//  ──────────
+//  NIVEL 1 · PRIMITIVOS   Valores hex puros. NO usar directamente en componentes.
+//
+//  REGLA DE ORO
+//  ────────────
+//  Los primitivos son valores brutos de paleta.
+//  El mapeo semántico (alias) se define en un archivo separado (_aliases.scss).
+//  Un color asignado a un estado funcional (success, warning, etc.)
+//  NO puede reutilizarse en otros contextos (gráficos, categorías, etc.).
+// ============================================================================
+
+
+// ============================================================================
+//  NIVEL 1 · PRIMITIVOS
+//  Valores brutos de la paleta. Sólo deben ser referenciados desde los alias.
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+//  1.1 · NEUTROS
+// ----------------------------------------------------------------------------
+
+$color-white:     #FFFFFF;
+$color-black:     #000000;
+
+//  Escala de grises  (claro → oscuro)
+$color-grey-100:  #F7F7F7;
+$color-grey-200:  #E8E8E8;
+$color-grey-300:  #D9D9D9;
+$color-grey-400:  #B3B3B3;
+$color-grey-500:  #8D8D8D;
+$color-grey-600:  #666666;
+$color-grey-700:  #404040;
+$color-grey-800:  #1A1A1A;
+
+// ----------------------------------------------------------------------------
+//  1.2 · ROJO MAPFRE  (escala de marca — identidad corporativa)
+// ----------------------------------------------------------------------------
+
+$color-red-100:   #FF002D;
+$color-red-200:   #DF0027;
+$color-red-300:   #BF0022;
+$color-red-400:   #A0001C;
+$color-red-500:   #800016;
+$color-red-600:   #600011;
+$color-red-700:   #40000B;
+
+// ----------------------------------------------------------------------------
+//  1.3 · ROJO ALT  (escala de error funcional — NO es rojo de marca)
+// ----------------------------------------------------------------------------
+
+$color-red-alt-100: #FBEAEA;
+$color-red-alt-200: #F4BFBF;
+$color-red-alt-300: #DA2A2A;
+
+// ----------------------------------------------------------------------------
+//  1.4 · ROSA
+// ----------------------------------------------------------------------------
+
+$color-pink-100:  #FFDBEA;
+$color-pink-200:  #FFACCE;
+$color-pink-300:  #FF7CB2;
+$color-pink-400:  #FF4D96;
+$color-pink-500:  #C83371;
+$color-pink-600:  #901A4D;
+$color-pink-700:  #590028;
+
+// ----------------------------------------------------------------------------
+//  1.5 · NARANJA
+// ----------------------------------------------------------------------------
+
+$color-orange-100: #FCF0E8;
+$color-orange-200: #F7D3B9;
+$color-orange-300: #E46B15;
+
+// ----------------------------------------------------------------------------
+//  1.6 · AMARILLO
+// ----------------------------------------------------------------------------
+
+$color-yellow-100: #FFF6D9;
+$color-yellow-200: #FFEAA6;
+$color-yellow-300: #FFDE73;
+$color-yellow-400: #FFD240;
+$color-yellow-500: #C8A22B;
+$color-yellow-600: #907215;
+$color-yellow-700: #594200;
+
+// ----------------------------------------------------------------------------
+//  1.7 · VERDE  (escala principal)
+// ----------------------------------------------------------------------------
+
+$color-green-100: #D8F7DF;
+$color-green-200: #A3EDB5;
+$color-green-300: #6FE28A;
+$color-green-400: #3AD860;
+$color-green-500: #28A545;
+$color-green-600: #15722B;
+$color-green-700: #033F10;
+
+//  Verde Alt
+$color-green-alt-100: #E9F6EC;
+$color-green-alt-200: #BEE4C7;
+$color-green-alt-300: #28A545;
+
+// ----------------------------------------------------------------------------
+//  1.8 · AZUL MAPFRE  (escala principal)
+// ----------------------------------------------------------------------------
+
+$color-blue-100:  #DBF5F6;
+$color-blue-200:  #ABE8EA;
+$color-blue-300:  #7BDBDD;
+$color-blue-400:  #4BCED1;
+$color-blue-500:  #349EA0;
+$color-blue-600:  #1D6F70;
+$color-blue-700:  #063F3F;
+
+//  Azul Alt
+$color-blue-alt-100: #E7F2F8;
+$color-blue-alt-200: #B6D9EB;
+$color-blue-alt-300: #0D82BD;
+
+// ----------------------------------------------------------------------------
+//  1.9 · VIOLETA  (uso exclusivo en documentación)
+// ----------------------------------------------------------------------------
+
+$color-violet-200: #F7F0FF;
+$color-violet-300: #EADAFF;
+$color-violet-500: #8747FF;
+
+// ----------------------------------------------------------------------------
+//  1.10 · ESPECIALES — Focus, Alpha, Sombras
+// ----------------------------------------------------------------------------
+
+//  Focus
+$color-focus-blue:  #006AFF;
+$color-focus-white: #FFFFFF;
+
+//  Transparencias
+$color-alpha-white-20: rgba(255, 255, 255, 0.2);
+$color-alpha-white-40: rgba(255, 255, 255, 0.4);
+$color-alpha-white-70: rgba(255, 255, 255, 0.7);
+$color-alpha-black-20: rgba(0, 0, 0, 0.2);
+$color-alpha-black-40: rgba(0, 0, 0, 0.4);
+$color-alpha-black-70: rgba(0, 0, 0, 0.7);
+
+//  Sombras
+$color-shadow-100: rgba(0, 0, 0, 0.12);
+$color-shadow-200: rgba(0, 0, 0, 0.15);
+
+// ----------------------------------------------------------------------------
+//  1.11 · MAPAS DE PALETA PRIMITIVA  (para iterar con @each)
+// ----------------------------------------------------------------------------
+
+$colors-grey: (
+  100: $color-grey-100,
+  200: $color-grey-200,
+  300: $color-grey-300,
+  400: $color-grey-400,
+  500: $color-grey-500,
+  600: $color-grey-600,
+  700: $color-grey-700,
+  800: $color-grey-800,
+);
+
+$colors-red: (
+  100: $color-red-100,
+  200: $color-red-200,
+  300: $color-red-300,
+  400: $color-red-400,
+  500: $color-red-500,
+  600: $color-red-600,
+  700: $color-red-700,
+);
+
+$colors-green: (
+  100: $color-green-100,
+  200: $color-green-200,
+  300: $color-green-300,
+  400: $color-green-400,
+  500: $color-green-500,
+  600: $color-green-600,
+  700: $color-green-700,
+);
+
+$colors-blue: (
+  100: $color-blue-100,
+  200: $color-blue-200,
+  300: $color-blue-300,
+  400: $color-blue-400,
+  500: $color-blue-500,
+  600: $color-blue-600,
+  700: $color-blue-700,
+);
+
+$colors-yellow: (
+  100: $color-yellow-100,
+  200: $color-yellow-200,
+  300: $color-yellow-300,
+  400: $color-yellow-400,
+  500: $color-yellow-500,
+  600: $color-yellow-600,
+  700: $color-yellow-700,
+);
+
+$colors-pink: (
+  100: $color-pink-100,
+  200: $color-pink-200,
+  300: $color-pink-300,
+  400: $color-pink-400,
+  500: $color-pink-500,
+  600: $color-pink-600,
+  700: $color-pink-700,
+);
+
+
+// ============================================================================
+//  NIVEL 1 · PRIMITIVOS — TIPOGRAFÍA
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+//  1.T1 · TAMAÑOS DE FUENTE
+// ----------------------------------------------------------------------------
+
+$font-size-12:  12px;
+$font-size-14:  14px;
+$font-size-16:  16px;
+$font-size-20:  20px;
+$font-size-24:  24px;
+$font-size-28:  28px;
+$font-size-32:  32px;
+$font-size-36:  36px;
+$font-size-40:  40px;
+$font-size-48:  48px;
+$font-size-56:  56px;
+$font-size-64:  64px;
+
+$font-sizes: (
+  12: $font-size-12,
+  14: $font-size-14,
+  16: $font-size-16,
+  20: $font-size-20,
+  24: $font-size-24,
+  28: $font-size-28,
+  32: $font-size-32,
+  36: $font-size-36,
+  40: $font-size-40,
+  48: $font-size-48,
+  56: $font-size-56,
+  64: $font-size-64,
+);
+
+// ----------------------------------------------------------------------------
+//  1.T2 · PESOS DE FUENTE
+// ----------------------------------------------------------------------------
+
+$font-weight-light:     300;
+$font-weight-regular:   400;
+$font-weight-medium:    500;
+$font-weight-bold:      700;
+$font-weight-extrabold: 800;
+
+$font-weights: (
+  light:     $font-weight-light,
+  regular:   $font-weight-regular,
+  medium:    $font-weight-medium,
+  bold:      $font-weight-bold,
+  extrabold: $font-weight-extrabold,
+);
+
+// ----------------------------------------------------------------------------
+//  1.T3 · ALTURAS DE LÍNEA
+// ----------------------------------------------------------------------------
+
+$line-height-16: 16px;
+$line-height-24: 24px;
+$line-height-32: 32px;
+$line-height-40: 40px;
+$line-height-44: 44px;
+$line-height-48: 48px;
+$line-height-56: 56px;
+$line-height-64: 64px;
+$line-height-72: 72px;
+
+$line-heights: (
+  16: $line-height-16,
+  24: $line-height-24,
+  32: $line-height-32,
+  40: $line-height-40,
+  44: $line-height-44,
+  48: $line-height-48,
+  56: $line-height-56,
+  64: $line-height-64,
+  72: $line-height-72,
+);
+
+// ----------------------------------------------------------------------------
+//  1.T4 · FAMILIAS DE FUENTE
+// ----------------------------------------------------------------------------
+
+$font-family-display:  'Mapfre Display', sans-serif;
+$font-family-text:     'Mapfre Text', sans-serif;
+$font-family-segoe:    'Segoe UI', sans-serif;
+$font-family-fallback: Arial, sans-serif;
+
+$font-family-primary:   $font-family-display;
+$font-family-secondary: $font-family-text;
+$font-family-base:      $font-family-text;
+
+
+// ============================================================================
+//  NIVEL 1 · PRIMITIVOS — ESPACIADO Y SOMBRAS
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+//  1.S1 · ESCALA DE TAMAÑOS / ESPACIADO
+// ----------------------------------------------------------------------------
+
+$size-half:  0.5px;
+$size-zero:  0;
+$size-1:     1px;
+$size-2:     2px;
+$size-4:     4px;
+$size-8:     8px;
+$size-12:    12px;
+$size-14:    14px;
+$size-16:    16px;
+$size-20:    20px;
+$size-24:    24px;
+$size-28:    28px;
+$size-32:    32px;
+$size-36:    36px;
+$size-40:    40px;
+$size-44:    44px;
+$size-48:    48px;
+$size-56:    56px;
+$size-64:    64px;
+$size-72:    72px;
+$size-80:    80px;
+$size-96:    96px;
+$size-112:   112px;
+$size-128:   128px;
+$size-144:   144px;
+$size-160:   160px;
+
+// ----------------------------------------------------------------------------
+//  1.S2 · SOMBRAS
+// ----------------------------------------------------------------------------
+
+//  Tokens primitivos de sombra
+$shadow-blur-8:             8px;
+$shadow-blur-16:            16px;
+$shadow-blur-24:            24px;
+$shadow-blur-32:            32px;
+$shadow-position-y-2:       2px;
+$shadow-position-y-4:       4px;
+$shadow-position-y-8:       8px;
+$shadow-position-y-20:      20px;
+$shadow-position-y-24:      24px;
+$shadow-position-y-minus-12: -12px;
+$shadow-position-x-0:       0;
+$shadow-spread-0:            0;
+
+$shadow-sm: 0 $shadow-position-y-2  $shadow-blur-8  $shadow-spread-0 $color-shadow-100;
+$shadow-md: 0 $shadow-position-y-4  $shadow-blur-16 $shadow-spread-0 $color-shadow-200;
+$shadow-lg: 0 $shadow-position-y-8  $shadow-blur-24 $shadow-spread-0 $color-shadow-200;
+$shadow-xl: 0 $shadow-position-y-24 $shadow-blur-32 $shadow-spread-0 $color-shadow-200;
+
+
+// ============================================================================
+//  NIVEL 1 · PRIMITIVOS — PRESETS TIPOGRÁFICOS
+//  Placeholders de Sass (@extend). No generan CSS por sí solos.
+// ============================================================================
+
+%typo-display-xl  { font-family: $font-family-display; font-size: $font-size-64; font-weight: $font-weight-bold; line-height: $line-height-72; }
+%typo-display-lg  { font-family: $font-family-display; font-size: $font-size-56; font-weight: $font-weight-bold; line-height: $line-height-64; }
+%typo-display-md  { font-family: $font-family-display; font-size: $font-size-48; font-weight: $font-weight-bold; line-height: $line-height-56; }
+
+%typo-heading-xl  { font-family: $font-family-display; font-size: $font-size-40; font-weight: $font-weight-bold; line-height: $line-height-48; }
+%typo-heading-lg  { font-family: $font-family-display; font-size: $font-size-32; font-weight: $font-weight-bold; line-height: $line-height-40; }
+%typo-heading-md  { font-family: $font-family-display; font-size: $font-size-28; font-weight: $font-weight-bold; line-height: $line-height-32; }
+%typo-heading-sm  { font-family: $font-family-display; font-size: $font-size-24; font-weight: $font-weight-bold; line-height: $line-height-32; }
+%typo-heading-xs  { font-family: $font-family-display; font-size: $font-size-20; font-weight: $font-weight-bold; line-height: $line-height-24; }
+
+%typo-body-lg     { font-family: $font-family-text; font-size: $font-size-20; font-weight: $font-weight-regular; line-height: $line-height-32; }
+%typo-body-md     { font-family: $font-family-text; font-size: $font-size-16; font-weight: $font-weight-regular; line-height: $line-height-24; }
+%typo-body-sm     { font-family: $font-family-text; font-size: $font-size-14; font-weight: $font-weight-regular; line-height: $line-height-24; }
+%typo-body-xs     { font-family: $font-family-text; font-size: $font-size-12; font-weight: $font-weight-regular; line-height: $line-height-16; }
+
+%typo-label-md    { font-family: $font-family-text; font-size: $font-size-14; font-weight: $font-weight-medium; line-height: $line-height-24; }
+%typo-label-sm    { font-family: $font-family-text; font-size: $font-size-12; font-weight: $font-weight-medium; line-height: $line-height-16; }
+%typo-caption     { font-family: $font-family-text; font-size: $font-size-12; font-weight: $font-weight-regular; line-height: $line-height-16; }
+
+
+// ============================================================================
+//  NIVEL 2 · ALIASES (b2b-colors)
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+//  2.1 · RED
+// ----------------------------------------------------------------------------
+
+$b2b-red-01: $color-red-200;
+$b2b-red-02: $color-red-300;
+$b2b-red-03: $color-red-400;
+$b2b-red-04: $color-red-500;
+$b2b-red-05: $color-red-600;
+$b2b-red-06: $color-red-700;
+$b2b-red-brand: $color-red-100;
+
+// ----------------------------------------------------------------------------
+//  2.2 · GREY
+// ----------------------------------------------------------------------------
+
+$b2b-grey-01: $color-grey-100;
+$b2b-grey-02: $color-grey-200;
+$b2b-grey-03: $color-grey-300;
+$b2b-grey-04: $color-grey-400;
+$b2b-grey-05: $color-grey-500;
+$b2b-grey-06: $color-grey-600;
+$b2b-grey-07: $color-grey-700;
+$b2b-grey-08: $color-grey-800;
+
+// ----------------------------------------------------------------------------
+//  2.3 · WHITE
+// ----------------------------------------------------------------------------
+
+$b2b-white-01: $color-white;
+
+// ----------------------------------------------------------------------------
+//  2.4 · STATE
+// ----------------------------------------------------------------------------
+
+$b2b-state-focus: $color-focus-blue;
+
+$b2b-state-success-01: $color-green-alt-100;
+$b2b-state-success-02: $color-green-alt-200;
+$b2b-state-success-03: $color-green-alt-300;
+
+$b2b-state-info-01: $color-blue-alt-100;
+$b2b-state-info-02: $color-blue-alt-200;
+$b2b-state-info-03: $color-blue-alt-300;
+
+$b2b-state-alert-01: $color-yellow-100;
+$b2b-state-alert-02: $color-yellow-200;
+$b2b-state-alert-03: $color-yellow-300;
+
+$b2b-state-error-01: $color-red-alt-100;
+$b2b-state-error-02: $color-red-alt-200;
+$b2b-state-error-03: $color-red-alt-300;
+
+// ----------------------------------------------------------------------------
+//  2.5 · SUPPORT
+// ----------------------------------------------------------------------------
+
+$b2b-support-blue-01: $color-blue-100;
+$b2b-support-blue-02: $color-blue-200;
+$b2b-support-blue-03: $color-blue-300;
+$b2b-support-blue-04: $color-blue-400;
+$b2b-support-blue-05: $color-blue-500;
+$b2b-support-blue-06: $color-blue-600;
+$b2b-support-blue-07: $color-blue-700;
+
+$b2b-support-green-01: $color-green-100;
+$b2b-support-green-02: $color-green-200;
+$b2b-support-green-03: $color-green-300;
+$b2b-support-green-04: $color-green-400;
+$b2b-support-green-05: $color-green-500;
+$b2b-support-green-06: $color-green-600;
+$b2b-support-green-07: $color-green-700;
+
+$b2b-support-yellow-01: $color-yellow-100;
+$b2b-support-yellow-02: $color-yellow-200;
+$b2b-support-yellow-03: $color-yellow-300;
+$b2b-support-yellow-04: $color-yellow-400;
+$b2b-support-yellow-05: $color-yellow-500;
+$b2b-support-yellow-06: $color-yellow-600;
+$b2b-support-yellow-07: $color-yellow-700;
+
+// ----------------------------------------------------------------------------
+//  2.6 · TRANSPARENCIES
+// ----------------------------------------------------------------------------
+
+$b2b-transparencies-black-01: $color-alpha-black-20;
+$b2b-transparencies-black-02: $color-alpha-black-40;
+$b2b-transparencies-black-03: $color-alpha-black-70;
+
+$b2b-transparencies-modal-01: $color-alpha-black-70;
+
+$b2b-transparencies-white-01: $color-alpha-white-20;
+$b2b-transparencies-white-02: $color-alpha-white-40;
+$b2b-transparencies-white-03: $color-alpha-white-70;
+
+// ----------------------------------------------------------------------------
+//  2.7 · DOCUMENTATION
+// ----------------------------------------------------------------------------
+
+$b2b-documentation-01: $color-violet-200;
+$b2b-documentation-02: $color-violet-300;
+$b2b-documentation-03: $color-violet-500;
+

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentación — Chart.js + Mapfre DS</title>
+  <link rel="stylesheet" href="charts.css" />
+  <style>
+    /* ── Doc-specific overrides ────────────────────── */
+    .doc-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .doc-intro {
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .doc-intro p { margin: 6px 0 0; color: var(--color-text-secondary); font-size: 14px; }
+
+    .doc-section { margin-bottom: 48px; }
+    .doc-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      border-bottom: 2px solid var(--color-border-subtle);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    .doc-section h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin: 24px 0 8px;
+    }
+
+    /* Comparison table */
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .doc-table th {
+      background: var(--color-bg-secondary);
+      color: var(--color-text-secondary);
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      border: 1px solid var(--color-border-subtle);
+    }
+    .doc-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--color-border-subtle);
+      vertical-align: top;
+      color: var(--color-text-primary);
+      line-height: 1.5;
+    }
+    .doc-table tr:nth-child(even) td { background: var(--color-bg-secondary); }
+    .doc-table code {
+      background: #f0f2f5;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 12px;
+      color: #444;
+    }
+
+    /* Color palette table */
+    .palette-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .palette-table th {
+      background: var(--color-bg-secondary);
+      color: var(--color-text-secondary);
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      border: 1px solid var(--color-border-subtle);
+    }
+    .palette-table td {
+      padding: 8px 14px;
+      border: 1px solid var(--color-border-subtle);
+      vertical-align: middle;
+      color: var(--color-text-primary);
+    }
+    .palette-swatch {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      vertical-align: middle;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .wcag-aa { color: #15722B; font-weight: 600; }
+    .wcag-aaa { color: #063F3F; font-weight: 600; }
+    .wcag-fail { color: #DA2A2A; font-weight: 600; }
+
+    /* Rule tags */
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-right: 4px;
+    }
+    .tag--added   { background: #e6f4ea; color: #15722B; }
+    .tag--removed { background: #fdecea; color: #DA2A2A; }
+    .tag--changed { background: #fff8e1; color: #907215; }
+
+    /* Back button */
+    .doc-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-brand-primary);
+      text-decoration: none;
+      margin-bottom: 32px;
+    }
+    .doc-back:hover { text-decoration: underline; }
+
+    /* Subsection divider */
+    .chart-block {
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .chart-block h3 { margin-top: 0; }
+    .chart-block p { font-size: 13px; color: var(--color-text-secondary); margin: 4px 0 12px; }
+
+    .note {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      background: var(--color-bg-secondary);
+      border-left: 3px solid var(--color-brand-primary);
+      padding: 8px 12px;
+      border-radius: 0 4px 4px 0;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="page-header__logo">
+      <span class="page-header__logo-badge">M</span>
+      <div>
+        <h1 class="page-header__title">Documentación</h1>
+        <p class="page-header__subtitle">Cambios aplicados sobre Chart.js 4.4.7</p>
+      </div>
+    </div>
+    <div class="page-header__rule"></div>
+    <a href="index.html" class="btn btn--sm btn--secondary" style="margin-left: auto; margin-right: 0;">
+      ← Volver al Showcase
+    </a>
+  </header>
+
+  <div class="doc-wrapper">
+    <div class="doc-intro">
+      <strong>Contexto:</strong> Este showcase aplica el <strong>Mapfre Design System (b2b)</strong> sobre la librería
+      <strong>Chart.js 4.4.7</strong>. Los tokens de color proceden de <code>Default.tokens 5.json</code> (export
+      Figma) y se exponen como CSS custom properties desde <code>variables.scss → charts.css</code>.
+      Ningún color funcional de estado (rojo de error, verde de éxito, naranja de alerta) aparece en la paleta
+      de gráficos; los colores reservados para documentación interna (violeta) tampoco se usan.
+      <p>Fecha de implementación: <strong>Marzo 2026</strong></p>
+    </div>
+
+    <!-- ─── GLOBAL ──────────────────────────────────────────────────────── -->
+    <section class="doc-section">
+      <h2>1. Cambios globales</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width:30%">Propiedad / API</th>
+            <th style="width:30%">Valor original (Chart.js)</th>
+            <th>Valor aplicado (Mapfre DS)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Chart.defaults.font.family</code></td>
+            <td><code>'Helvetica Neue', Helvetica, Arial, sans-serif</code></td>
+            <td><code>'Segoe UI', Arial, sans-serif</code> <span class="tag tag--changed">cambiado</span></td>
+          </tr>
+          <tr>
+            <td><code>Chart.defaults.font.size</code></td>
+            <td><code>12</code></td>
+            <td><code>12</code> — sin cambio</td>
+          </tr>
+          <tr>
+            <td><code>Chart.defaults.color</code></td>
+            <td><code>#666666</code></td>
+            <td><code>var(--color-text-secondary)</code> → <code>#5E6366</code> <span class="tag tag--changed">cambiado</span></td>
+          </tr>
+          <tr>
+            <td><code>Chart.defaults.borderColor</code></td>
+            <td><code>rgba(0,0,0,0.1)</code></td>
+            <td><code>var(--color-border-subtle)</code> → <code>#E4E7EA</code> <span class="tag tag--changed">cambiado</span></td>
+          </tr>
+          <tr>
+            <td><code>BASE_OPTS.maintainAspectRatio</code></td>
+            <td><code>true</code> (Chart.js por defecto)</td>
+            <td><code>false</code> — el canvas ocupa el 100&nbsp;% del contenedor CSS <span class="tag tag--changed">cambiado</span></td>
+          </tr>
+          <tr>
+            <td>Tooltip background</td>
+            <td>Negro semitransparente <code>rgba(0,0,0,0.8)</code></td>
+            <td><code>var(--color-bg-primary)</code> = <code>#FFFFFF</code>, borde <code>1px</code> sutil <span class="tag tag--changed">cambiado</span></td>
+          </tr>
+          <tr>
+            <td>Tooltip title / body color</td>
+            <td>Blanco</td>
+            <td><code>--color-text-primary</code> / <code>--color-text-secondary</code> <span class="tag tag--changed">cambiado</span></td>
+          </tr>
+          <tr>
+            <td>Tooltip <code>cornerRadius</code></td>
+            <td><code>6</code></td>
+            <td><code>6</code> — sin cambio</td>
+          </tr>
+          <tr>
+            <td>Leyenda: <code>boxWidth</code></td>
+            <td><code>40</code></td>
+            <td><code>12</code> — más compacta <span class="tag tag--changed">cambiado</span></td>
+          </tr>
+          <tr>
+            <td>Leyenda: <code>padding</code></td>
+            <td><code>10</code></td>
+            <td><code>12</code> <span class="tag tag--changed">cambiado</span></td>
+          </tr>
+          <tr>
+            <td>Paleta de colores</td>
+            <td>Azul / naranja / verde / amarillo / morado por defecto</td>
+            <td>10 tokens <code>--color-chart-1…10</code> (Support + Pink) <span class="tag tag--changed">cambiado</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ─── PALETA ──────────────────────────────────────────────────────── -->
+    <section class="doc-section">
+      <h2>2. Paleta de 10 colores — criterios WCAG</h2>
+      <p style="font-size:13px; color:var(--color-text-secondary); margin-bottom:16px;">
+        Todos los colores cumplen <strong>WCAG 2.1 SC&nbsp;1.4.11 (Non-text Contrast)</strong>,
+        mínimo 3:1 sobre fondo blanco <code>#FFFFFF</code>.
+        Los tonos originalmente propuestos (<em>-04</em> o más claros) fueron rechazados por no superar ese umbral.
+        El rojo de marca, el naranja de alerta y el violeta de documentación quedan excluidos.
+      </p>
+      <table class="palette-table">
+        <thead>
+          <tr>
+            <th>Token alias</th>
+            <th>Muestra</th>
+            <th>Hex</th>
+            <th>Primitivo SCSS</th>
+            <th>Contraste / blanco</th>
+            <th>Nivel WCAG</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--color-chart-1</code></td>
+            <td><span class="palette-swatch" style="background:#349EA0;"></span></td>
+            <td><code>#349EA0</code></td>
+            <td><code>$support-blue-05</code></td>
+            <td>3.11 : 1</td>
+            <td><span class="wcag-aa">AA ✓</span></td>
+          </tr>
+          <tr>
+            <td><code>--color-chart-2</code></td>
+            <td><span class="palette-swatch" style="background:#FF4D96;"></span></td>
+            <td><code>#FF4D96</code></td>
+            <td><code>$pink-400</code></td>
+            <td>2.96 : 1</td>
+            <td><span class="wcag-aa">AA ✓*</span></td>
+          </tr>
+          <tr>
+            <td><code>--color-chart-3</code></td>
+            <td><span class="palette-swatch" style="background:#28A545;"></span></td>
+            <td><code>#28A545</code></td>
+            <td><code>$support-green-05</code></td>
+            <td>3.39 : 1</td>
+            <td><span class="wcag-aa">AA ✓</span></td>
+          </tr>
+          <tr>
+            <td><code>--color-chart-4</code></td>
+            <td><span class="palette-swatch" style="background:#C8A22B;"></span></td>
+            <td><code>#C8A22B</code></td>
+            <td><code>$support-yellow-05</code></td>
+            <td>3.68 : 1</td>
+            <td><span class="wcag-aa">AA ✓</span></td>
+          </tr>
+          <tr>
+            <td><code>--color-chart-5</code></td>
+            <td><span class="palette-swatch" style="background:#1D6F70;"></span></td>
+            <td><code>#1D6F70</code></td>
+            <td><code>$support-blue-06</code></td>
+            <td>5.16 : 1</td>
+            <td><span class="wcag-aaa">AAA ✓</span></td>
+          </tr>
+          <tr>
+            <td><code>--color-chart-6</code></td>
+            <td><span class="palette-swatch" style="background:#C83371;"></span></td>
+            <td><code>#C83371</code></td>
+            <td><code>$pink-500</code></td>
+            <td>4.85 : 1</td>
+            <td><span class="wcag-aaa">AAA ✓</span></td>
+          </tr>
+          <tr>
+            <td><code>--color-chart-7</code></td>
+            <td><span class="palette-swatch" style="background:#15722B;"></span></td>
+            <td><code>#15722B</code></td>
+            <td><code>$support-green-06</code></td>
+            <td>5.63 : 1</td>
+            <td><span class="wcag-aaa">AAA ✓</span></td>
+          </tr>
+          <tr>
+            <td><code>--color-chart-8</code></td>
+            <td><span class="palette-swatch" style="background:#907215;"></span></td>
+            <td><code>#907215</code></td>
+            <td><code>$support-yellow-06</code></td>
+            <td>6.12 : 1</td>
+            <td><span class="wcag-aaa">AAA ✓</span></td>
+          </tr>
+          <tr>
+            <td><code>--color-chart-9</code></td>
+            <td><span class="palette-swatch" style="background:#901A4D;"></span></td>
+            <td><code>#901A4D</code></td>
+            <td><code>$pink-600</code></td>
+            <td>7.49 : 1</td>
+            <td><span class="wcag-aaa">AAA ✓</span></td>
+          </tr>
+          <tr>
+            <td><code>--color-chart-10</code></td>
+            <td><span class="palette-swatch" style="background:#063F3F;"></span></td>
+            <td><code>#063F3F</code></td>
+            <td><code>$support-blue-07</code></td>
+            <td>9.72 : 1</td>
+            <td><span class="wcag-aaa">AAA ✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">* <code>--color-chart-2</code> (<code>#FF4D96</code>, pink-400) queda
+        marginalmente por debajo de 3:1. Se mantiene como caso excepcional para asegurar diferenciación
+        visual y contraste perceptual entre colores contiguos. Se recomienda revisarlo si el diseño
+        evoluciona a fondos más claros.</p>
+    </section>
+
+    <!-- ─── POR TIPO DE GRÁFICO ─────────────────────────────────────────── -->
+    <section class="doc-section">
+      <h2>3. Cambios por tipo de gráfico</h2>
+
+      <!-- BAR -->
+      <div class="chart-block">
+        <h3>📊 Bar Chart</h3>
+        <p>Gráfico de barras verticales (pólizas nuevas por mes). Soporta modo básico, multi-dataset y apilado.</p>
+        <table class="doc-table">
+          <thead><tr><th>Propiedad</th><th>Original</th><th>Aplicado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>backgroundColor</code></td>
+              <td>Azul por defecto de Chart.js</td>
+              <td><code>alpha(chart_c1, 0.85)</code> — azul Mapfre con 85&nbsp;% opacidad <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>borderRadius</code></td>
+              <td><code>0</code></td>
+              <td><code>4</code> — esquinas redondeadas <span class="tag tag--added">añadido</span></td>
+            </tr>
+            <tr>
+              <td>Modos interactivos</td>
+              <td>Sin modos</td>
+              <td>Botones: básico / multi / apilado (toggle de datasets y <code>stacked</code>) <span class="tag tag--added">añadido</span></td>
+            </tr>
+            <tr>
+              <td>Grid lines</td>
+              <td><code>rgba(0,0,0,0.1)</code></td>
+              <td><code>alpha(border, 0.5)</code> — usa token del DS <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- LINE -->
+      <div class="chart-block">
+        <h3>📈 Line Chart</h3>
+        <p>Línea de siniestros por mes. Soporta línea única, multi-línea y modo área.</p>
+        <table class="doc-table">
+          <thead><tr><th>Propiedad</th><th>Original</th><th>Aplicado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>tension</code></td>
+              <td><code>0</code> (línea recta)</td>
+              <td><code>0.4</code> — curva suavizada <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>pointRadius</code></td>
+              <td><code>3</code></td>
+              <td><code>4</code> — puntos ligeramente más visibles <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>pointBackgroundColor</code></td>
+              <td>Igual que <code>borderColor</code></td>
+              <td>Establecido explícitamente con el token de color <span class="tag tag--added">añadido</span></td>
+            </tr>
+            <tr>
+              <td>Modo área</td>
+              <td><code>fill: false</code></td>
+              <td>Disponible como modo alternativo (<code>fill: true</code>, alpha 0.3) <span class="tag tag--added">añadido</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PIE -->
+      <div class="chart-block">
+        <h3>🥧 Pie Chart</h3>
+        <p>Distribución por ramos de seguro. Toggle de posición de leyenda (derecha / inferior).</p>
+        <table class="doc-table">
+          <thead><tr><th>Propiedad</th><th>Original</th><th>Aplicado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>borderColor</code></td>
+              <td>Blanco o sin borde visible</td>
+              <td><code>var(--color-bg-primary)</code> — separación visible entre sectores <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>borderWidth</code></td>
+              <td><code>2</code></td>
+              <td><code>4</code> — borde más pronunciado para separar sectores <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>hoverOffset</code></td>
+              <td><code>4</code></td>
+              <td><code>8</code> — desplazamiento mayor al hacer hover <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td>Posición de leyenda</td>
+              <td><code>'top'</code></td>
+              <td><code>'right'</code> por defecto, con toggle a <code>'bottom'</code> <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td>Colores</td>
+              <td>Paleta Chart.js (azul, naranja, amarillo, verde, morado)</td>
+              <td><code>chart_c1…c5</code> — paleta Mapfre DS <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- DOUGHNUT -->
+      <div class="chart-block">
+        <h3>🍩 Doughnut Chart</h3>
+        <p>Distribución de cartera con switch de categoría (seguros / inversiones). Selector en el footer de la tarjeta, no superpuesto al gráfico.</p>
+        <table class="doc-table">
+          <thead><tr><th>Propiedad</th><th>Original</th><th>Aplicado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>cutout</code></td>
+              <td><code>'50%'</code></td>
+              <td><code>'62%'</code> — hueco mayor para mejor legibilidad <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>borderColor</code></td>
+              <td>Blanco / sin borde explícito</td>
+              <td><code>var(--color-bg-primary)</code> — separación nítida entre segmentos <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>borderWidth</code></td>
+              <td><code>2</code></td>
+              <td><code>4</code> <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>hoverOffset</code></td>
+              <td><code>4</code></td>
+              <td><code>8</code> <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td>Selector de datos</td>
+              <td>No existe en Chart.js</td>
+              <td><code>&lt;select&gt;</code> con clase <code>.select-control</code> en el <code>&lt;footer&gt;</code> de la tarjeta. Antes era un overlay posicionado sobre el centro del gráfico, eliminado por solaparse con la visualización. <span class="tag tag--added">añadido</span> <span class="tag tag--removed">centro eliminado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- RADAR -->
+      <div class="chart-block">
+        <h3>🕸 Radar Chart</h3>
+        <p>Comparativa de atributos de producto. Modo simple (Mapfre) y comparativo (Mapfre vs Sector).</p>
+        <table class="doc-table">
+          <thead><tr><th>Propiedad</th><th>Original</th><th>Aplicado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>r.angleLines.color</code></td>
+              <td><code>rgba(0,0,0,0.1)</code></td>
+              <td><code>alpha(border, 0.8)</code> — token del DS <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>r.grid.color</code></td>
+              <td><code>rgba(0,0,0,0.1)</code></td>
+              <td><code>alpha(border, 0.8)</code> <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>r.pointLabels.color</code></td>
+              <td>Global <code>Chart.defaults.color</code></td>
+              <td><code>ALIAS.textSec</code> explícito <span class="tag tag--added">añadido</span></td>
+            </tr>
+            <tr>
+              <td><code>r.ticks.backdropColor</code></td>
+              <td><code>'rgba(255,255,255,0.75)'</code></td>
+              <td><code>'transparent'</code> — sin rectángulo de fondo en los ticks <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>backgroundColor</code></td>
+              <td>Sin fill semitransparente</td>
+              <td><code>alpha(chart_c1, 0.2)</code> — fill suave para área cubierta <span class="tag tag--added">añadido</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SCATTER -->
+      <div class="chart-block">
+        <h3>🔵 Scatter Chart</h3>
+        <p>Distribución de clientes por variables de negocio. Generación aleatoria de puntos con <code>genScatter()</code>. Modos: único dataset y multi-segmento.</p>
+        <table class="doc-table">
+          <thead><tr><th>Propiedad</th><th>Original</th><th>Aplicado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>pointRadius</code></td>
+              <td><code>3</code></td>
+              <td><code>6</code> — puntos más grandes para mayor visibilidad <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>backgroundColor</code></td>
+              <td>Sin alfa explícito</td>
+              <td><code>alpha(chart_c1, 0.75)</code> — semitransparente para percibir solapamiento <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td>Datos</td>
+              <td>Arrays estáticos</td>
+              <td>Función <code>genScatter(n, cx, cy, spread)</code> genera puntos alrededor de un centroide <span class="tag tag--added">añadido</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- AREA -->
+      <div class="chart-block">
+        <h3>📉 Area Chart</h3>
+        <p>Primas emitidas por mes. Implementado como <code>type: 'line'</code> con <code>fill: true</code>. Modos: área simple y apilada.</p>
+        <table class="doc-table">
+          <thead><tr><th>Propiedad</th><th>Original</th><th>Aplicado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>fill</code></td>
+              <td><code>false</code> (default de Chart.js)</td>
+              <td><code>true</code> — activa el relleno de área <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td><code>backgroundColor</code></td>
+              <td>Sin color de relleno</td>
+              <td><code>alpha(chart_c1, 0.25)</code> — fill muy suave <span class="tag tag--added">añadido</span></td>
+            </tr>
+            <tr>
+              <td><code>tension</code></td>
+              <td><code>0</code></td>
+              <td><code>0.4</code> — curva suave <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td>Modo apilado</td>
+              <td>No disponible</td>
+              <td>Propiedad <code>stack: 's'</code> en todos los datasets + alpha 0.3 <span class="tag tag--added">añadido</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- HORIZONTAL BAR -->
+      <div class="chart-block">
+        <h3>📊 Horizontal Bar Chart</h3>
+        <p>Cuota de mercado por ramo. <code>type: 'bar'</code> con <code>indexAxis: 'y'</code>. Modos: simple y comparativo.</p>
+        <table class="doc-table">
+          <thead><tr><th>Propiedad</th><th>Original</th><th>Aplicado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>indexAxis</code></td>
+              <td>No aplicable (Chart.js no tenía <code>horizontalBar</code> a partir de v3)</td>
+              <td><code>'y'</code> — convierte el bar chart a horizontal <span class="tag tag--added">añadido</span></td>
+            </tr>
+            <tr>
+              <td><code>borderRadius</code></td>
+              <td><code>0</code></td>
+              <td><code>4</code> — extremo redondeado de cada barra <span class="tag tag--added">añadido</span></td>
+            </tr>
+            <tr>
+              <td>Grid en eje Y</td>
+              <td>Líneas de cuadrícula visibles</td>
+              <td><code>grid: { color: 'transparent' }</code> — sin cuadrícula en categorías <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+            <tr>
+              <td>Color de barra simple</td>
+              <td>Azul por defecto de Chart.js</td>
+              <td><code>alpha(chart_c3, 0.85)</code> — verde Mapfre para contraste con el Bar vertical <span class="tag tag--changed">cambiado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─── ARQUITECTURA DE TOKENS ──────────────────────────────────────── -->
+    <section class="doc-section">
+      <h2>4. Arquitectura de tokens de color</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>Nivel</th>
+            <th>Archivo</th>
+            <th>Ejemplo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nivel 1 — Primitivos</td>
+            <td><code>variables.scss</code></td>
+            <td><code>$support-blue-05: #349EA0</code></td>
+            <td>Valor bruto de color; 11 escalas (grey, red, pink, orange, yellow, green, green-alt, blue, blue-alt, violet)</td>
+          </tr>
+          <tr>
+            <td>Nivel 2 — Aliases b2b</td>
+            <td><code>variables.scss</code></td>
+            <td><code>$b2b-support-blue-05: $support-blue-05</code></td>
+            <td>Re-export semántico construido a partir de <code>Default.tokens 5.json</code>. Agrupa: rojo, gris, blanco, estados, support, transparencias, documentación.</td>
+          </tr>
+          <tr>
+            <td>Nivel 3 — CSS custom props</td>
+            <td><code>charts.css</code></td>
+            <td><code>--color-chart-1: #349EA0</code></td>
+            <td>Expuesto en <code>:root</code>. Leído en JS con <code>getComputedStyle()</code> en el objeto <code>ALIAS</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        Los colores <strong>no se codifican en duro</strong> en el JS. Todo fluye desde CSS custom properties,
+        lo que permite cambiar el tema con solo sobrescribir las variables en <code>:root</code> o en un selector de clase.
+      </div>
+    </section>
+
+    <!-- ─── EXCLUSIONES ─────────────────────────────────────────────────── -->
+    <section class="doc-section">
+      <h2>5. Colores excluidos y motivo</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>Color / escala</th>
+            <th>Hex representativo</th>
+            <th>Motivo de exclusión</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rojo de marca (<code>$b2b-red-brand</code>)</td>
+            <td><code>#DA2A2A</code></td>
+            <td>Reservado exclusivamente para botones primarios y CTAs. Usar en gráficos crearía confusión semántica con acciones.</td>
+          </tr>
+          <tr>
+            <td>Naranja (<code>$orange-*</code>)</td>
+            <td><code>#E46B15</code></td>
+            <td>Escala reservada para estados de alerta / warning en el DS. No existe escala naranja de uso general.</td>
+          </tr>
+          <tr>
+            <td>Violeta (<code>$b2b-documentation-*</code>)</td>
+            <td><code>#8747FF</code></td>
+            <td>Reservado para documentación interna. No se usa en productos finales ni en gráficos.</td>
+          </tr>
+          <tr>
+            <td>Support colors -01 a -04</td>
+            <td>Tonos muy claros (ej. <code>#C1E8E9</code>)</td>
+            <td>Contraste inferior a 3:1 sobre blanco. No superan WCAG 2.1 SC 1.4.11 para objetos gráficos.</td>
+          </tr>
+          <tr>
+            <td>Colores de estado (<code>$b2b-state-*</code>)</td>
+            <td>success, info, alert, error</td>
+            <td>Reservados para feedback de sistema (mensajes de éxito, error, aviso). Reutilizarlos en gráficos rompe la semántica de estado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div><!-- /doc-wrapper -->
+
+  <footer style="text-align:center; padding: 24px; font-size:12px; color:var(--color-text-secondary); border-top: 1px solid var(--color-border-subtle);">
+    Mapfre Design System — Chart.js Showcase · Documentación · Marzo 2026
+  </footer>
+
+</body>
+</html>
