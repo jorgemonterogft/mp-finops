@@ -79,15 +79,233 @@ const BASE_SCALES = {
 /* ── Toggle chart ↔ table ─────────────────────────────────── */
 const _tableViews = {};
 
+// Utility: Format currency
+function fmt(val, currency = '€') {
+  if (typeof val === 'string') return val;
+  const num = Number(val);
+  if (num >= 1000000) return currency + (num/1000000).toFixed(2) + 'M';
+  if (num >= 1000) return currency + (num/1000).toFixed(0) + 'K';
+  return currency + num.toLocaleString('es-ES');
+}
+
+// Utility: Format percentage
+function pct(val) {
+  return Number(val).toFixed(0) + '%';
+}
+
+// ── Table Generators ──────────────────────────────────────────
+
+function generateRankingTable() {
+  const products = [
+    {name: 'MVID RPM', cost: 185000, pct: 17},
+    {name: 'Seguros Generales', cost: 165000, pct: 15},
+    {name: 'Vida & Pensiones', cost: 148000, pct: 14},
+    {name: 'IT Core', cost: 132000, pct: 12},
+    {name: 'Digital Experience', cost: 118000, pct: 11},
+    {name: 'Reaseguro', cost: 105000, pct: 10},
+    {name: 'Analytics', cost: 92000, pct: 8},
+    {name: 'MAPFRE Internacional', cost: 78000, pct: 7},
+    {name: 'Data Platform', cost: 65000, pct: 6},
+    {name: 'Otros', cost: 37000, pct: 3}
+  ];
+  
+  let html = '<div class="table-wrapper"><table class="data-table">';
+  html += '<thead><tr><th>Product/Domain</th><th class="align-right">Cost</th><th class="align-right">% of Total</th></tr></thead>';
+  html += '<tbody>';
+  products.forEach(p => {
+    html += `<tr><td class="strong">${p.name}</td><td class="align-right">${fmt(p.cost)}</td><td class="align-right">${pct(p.pct)}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function generateCostsTable() {
+  const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  const cloud = [45,48,52,55,58,57,60,62,58,55,60,60];
+  const dc = [25,25,27,27,28,27,28,28,27,27,27,24];
+  const saas = [9,10,10,11,11,11,11,11,11,11,12,12];
+  
+  let html = '<div class="table-wrapper"><table class="data-table">';
+  html += '<thead><tr><th>Month</th><th class="align-right">Cloud</th><th class="align-right">Datacenter</th><th class="align-right">SaaS</th><th class="align-right">Total</th></tr></thead>';
+  html += '<tbody>';
+  months.forEach((m, i) => {
+    const total = cloud[i] + dc[i] + saas[i];
+    html += `<tr><td class="strong">${m}</td><td class="align-right">${fmt(cloud[i], '€')}</td><td class="align-right">${fmt(dc[i], '€')}</td><td class="align-right">${fmt(saas[i], '€')}</td><td class="align-right strong">${fmt(total, '€')}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function generateTrackerTable() {
+  const services = [
+    {name: 'EC2/VMs', cost: 310000, pct: 52},
+    {name: 'RDS/SQL', cost: 100000, pct: 17},
+    {name: 'Storage', cost: 70000, pct: 12},
+    {name: 'AKS/EKS', cost: 60000, pct: 10},
+    {name: 'Networking', cost: 50000, pct: 8}
+  ];
+  
+  let html = '<div class="table-wrapper">';
+  html += '<h4 style="margin-bottom:16px;font-size:14px;font-weight:600;color:var(--b2b-brand-blue-01);">Top Cloud Services</h4>';
+  html += '<table class="data-table">';
+  html += '<thead><tr><th>Service</th><th class="align-right">Cost</th><th class="align-right">% of Cloud</th></tr></thead>';
+  html += '<tbody>';
+  services.forEach(s => {
+    html += `<tr><td class="strong">${s.name}</td><td class="align-right">${fmt(s.cost)}</td><td class="align-right">${pct(s.pct)}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function generateOptimizerTable() {
+  const actions = [
+    {name: 'Wasted Resources', exec: 45, managed: 15, pending: 40},
+    {name: 'Savings Plans', exec: 30, managed: 20, pending: 50},
+    {name: 'IaaS Stop', exec: 25, managed: 10, pending: 65},
+    {name: 'Reservation', exec: 20, managed: 15, pending: 65},
+    {name: 'Rebiller', exec: 15, managed: 10, pending: 75},
+    {name: 'Migration', exec: 10, managed: 5, pending: 85},
+    {name: 'Rightsizing', exec: 5, managed: 10, pending: 85},
+    {name: 'BYOL', exec: 0, managed: 5, pending: 95}
+  ];
+  
+  let html = '<div class="table-wrapper"><table class="data-table">';
+  html += '<thead><tr><th>FinOps Action</th>';
+  html += '<th class="align-right"><span class="color-dot" style="background:var(--b2b-state-success-01);"></span>Executed (%)</th>';
+  html += '<th class="align-right"><span class="color-dot" style="background:var(--b2b-state-info-01);"></span>Managed (%)</th>';
+  html += '<th class="align-right"><span class="color-dot" style="background:var(--b2b-state-error-01);"></span>Pending (%)</th>';
+  html += '</tr></thead><tbody>';
+  actions.forEach(a => {
+    html += `<tr><td class="strong">${a.name}</td><td class="align-right">${pct(a.exec)}</td><td class="align-right">${pct(a.managed)}</td><td class="align-right">${pct(a.pending)}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function generateDCTable() {
+  const categories = [
+    {name: 'Infrastructure', cost: 150000, pct: 46},
+    {name: 'Database', cost: 120000, pct: 37},
+    {name: 'Licences', cost: 50000, pct: 15},
+    {name: 'Services', cost: 5000, pct: 2}
+  ];
+  
+  let html = '<div class="table-wrapper"><table class="data-table">';
+  html += '<thead><tr><th>Category</th><th class="align-right">Cost</th><th class="align-right">% of Total</th></tr></thead>';
+  html += '<tbody>';
+  categories.forEach(c => {
+    html += `<tr><td class="strong">${c.name}</td><td class="align-right">${fmt(c.cost)}</td><td class="align-right">${pct(c.pct)}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function generateSAASTable() {
+  const services = [
+    {name: 'Mongo Atlas', provider: 'Mongo', cost: 75000, pct: 58},
+    {name: 'GitHub Licenses', provider: 'DevOps', cost: 35000, pct: 27},
+    {name: 'GitHub Actions', provider: 'DevOps', cost: 20000, pct: 15}
+  ];
+  
+  let html = '<div class="table-wrapper"><table class="data-table">';
+  html += '<thead><tr><th>Service</th><th>Provider</th><th class="align-right">Cost</th><th class="align-right">% of Total</th></tr></thead>';
+  html += '<tbody>';
+  services.forEach(s => {
+    html += `<tr><td class="strong">${s.name}</td><td>${s.provider}</td><td class="align-right">${fmt(s.cost)}</td><td class="align-right">${pct(s.pct)}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+// Domain page tables
+function generateDCostsTable() {
+  const data = [
+    {period: 'Jan 25', type: 'Historical', cost: 1250},
+    {period: 'Feb 25', type: 'Historical', cost: 1220},
+    {period: 'Mar 25', type: 'Historical', cost: 1050},
+    {period: 'Apr 25', type: 'Historical', cost: 1010},
+    {period: 'May 25', type: 'Historical', cost: 1150},
+    {period: 'Jun 25', type: 'Historical', cost: 1080},
+    {period: 'Jul 25', type: 'Historical', cost: 1100},
+    {period: 'Aug 25', type: 'Historical', cost: 1150},
+    {period: 'Sep 25', type: 'Historical', cost: 1200},
+    {period: 'Oct 25', type: 'Historical', cost: 1200},
+    {period: 'Nov 25', type: 'Historical', cost: 1310},
+    {period: 'Dec 25', type: 'Historical', cost: 1850},
+    {period: 'Jan 26', type: 'Forecast', cost: 1310},
+    {period: 'Feb 26', type: 'Forecast', cost: 1340},
+    {period: 'Mar 26', type: 'Forecast', cost: 1340},
+    {period: 'Apr 26', type: 'Forecast', cost: 1200},
+    {period: 'May 26', type: 'Forecast', cost: 1200},
+    {period: 'Jun 26', type: 'Forecast', cost: 1190},
+    {period: 'Jul 26', type: 'Forecast', cost: 640}
+  ];
+  
+  let html = '<div class="table-wrapper"><table class="data-table">';
+  html += '<thead><tr><th>Period</th><th>Type</th><th class="align-right">Cost ($M)</th></tr></thead>';
+  html += '<tbody>';
+  data.forEach(d => {
+    const badge = d.type === 'Forecast' ? 'info' : '';
+    html += `<tr><td class="strong">${d.period}</td><td>${badge ? '<span class="badge '+badge+'">'+d.type+'</span>' : d.type}</td><td class="align-right">${fmt(d.cost, '$')}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function generateDRankingTable() {
+  const categories = [
+    {name: 'Other', pct: 63, amount: 1430100},
+    {name: 'Compute', pct: 16, amount: 363200},
+    {name: 'Networking', pct: 10, amount: 227000},
+    {name: 'Storage', pct: 6, amount: 136200},
+    {name: 'AI', pct: 2, amount: 45400}
+  ];
+  
+  let html = '<div class="table-wrapper"><table class="data-table">';
+  html += '<thead><tr><th>Category</th><th class="align-right">Percentage</th><th class="align-right">Amount</th></tr></thead>';
+  html += '<tbody>';
+  categories.forEach(c => {
+    html += `<tr><td class="strong">${c.name}</td><td class="align-right">${pct(c.pct)}</td><td class="align-right">${fmt(c.amount, '$')}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+function generateDSavingsTable() {
+  const actions = [
+    {name: 'Wasted Resources', exec: 10.6, pot: 1.08},
+    {name: 'Savings Plans', exec: 6.25, pot: 6.4},
+    {name: 'Rebiller', exec: 0, pot: 1.48},
+    {name: 'Migration', exec: 0, pot: 2.02},
+    {name: 'Reservation', exec: 0, pot: 1.11},
+    {name: 'IaaS Stop', exec: 0.55, pot: 1.16},
+    {name: 'Rightsizing', exec: 0, pot: 1.2},
+    {name: 'BYOL', exec: 0, pot: 0.08}
+  ];
+  
+  let html = '<div class="table-wrapper"><table class="data-table">';
+  html += '<thead><tr><th>FinOps Action</th>';
+  html += '<th class="align-right"><span class="color-dot" style="background:var(--b2b-state-success-01);"></span>Executed (%)</th>';
+  html += '<th class="align-right"><span class="color-dot" style="background:var(--b2b-state-alert-01);"></span>Potential (%)</th>';
+  html += '<th class="align-right">Total (%)</th>';
+  html += '</tr></thead><tbody>';
+  actions.forEach(a => {
+    const total = a.exec + a.pot;
+    html += `<tr><td class="strong">${a.name}</td><td class="align-right">${a.exec.toFixed(2)}%</td><td class="align-right">${a.pot.toFixed(2)}%</td><td class="align-right strong">${total.toFixed(2)}%</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
 function fpToggle(id, btn) {
   const body = document.getElementById('body-' + id);
   if (!body) return;
   const toggleGroup = btn.closest('.panel-toggle');
   const btns = toggleGroup ? Array.from(toggleGroup.querySelectorAll('.panel-toggle__btn')) : [];
   const btnIndex = btns.indexOf(btn);
-  const isTableBtn = btnIndex === 1; // second button is always "Tabla"
+  const isTableBtn = btnIndex === 1;
 
-  // Update active state — always set to the clicked button
+  // Update active state
   btns.forEach(function (b) { b.classList.remove('active'); });
   btn.classList.add('active');
 
@@ -96,13 +314,32 @@ function fpToggle(id, btn) {
 
   if (isTableBtn) {
     body.style.display = 'none';
-    if (!document.getElementById('table-' + id)) {
-      const placeholder = document.createElement('div');
-      placeholder.id = 'table-' + id;
-      placeholder.style.cssText = 'padding:16px;font-size:13px;color:var(--b2b-brand-blue-02);min-height:200px;display:flex;align-items:center;justify-content:center;';
-      placeholder.innerHTML = '<em>Vista tabla no disponible en esta demo.</em>';
-      body.parentNode.insertBefore(placeholder, body.nextSibling);
-    }
+    
+    // Remove old table if exists
+    const oldTable = document.getElementById('table-' + id);
+    if (oldTable) oldTable.remove();
+    
+    // Generate new table
+    const tableDiv = document.createElement('div');
+    tableDiv.id = 'table-' + id;
+    tableDiv.style.cssText = 'background:var(--b2b-white);';
+    
+    // Route to appropriate generator
+    const generators = {
+      'ranking': generateRankingTable,
+      'costs': generateCostsTable,
+      'tracker': generateTrackerTable,
+      'optimizer': generateOptimizerTable,
+      'dc': generateDCTable,
+      'saas': generateSAASTable,
+      'd-costs': generateDCostsTable,
+      'd-ranking': generateDRankingTable,
+      'd-savings': generateDSavingsTable
+    };
+    
+    tableDiv.innerHTML = generators[id] ? generators[id]() : '<div style="padding:24px;color:var(--b2b-brand-blue-02);"><em>Table view not configured for this panel.</em></div>';
+    body.parentNode.insertBefore(tableDiv, body.nextSibling);
+    
   } else {
     const tbl = document.getElementById('table-' + id);
     if (tbl) tbl.remove();
@@ -748,6 +985,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initDRanking();
   initDSavings();
 
+
   requestAnimationFrame(syncTrackerServicesHeight);
   window.addEventListener('resize', syncTrackerServicesHeight);
 });
+
