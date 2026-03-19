@@ -3,29 +3,29 @@
    ───────────────────────────────────────────────────────────── */
 
 /* ── Color tokens (mapped to B2B CSS variables) ─────────────────────────────────────────── */
-// --b2b-brand-blue-01: #2d373d  →  C/Z use case: titles, dark text, backgrounds
-// --b2b-brand-blue-02: #526570  →  C/Z use case: secondary text, borders, icons
+// --b2b-brand-blue-01: #2d373d  →  Z.brand1  titles, dark text
+// --b2b-brand-blue-02: #526570  →  Z.brand2  secondary text, borders, icons
 // --b2b-brand-blue-03: #9cb0bc  →  Z.brand4  percentage values
 // --b2b-brand-blue-05: #d8dfe4  →  Z.brand5  borders, dividers
 // --b2b-brand-blue-06: #e8ebed  →  Z.brand6  light backgrounds
-// --b2b-state-info-01: #0d82bd  →  C.c4  blue accent (managed, services)
-// --b2b-state-success-01: #008c47  →  C.c5  green (executed, positive deltas)
-// --b2b-state-error-01: #da2a2a  →  C.c8  red (pending, errors, negative deltas)
-// --b2b-state-alert-01: #e46b15  →  C.c3  orange (services, alerts)
-// --b2b-support-03-yellow: #ffd618  →  C.c6  yellow
+// --b2b-state-info-01: #0d82bd  →  C.c4  blue accent (managed, services, compute)
+// --b2b-state-success-01: #008c47  →  C.c5  green (executed, positive deltas, networking)
+// --b2b-state-error-01: #da2a2a  →  C.c8  red (pending, errors, negative deltas, forecast, other)
+// --b2b-state-alert-01: #e46b15  →  C.c3  orange (services, alerts, potential)
 // --b2b-support-05-turquoise: #0ca6b3  →  C.c1  teal (Mongo Atlas)
-// --b2b-support-08-purple: #a51783  →  Cloud brand color
-// --b2b-customer-gold: #ac9316  →  SaaS brand color
-// --b2b-customer-platinum: #7994a4  →  Datacenter brand color
+// --b2b-support-08-purple: #a51783  →  C.cloud  purple (Cloud brand)
+// --b2b-customer-gold: #ac9316  →  C.saas  gold (SaaS brand, DevOps Azure)
+// --b2b-customer-platinum: #7994a4  →  C.dc  platinum (Datacenter brand, AI)
 const C = {
-  c1: '#0CA6B3',  // teal (was #349EA0 → turquoise)
-  c2: '#C83371',  // pink/red (unused, keeping for reference)
-  c3: '#E46B15',  // orange (alert/aws)
-  c4: '#0D82BD',  // blue (info/managed)
-  c5: '#008C47',  // green (success/executed - was #28A545 → official green)
-  c6: '#FFD618',  // yellow (was #FFD240 → official yellow)
-  c7: '#526570',  // grey-medium (blue-02)
-  c8: '#DA2A2A',  // red (error/pending)
+  c1: '#0CA6B3',  // teal (Mongo)
+  c3: '#E46B15',  // orange (alert/potential)
+  c4: '#0D82BD',  // blue (info/managed/compute/historical)
+  c5: '#008C47',  // green (success/executed/networking)
+  c8: '#DA2A2A',  // red (error/pending/forecast/other)
+  white: '#FFFFFF',  // white (borders, backgrounds, tooltips)
+  cloud: '#A51783',  // purple (Cloud product)
+  dc: '#7994A4',  // platinum (Datacenter product)
+  saas: '#AC9316',  // gold (SaaS product)
 };
 const Z = {
   brand1: '#2D373D',  // blue-01 (dark text, titles)
