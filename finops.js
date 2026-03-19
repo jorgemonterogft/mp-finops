@@ -297,8 +297,7 @@ function initOptimizer() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
-          titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
+          ...TOOLTIP_OPTS,
           position: 'average',
           yAlign: 'top',
           caretPadding: 12,
@@ -331,8 +330,7 @@ function initOptimizer() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
-          titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
+          ...TOOLTIP_OPTS,
           callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.x}%` }
         },
       },
@@ -408,13 +406,7 @@ function initDC() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#fff',
-          borderColor: Z.brand5,
-          borderWidth: 1,
-          titleColor: Z.brand1,
-          bodyColor: Z.brand2,
-          padding: 10,
-          cornerRadius: 6,
+          ...TOOLTIP_OPTS,
           callbacks: {
             title(items) {
               return items[0]?.raw?._data?.label ?? '';
@@ -478,8 +470,7 @@ function initSaas() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
-          titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
+          ...TOOLTIP_OPTS,
           position: 'average',
           yAlign: 'top',
           caretPadding: 12,
@@ -664,8 +655,7 @@ function initDRanking() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
-          titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
+          ...TOOLTIP_OPTS,
           callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` },
         },
       },
@@ -731,8 +721,7 @@ function initDSavings() {
           labels: { boxWidth: 10, boxHeight: 10, borderRadius: 2, padding: 16, color: Z.brand2, font: { size: 12 } },
         },
         tooltip: {
-          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
-          titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
+          ...TOOLTIP_OPTS,
           callbacks: { label: ctx => ctx.parsed.x > 0 ? ` ${ctx.dataset.label}: ${ctx.parsed.x}%` : null },
         },
       },
