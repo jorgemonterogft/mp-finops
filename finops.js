@@ -339,6 +339,36 @@ function generateDSavingsTable() {
   return html;
 }
 
+function fpToggleAll(btn) {
+  const wrapper = btn.closest('.page-header__toggle');
+  const allBtns = Array.from(wrapper.querySelectorAll('.page-header__toggle-btn'));
+  const isTableMode = allBtns.indexOf(btn) === 1;
+
+  // Update global toggle active state
+  allBtns.forEach(function (b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+
+  // Collect all panel IDs from the page
+  const panelBtns = document.querySelectorAll('.panel-toggle__btn[onclick]');
+  const seen = new Set();
+  panelBtns.forEach(function (pb) {
+    const match = pb.getAttribute('onclick').match(/fpToggle\('([^']+)'/);
+    if (!match) return;
+    const id = match[1];
+    if (seen.has(id)) return;
+    seen.add(id);
+
+    // Find the panel toggle group and simulate clicking the right button
+    const toggleGroup = pb.closest('.panel-toggle');
+    if (!toggleGroup) return;
+    const groupBtns = Array.from(toggleGroup.querySelectorAll('.panel-toggle__btn'));
+    const target = isTableMode ? groupBtns[1] : groupBtns[0];
+    if (target && !target.classList.contains('active')) {
+      fpToggle(id, target);
+    }
+  });
+}
+
 function fpToggle(id, btn) {
   const body = document.getElementById('body-' + id);
   if (!body) return;
