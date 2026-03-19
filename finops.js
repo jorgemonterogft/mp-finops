@@ -42,13 +42,16 @@ function alpha(hex, a) {
   return `rgba(${r},${g},${b},${a})`;
 }
 
+/* ── Constants ───────────────────────────────────────────── */
+const FONT_FAMILY = "'DM Sans', system-ui, sans-serif";
+
 /* ── Global Chart.js defaults ─────────────────────────────── */
-Chart.defaults.font.family = "'DM Sans', system-ui, sans-serif";
+Chart.defaults.font.family = FONT_FAMILY;
 Chart.defaults.font.size   = 12;
 Chart.defaults.color       = Z.brand2;
 
 const TOOLTIP_OPTS = {
-  backgroundColor: '#fff',
+  backgroundColor: C.white,
   borderColor: Z.brand5,
   borderWidth: 1,
   titleColor: Z.brand1,
@@ -137,9 +140,9 @@ function initMonthly() {
     data: {
       labels: MONTHS,
       datasets: [
-        { label: 'Cloud',       data: MONTHLY_CLOUD, backgroundColor: '#A51783', borderWidth: 2, borderColor: '#fff', borderSkipped: false, stack: 'stack' },
-        { label: 'Datacenter',  data: MONTHLY_DC,    backgroundColor: '#7994A4', borderWidth: 2, borderColor: '#fff', borderSkipped: false, stack: 'stack' },
-        { label: 'SaaS',        data: MONTHLY_SAAS,  backgroundColor: '#AC9316', borderWidth: 2, borderColor: '#fff', borderSkipped: false, stack: 'stack' },
+        { label: 'Cloud',       data: MONTHLY_CLOUD, backgroundColor: C.cloud, borderWidth: 2, borderColor: C.white, borderSkipped: false, stack: 'stack' },
+        { label: 'Datacenter',  data: MONTHLY_DC,    backgroundColor: C.dc, borderWidth: 2, borderColor: C.white, borderSkipped: false, stack: 'stack' },
+        { label: 'SaaS',        data: MONTHLY_SAAS,  backgroundColor: C.saas, borderWidth: 2, borderColor: C.white, borderSkipped: false, stack: 'stack' },
       ],
     },
     options: {
@@ -173,7 +176,7 @@ function initRanking() {
       datasets: [{
         label: 'Cost',
         data: RANKING_VALUES,
-        backgroundColor: '#A51783',
+        backgroundColor: C.cloud,
       }],
     },
     options: {
@@ -197,7 +200,7 @@ function initRanking() {
 // Cloud Services data
 const SERVICES = ['EC2 / VMs', 'RDS / SQL', 'Storage', 'AKS / EKS', 'Networking'];
 const SERVICE_VALUES = [310, 100, 70, 60, 50];  // in K
-const SERVICE_COLORS = '#0D82BD';  // single blue color
+const SERVICE_COLORS = C.c4;  // single blue color
 
 let trackerServicesChart = null;
 
@@ -254,7 +257,7 @@ function initOptimizer() {
   const ctx = document.getElementById('chart-optimizer');
   if (!ctx) return;
   const cssVars = getComputedStyle(document.documentElement);
-  const pendingColor = cssVars.getPropertyValue('--Customer-Platinium').trim() || '#7994A4';
+  const pendingColor = cssVars.getPropertyValue('--Customer-Platinium').trim() || C.dc;
 
   // Draw centre text plugin
   const plugin = {
@@ -266,10 +269,10 @@ function initOptimizer() {
       c.textBaseline = 'middle';
       const cx = left + width / 2;
       const cy = top + height / 2;
-      c.font = 'bold 16px "DM Sans", system-ui';
+      c.font = `bold 16px ${FONT_FAMILY}`;
       c.fillStyle = Z.brand1;
       c.fillText('10.24%', cx, cy - 6);
-      c.font = '10px "DM Sans", system-ui';
+      c.font = `10px ${FONT_FAMILY}`;
       c.fillStyle = Z.brand2;
       c.fillText('Savings Rate', cx, cy + 10);
       c.restore();
@@ -282,10 +285,10 @@ function initOptimizer() {
     data: {
       labels: ['Executed','Managed','Pending'],
       datasets: [{
-        data: [30, 2, 68],
-        backgroundColor: ['#008C47', '#0D82BD', pendingColor],
+        data: [45, 15, 40],
+        backgroundColor: [C.c5, C.c4, pendingColor],
         borderWidth: 2,
-        borderColor: '#fff',
+        borderColor: C.white,
         cutout: '68%',
       }],
     },
@@ -294,7 +297,7 @@ function initOptimizer() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#fff', borderColor: Z.brand5, borderWidth: 1,
+          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
           titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
           position: 'average',
           yAlign: 'top',
@@ -317,9 +320,9 @@ function initOptimizer() {
     data: {
       labels: ACTIONS,
       datasets: [
-        { label: 'Executed', data: [45,20,30,15,25,35,40,10], backgroundColor: '#008C47', borderWidth: 2, borderColor: '#fff', borderSkipped: ['left', 'top', 'bottom'], stack: 'opt' },
-        { label: 'Managed',  data: [15,10,5,8,12,10,8,5],     backgroundColor: '#0D82BD', borderWidth: 2, borderColor: '#fff', borderSkipped: ['left', 'top', 'bottom'], stack: 'opt' },
-        { label: 'Pending',  data: [40,70,65,77,63,55,52,85], backgroundColor: pendingColor, borderWidth: 2, borderColor: '#fff', borderSkipped: ['left', 'top', 'bottom'], stack: 'opt' },
+        { label: 'Executed', data: [45,20,30,15,25,35,40,10], backgroundColor: C.c5, borderWidth: 2, borderColor: C.white, borderSkipped: ['left', 'top', 'bottom'], stack: 'opt' },
+        { label: 'Managed',  data: [15,10,5,8,12,10,8,5],     backgroundColor: C.c4, borderWidth: 2, borderColor: C.white, borderSkipped: ['left', 'top', 'bottom'], stack: 'opt' },
+        { label: 'Pending',  data: [40,70,65,77,63,55,52,85], backgroundColor: pendingColor, borderWidth: 2, borderColor: C.white, borderSkipped: ['left', 'top', 'bottom'], stack: 'opt' },
       ],
     },
     options: {
@@ -328,7 +331,7 @@ function initOptimizer() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#fff', borderColor: Z.brand5, borderWidth: 1,
+          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
           titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
           callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.x}%` }
         },
@@ -363,7 +366,7 @@ function initDC() {
         tree: DC_DATA.map(d => ({ ...d })),
         key: 'value',
         borderWidth: 2,
-        borderColor: '#fff',
+        borderColor: C.white,
         spacing: 2,
         backgroundColor(ctx) {
           const item = ctx.raw?._data;
@@ -380,7 +383,7 @@ function initDC() {
             const item = ctx.raw?._data;
             const found = item ? DC_DATA.find(d => d.label === item.label) : null;
             const light = [Z.brand4, Z.brand5];
-            return (found && light.includes(found.color)) ? Z.brand1 : '#fff';
+            return (found && light.includes(found.color)) ? Z.brand1 : C.white;
           },
           font: [
             { size: 13, weight: '600' },
@@ -439,8 +442,8 @@ function initSaas() {
   const SAAS_DEVOPS = 55;
   const SAAS_TOTAL = SAAS_MONGO + SAAS_DEVOPS;
   const SAAS_MONGO_PCT = Math.round((SAAS_MONGO / SAAS_TOTAL) * 100);
-  const COLOR_MONGO = '#E46B15';
-  const COLOR_DEVOPS = '#AC9316';
+  const COLOR_MONGO = C.c3;
+  const COLOR_DEVOPS = C.saas;
 
   const plugin = {
     id: 'saasCentre',
@@ -449,9 +452,9 @@ function initSaas() {
       c.save();
       c.textAlign = 'center'; c.textBaseline = 'middle';
       const cx = left + width / 2, cy = top + height / 2;
-      c.font = 'bold 18px "DM Sans", system-ui'; c.fillStyle = Z.brand1;
+      c.font = `bold 18px ${FONT_FAMILY}`; c.fillStyle = Z.brand1;
       c.fillText(`${SAAS_MONGO_PCT}%`, cx, cy - 7);
-      c.font = '11px "DM Sans", system-ui'; c.fillStyle = Z.brand2;
+      c.font = `11px ${FONT_FAMILY}`; c.fillStyle = Z.brand2;
       c.fillText('Mongo', cx, cy + 11);
       c.restore();
     }
@@ -466,7 +469,7 @@ function initSaas() {
         data: [SAAS_MONGO, SAAS_DEVOPS],
         backgroundColor: [COLOR_MONGO, COLOR_DEVOPS],
         borderWidth: 2,
-        borderColor: '#fff',
+        borderColor: C.white,
         cutout: '68%',
       }],
     },
@@ -475,7 +478,7 @@ function initSaas() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#fff', borderColor: Z.brand5, borderWidth: 1,
+          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
           titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
           position: 'average',
           yAlign: 'top',
@@ -557,7 +560,7 @@ function initDCosts() {
       c.lineTo(chartArea.right, yPos);
       c.stroke();
       c.setLineDash([]);
-      c.font = '11px "DM Sans", system-ui';
+      c.font = `11px ${FONT_FAMILY}`;
       c.fillStyle = Z.brand2;
       c.textAlign = 'left';
       c.fillText(`Avg. ${AVG.toLocaleString('es-ES', {minimumFractionDigits:3})}`, chartArea.left + 4, yPos - 5);
@@ -635,7 +638,7 @@ function initDRanking() {
       const cx = left + width / 2, cy = top + height / 2;
       c.save();
       c.textAlign = 'center'; c.textBaseline = 'middle';
-      c.font = 'bold 22px "DM Sans", system-ui';
+      c.font = `bold 22px ${FONT_FAMILY}`;
       c.fillStyle = Z.brand1;
       c.fillText(TOTAL_LABEL, cx, cy);
       c.restore();
@@ -652,7 +655,7 @@ function initDRanking() {
         data: VALUES,
         backgroundColor: COLORS,
         borderWidth: 2,
-        borderColor: '#fff',
+        borderColor: C.white,
         cutout: '65%',
       }],
     },
@@ -661,7 +664,7 @@ function initDRanking() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#fff', borderColor: Z.brand5, borderWidth: 1,
+          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
           titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
           callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` },
         },
@@ -702,7 +705,7 @@ function initDSavings() {
           data: EXECUTED,
           backgroundColor: C.c5,
           borderWidth: 2,
-          borderColor: '#fff',
+          borderColor: C.white,
           borderSkipped: false,
           stack: 'savings',
         },
@@ -711,7 +714,7 @@ function initDSavings() {
           data: POTENTIAL,
           backgroundColor: C.c3,
           borderWidth: 2,
-          borderColor: '#fff',
+          borderColor: C.white,
           borderSkipped: false,
           stack: 'savings',
         },
@@ -728,7 +731,7 @@ function initDSavings() {
           labels: { boxWidth: 10, boxHeight: 10, borderRadius: 2, padding: 16, color: Z.brand2, font: { size: 12 } },
         },
         tooltip: {
-          backgroundColor: '#fff', borderColor: Z.brand5, borderWidth: 1,
+          backgroundColor: C.white, borderColor: Z.brand5, borderWidth: 1,
           titleColor: Z.brand1, bodyColor: Z.brand2, padding: 10, cornerRadius: 6,
           callbacks: { label: ctx => ctx.parsed.x > 0 ? ` ${ctx.dataset.label}: ${ctx.parsed.x}%` : null },
         },
