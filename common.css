@@ -5,6 +5,7 @@
 
 /* ── Design tokens ─────────────────────────────────────────── */
 :root {
+  /* Brand colors */
   --b2b-brand-blue-01: #2d373d;
   --b2b-brand-blue-02: #526570;
   --b2b-brand-blue-03: #9cb0bc;
@@ -14,8 +15,30 @@
   --b2b-brand-red-01:  #df0027;
   --b2b-white:         #ffffff;
 
+  /* State colors */
+  --b2b-state-info-01: #0d82bd;
+  --b2b-state-success-01: #008c47;
+  --b2b-state-error-01: #da2a2a;
+  --b2b-state-alert-01: #e46b15;
+
+  /* Support colors */
+  --b2b-support-03-yellow: #ffd618;
+  --b2b-support-05-turquoise: #0ca6b3;
+  --b2b-support-08-purple: #a51783;
+
+  /* Customer/Product colors */
+  --b2b-customer-gold: #ac9316;
+  --b2b-customer-platinum: #7994a4;
+
+  /* Legacy aliases (deprecated, use above tokens) */
+  --State-Alert-01: var(--b2b-state-alert-01);
+  --Customer-Gold: var(--b2b-customer-gold);
+  --Customer-Platinium: var(--b2b-customer-platinum);
+
+  /* Typography */
   --font-family: 'DM Sans', system-ui, sans-serif;
 
+  /* Layout */
   --layout-padding: 72px;
 }
 
