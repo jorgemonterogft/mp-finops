@@ -192,12 +192,7 @@
     .applied-filters__clear img { width: 22px; height: 22px; display: block; }
 
     /* ── KPI row ──────────────────────────────────────────── */
-    .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
-    .kpi-card { background: var(--b2b-white); border: 0.5px solid var(--b2b-brand-blue-05); border-radius: 8px; box-shadow: 0px 2px 8px 0px rgba(82,101,112,.2); padding: 24px; display: flex; align-items: center; justify-content: center; }
-    .kpi-card__center { display: flex; flex-direction: column; gap: 4px; align-items: center; text-align: center; width: 100%; }
-    .kpi-card__label { font-size: 16px; font-weight: 400; color: var(--b2b-brand-blue-01); line-height: 1; }
-    .kpi-card__value { font-size: 20px; font-weight: 500; line-height: 28px; color: var(--b2b-brand-blue-01); }
-    .kpi-card__period { font-size: 14px; font-weight: 400; font-style: italic; color: var(--b2b-brand-blue-02); line-height: 1; }
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .kpi-card { background: var(--Brand-Base-White, #FFF); border: 0.5px solid var(--b2b-brand-blue-05); border-radius: 8px; box-shadow: 0px 2px 8px 0px rgba(82,101,112,.2); padding: 24px; display: flex; align-items: center; gap: 24px; }
     .kpi-card__icon { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 10px; }
     .kpi-card__icon--blue  { background: #EEF6FB; color: var(--b2b-state-info-01); }
@@ -365,47 +360,6 @@
       border: 1px solid var(--b2b-brand-blue-05);
       max-width: 200px;
     }
-
-    /* ── Domain 2×2 grid ──────────────────────────────────── */
-    .domain-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      width: 100%;
-    }
-
-    /* ── Chart placeholder (Figma guide style) ────────────── */
-    .domain-chart-placeholder {
-      flex: 1;
-      min-height: 300px;
-      background: #eadaff;
-      border: 1px dashed #9747ff;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-family);
-      font-size: 16px;
-      font-weight: 500;
-      color: #9747ff;
-    }
-
-    /* ── Panel 2: Doughnut + legend layout ────────────────── */
-    .d-ranking-layout { display: flex; gap: 24px; align-items: center; }
-    .d-ranking-donut  { position: relative; width: 260px; height: 260px; flex-shrink: 0; }
-    .d-ranking-donut canvas { display: block; width: 100% !important; height: 100% !important; }
-    .d-ranking-legend { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-    .d-ranking-legend__item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-    .d-ranking-legend__swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-    .d-ranking-legend__name  { flex: 1; color: var(--b2b-brand-blue-02); }
-    .d-ranking-legend__pct   { font-weight: 500; color: var(--b2b-brand-blue-01); min-width: 36px; text-align: right; }
-
-    /* ── Panel 4: Recommended Actions ─────────────────────── */
-    .d-savings-actions__title { font-size: 13px; font-weight: 600; color: var(--b2b-brand-red-01); margin-bottom: 8px; }
-    .d-savings-actions__list { list-style: none; display: flex; flex-direction: column; gap: 4px; padding: 0; }
-    .d-savings-actions__list li { font-size: 12px; color: var(--b2b-brand-blue-02); padding-left: 12px; position: relative; }
-    .d-savings-actions__list li::before { content: '•'; position: absolute; left: 0; color: var(--b2b-brand-blue-03); }
-    .d-savings-actions__list li strong { color: var(--b2b-brand-blue-01); font-weight: 500; }
   </style>
 </head>
 <body>
@@ -451,9 +405,9 @@
 <!-- NAV BAR -->
 <nav class="site-navbar">
   <div class="site-navbar__menu">
-    <a class="site-navbar__item" href="finops.html">Inicio</a>
-    <a class="site-navbar__item site-navbar__item--active" href="finops-domain.html">Dominios</a>
-    <a class="site-navbar__item" href="finops.html">Productos</a>
+    <a class="site-navbar__item" href="finops-v1-product.html">Inicio</a>
+    <a class="site-navbar__item" href="finops-v1-domain.html">Dominios</a>
+    <a class="site-navbar__item site-navbar__item--active" href="finops-v1-product.html">Productos</a>
   </div>
   <a class="site-navbar__support" href="#">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d81e05" stroke-width="1.5">
@@ -468,11 +422,16 @@
 <div class="subheader">
   <div class="subheader__breadcrumb">
     <!-- Entity icon -->
-    <img src="assets/icon-Domain.svg" alt="" width="24" height="24">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="#526570" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" stroke="#526570" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="12" y1="22.08" x2="12" y2="12" stroke="#526570" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
     <span class="subheader__sep">/</span>
-    <span class="subheader__label">[Dominio]</span>
+    <span class="subheader__label">[Producto]</span>
     <span class="subheader__sep">/</span>
     <div class="subheader__level">
+      <!-- Product icon -->
       <img src="assets/Subheader/Icon.svg" alt="" width="24" height="24">
       <span class="subheader__label subheader__label--active">Pluto365</span>
     </div>
@@ -595,50 +554,51 @@
 
   <div class="kpi-row">
     <div class="kpi-card">
-      <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+      <div class="kpi-card__icon kpi-card__icon--blue">
+        <img src="assets/icon-euro-circle.svg" width="24" height="24" alt="">
+      </div>
+      <div class="kpi-card__body">
+        <div class="kpi-card__label">Total costs</div>
+        <div class="kpi-card__value">€1.125M</div>
       </div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+      <div class="kpi-card__icon kpi-card__icon--teal">
+        <img src="assets/icon-cloud-check.svg" width="24" height="24" alt="">
+      </div>
+      <div class="kpi-card__body">
+        <div class="kpi-card__label">Cloud cost</div>
+        <div class="kpi-card__value">€670K</div>
       </div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+      <div class="kpi-card__icon kpi-card__icon--grey">
+        <img src="assets/icon-data-base.svg" width="24" height="24" alt="">
+      </div>
+      <div class="kpi-card__body">
+        <div class="kpi-card__label">Datacenter cost</div>
+        <div class="kpi-card__value">€325K</div>
       </div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+      <div class="kpi-card__icon kpi-card__icon--green">
+        <img src="assets/Icon-Producto.svg" width="24" height="24" alt="">
       </div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+      <div class="kpi-card__body">
+        <div class="kpi-card__label">SaaS cost</div>
+        <div class="kpi-card__value">€130K</div>
       </div>
     </div>
   </div>
 
-  <!-- ── PANELS GRID 2×2 ──────────────────────────────────── -->
-  <div class="domain-grid">
+  <!-- ── ROW 2: Ranking + Monthly ───────────────────────────── -->
+  <div class="dash-grid">
 
-    <!-- Panel 1: Total Costs and Forecasting -->
+    <!-- Ranking by Product/Domain -->
     <div class="panel">
       <div class="panel__inner">
         <div class="panel__header">
-          <span class="panel__title">Total Costs and Forecasting for the next 6 months</span>
+          <span class="panel__title">Ranking by Product/Domain</span>
           <div class="panel__actions">
             <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
             <div class="export-dropdown">
@@ -651,26 +611,24 @@
               </div>
             </div>
             <div class="panel-toggle">
-              <button class="panel-toggle__btn active" data-tooltip="Gráfico de barras" onclick="fpToggle('d-costs',this)"><img src="assets/icon-bars-toggle.svg" alt=""></button>
-              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('d-costs',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn active" data-tooltip="Gráfico de barras" onclick="fpToggle('ranking',this)"><img src="assets/icon-bars-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('ranking',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
             </div>
           </div>
         </div>
         <div class="panel__divider"></div>
-        <div class="panel__body" id="body-d-costs">
-          <div class="chart-area" style="height:320px">
-            <canvas id="chart-d-costs"></canvas>
-          </div>
+        <div class="panel__body" id="body-ranking">
+          <div class="chart-area"><canvas id="chart-ranking"></canvas></div>
         </div>
-        <div class="resumen"><strong>Resumen:</strong> Total costs last 30 days: <strong>$1.97M</strong> · Forecasted peak in Dec 2025 · Avg. monthly: $1.46M</div>
+        <div class="resumen"><strong>Resumen:</strong> MVID RPM lidera con €185K. Top 3 concentra el 44% del total.</div>
       </div>
     </div>
 
-    <!-- Panel 2: Consumption Ranking by Category -->
+    <!-- Monthly Costs by Technology -->
     <div class="panel">
       <div class="panel__inner">
         <div class="panel__header">
-          <span class="panel__title">Consumption Ranking by Category</span>
+          <span class="panel__title">Monthly Costs by Technology</span>
           <div class="panel__actions">
             <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
             <div class="export-dropdown">
@@ -683,55 +641,29 @@
               </div>
             </div>
             <div class="panel-toggle">
-              <button class="panel-toggle__btn active" data-tooltip="Gráfico" onclick="fpToggle('d-ranking',this)"><img src="assets/icon-chart-toggle.svg" alt=""></button>
-              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('d-ranking',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn active" data-tooltip="Gráfico de barras" onclick="fpToggle('monthly',this)"><img src="assets/icon-bars-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('monthly',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
             </div>
           </div>
         </div>
         <div class="panel__divider"></div>
-        <div class="panel__body" id="body-d-ranking">
-          <div class="d-ranking-layout">
-            <div class="d-ranking-donut">
-              <canvas id="chart-d-ranking"></canvas>
-            </div>
-            <div class="d-ranking-legend" id="d-ranking-legend"></div>
-          </div>
+        <div class="panel__body" id="body-monthly">
+          <div class="chart-area"><canvas id="chart-monthly"></canvas></div>
         </div>
-        <div class="resumen"><strong>Resumen:</strong> Total consumption: <strong>2.27M</strong> · Largest category: Other (63%) · Compute 16%</div>
+        <div class="resumen"><strong>Resumen:</strong> Tendencia creciente en 12 meses. Total acumulado: €1.125M.</div>
       </div>
     </div>
 
-    <!-- Panel 3: Account Anomaly Detection -->
-    <div class="panel">
-      <div class="panel__inner">
-        <div class="panel__header">
-          <span class="panel__title">Account Anomaly Detection last 30 days</span>
-          <div class="panel__actions">
-            <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
-            <div class="export-dropdown">
-              <button class="btn-icon" data-tooltip="Descargar" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
-              <div class="export-menu" role="menu">
-                <button class="export-menu__item" role="menuitem">PDF</button>
-                <button class="export-menu__item" role="menuitem">CSV</button>
-                <button class="export-menu__item" role="menuitem">XLSX</button>
-                <button class="export-menu__item" role="menuitem">JSON</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="panel__divider"></div>
-        <div class="panel__body" id="body-d-anomaly">
-          <div class="domain-chart-placeholder">Próximamente</div>
-        </div>
-        <div class="resumen"><strong>Resumen:</strong> Lorem ipsum dolor amet</div>
-      </div>
-    </div>
+  </div>
 
-    <!-- Panel 4: Savings Distribution by FinOps Action -->
+  <!-- ── ROW 3: Cloud Tracker + Cloud Optimizer ─────────────── -->
+  <div class="dash-grid">
+
+    <!-- Cloud Tracker -->
     <div class="panel">
       <div class="panel__inner">
         <div class="panel__header">
-          <span class="panel__title">Savings Distribution by FinOps Action</span>
+          <span class="panel__title">Cloud Tracker</span>
           <div class="panel__actions">
             <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
             <div class="export-dropdown">
@@ -744,28 +676,188 @@
               </div>
             </div>
             <div class="panel-toggle">
-              <button class="panel-toggle__btn active" data-tooltip="Gráfico de barras" onclick="fpToggle('d-savings',this)"><img src="assets/icon-bars-toggle.svg" alt=""></button>
-              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('d-savings',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn active" data-tooltip="Gráfico" onclick="fpToggle('tracker',this)"><img src="assets/icon-chart-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('tracker',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
             </div>
           </div>
         </div>
         <div class="panel__divider"></div>
-        <div class="panel__body" id="body-d-savings">
-          <div class="chart-area" style="height:260px">
-            <canvas id="chart-d-savings"></canvas>
-          </div>
-          <div class="d-savings-actions">
-            <div class="d-savings-actions__title">Recommended Actions:</div>
-            <ul class="d-savings-actions__list">
-              <li>Shut down resources in PoC account <strong>aws-avm-poc-corpusaws-maptech</strong> with <strong>$969,327.70</strong></li>
-              <li>Purchase a <strong>COMPUTE_SP</strong> in MASTER LANDING ZONE with <strong>$276,046.08</strong></li>
-              <li>Purchase a reservation of in MASTER LANDING ZONE with <strong>$238,331.90</strong></li>
-              <li>Shutdown instance with <strong>$203,386.05</strong></li>
-              <li>Shut down resources in PoC account <strong>aws-avm-poc-mreot-mapfrere</strong> with <strong>$175,103.72</strong></li>
-            </ul>
+        <div class="panel__body" id="body-tracker">
+          <div class="tracker-layout">
+            <div class="tracker-col">
+              <div class="tracker-col__title">Top Cloud Providers</div>
+              <div class="tracker-providers">
+                <!-- AWS -->
+                <div class="provider-card">
+                  <div class="provider-icon"><img src="assets/AWS.svg" alt="AWS" /></div>
+                  <div class="provider-body">
+                    <div class="provider-top">
+                      <span class="provider-name">AWS</span>
+                      <span class="provider-value">€430K</span>
+                    </div>
+                    <div class="provider-bottom">
+                      <div class="provider-bar"><div class="provider-bar-fill" style="width:100%"></div></div>
+                      <span class="provider-pct">63%</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Azure -->
+                <div class="provider-card">
+                  <div class="provider-icon"><img src="assets/Azure.svg" alt="Azure" /></div>
+                  <div class="provider-body">
+                    <div class="provider-top">
+                      <span class="provider-name">Azure</span>
+                      <span class="provider-value">€170K</span>
+                    </div>
+                    <div class="provider-bottom">
+                      <div class="provider-bar"><div class="provider-bar-fill" style="width:39.5%"></div></div>
+                      <span class="provider-pct">25%</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- GCP -->
+                <div class="provider-card">
+                  <div class="provider-icon"><img src="assets/Google Cloud.svg" alt="GCP" /></div>
+                  <div class="provider-body">
+                    <div class="provider-top">
+                      <span class="provider-name">GCP</span>
+                      <span class="provider-value">€43K</span>
+                    </div>
+                    <div class="provider-bottom">
+                      <div class="provider-bar"><div class="provider-bar-fill" style="width:10%"></div></div>
+                      <span class="provider-pct">6%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tracker-col tracker-col--services">
+              <div class="tracker-col__title">Top Cloud Services</div>
+              <div class="tracker-services-chart" id="tracker-services-chart"><canvas id="chart-tracker-services"></canvas></div>
+            </div>
           </div>
         </div>
-        <div class="resumen"><strong>Resumen:</strong> Wasted Resources lead at 11.64% · Top action: Shut down PoC accounts</div>
+        <div class="resumen"><strong>Resumen:</strong> AWS concentra el 64% del gasto cloud. EC2/VMs lidera servicios.</div>
+      </div>
+    </div>
+
+    <!-- Cloud Optimizer -->
+    <div class="panel panel--hug-content">
+      <div class="panel__inner">
+        <div class="panel__header">
+          <span class="panel__title">Cloud Optimizer</span>
+          <div class="panel__actions">
+            <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
+            <div class="export-dropdown">
+              <button class="btn-icon" data-tooltip="Descargar" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
+              <div class="export-menu" role="menu">
+                <button class="export-menu__item" role="menuitem">PDF</button>
+                <button class="export-menu__item" role="menuitem">CSV</button>
+                <button class="export-menu__item" role="menuitem">XLSX</button>
+                <button class="export-menu__item" role="menuitem">JSON</button>
+              </div>
+            </div>
+            <div class="panel-toggle">
+              <button class="panel-toggle__btn active" data-tooltip="Gráfico" onclick="fpToggle('optimizer',this)"><img src="assets/icon-chart-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('optimizer',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
+            </div>
+          </div>
+        </div>
+        <div class="panel__divider"></div>
+        <div class="panel__body optimizer-layout" id="body-optimizer">
+          <div class="optimizer-left">
+            <div class="optimizer-chart"><canvas id="chart-optimizer"></canvas></div>
+            <div class="optimizer-stats">
+              <div class="optimizer-stat"><span style="color:var(--b2b-state-success-01);">●</span> Executed: €752.43K (30%)</div>
+              <div class="optimizer-stat"><span style="color:var(--b2b-state-info-01);">●</span> Managed: €27.31K (2%)</div>
+              <div class="optimizer-stat"><span style="color:var(--b2b-state-error-01);">●</span> Pending: €986.01K (68%)</div>
+            </div>
+            <div class="optimizer-total">YTD Identified Savings<br><strong>€2.347M</strong></div>
+          </div>
+          <div class="optimizer-right">
+            <div class="optimizer-title">Savings by FinOps Action</div>
+            <div class="optimizer-matrix"><canvas id="chart-optimizer-matrix"></canvas></div>
+          </div>
+        </div>
+        <div class="resumen"><strong>Resumen:</strong> 10.24% de ahorro identificado. Waste Cleanup y Flexible lideran oportunidades.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── ROW 4: Datacenter Breakdown + SAAS ─────────────────── -->
+  <div class="dash-grid">
+
+    <!-- Datacenter Cost Breakdown -->
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="panel__header">
+          <span class="panel__title">Datacenter Cost Breakdown</span>
+          <div class="panel__actions">
+            <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
+            <div class="export-dropdown">
+              <button class="btn-icon" data-tooltip="Descargar" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
+              <div class="export-menu" role="menu">
+                <button class="export-menu__item" role="menuitem">PDF</button>
+                <button class="export-menu__item" role="menuitem">CSV</button>
+                <button class="export-menu__item" role="menuitem">XLSX</button>
+                <button class="export-menu__item" role="menuitem">JSON</button>
+              </div>
+            </div>
+            <div class="panel-toggle">
+              <button class="panel-toggle__btn active" data-tooltip="Gráfico" onclick="fpToggle('dc',this)"><img src="assets/icon-chart-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('dc',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
+            </div>
+          </div>
+        </div>
+        <div class="panel__divider"></div>
+        <div class="panel__body" id="body-dc">
+          <div class="chart-area"><canvas id="chart-dc"></canvas></div>
+        </div>
+        <div class="resumen"><strong>Resumen:</strong> Infrastructure concentra el 46% del coste datacenter. Total: €325K.</div>
+      </div>
+    </div>
+
+    <!-- SAAS -->
+    <div class="panel">
+      <div class="panel__inner">
+        <div class="panel__header">
+          <span class="panel__title">SAAS</span>
+          <div class="panel__actions">
+            <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
+            <div class="export-dropdown">
+              <button class="btn-icon" data-tooltip="Descargar" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
+              <div class="export-menu" role="menu">
+                <button class="export-menu__item" role="menuitem">PDF</button>
+                <button class="export-menu__item" role="menuitem">CSV</button>
+                <button class="export-menu__item" role="menuitem">XLSX</button>
+                <button class="export-menu__item" role="menuitem">JSON</button>
+              </div>
+            </div>
+            <div class="panel-toggle">
+              <button class="panel-toggle__btn active" data-tooltip="Gráfico" onclick="fpToggle('saas',this)"><img src="assets/icon-chart-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('saas',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
+            </div>
+          </div>
+        </div>
+        <div class="panel__divider"></div>
+        <div class="panel__body" id="body-saas">
+          <div class="saas-layout">
+            <div class="saas-left">
+              <div class="saas-doughnut"><canvas id="chart-saas"></canvas></div>
+              <div class="saas-legend">
+                <div class="saas-legend-item"><span class="saas-legend-dot" style="background:var(--State-Alert-01, #E46B15);"></span>Mongo: €75.000 (58%)</div>
+                <div class="saas-legend-item"><span class="saas-legend-dot" style="background:var(--Customer-Gold, #AC9316);"></span>DevOps: €55.000 (42%)</div>
+              </div>
+            </div>
+            <div class="saas-breakdown">
+              <div class="saas-breakdown__title">Service Breakdown</div>
+              <div class="saas-services"><canvas id="chart-saas-services"></canvas></div>
+              <div class="saas-total">Total SaaS: <strong>€130.000</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="resumen"><strong>Resumen:</strong> Mongo Atlas es el mayor gasto SaaS con €75K (58%). Total: €130K.</div>
       </div>
     </div>
 
