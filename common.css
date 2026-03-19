@@ -1,0 +1,177 @@
+/* ============================================================
+   common.css — Shared header, footer & base tokens
+   ZEUS / MAPFRE design system
+   ============================================================ */
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --b2b-brand-blue-01: #2d373d;
+  --b2b-brand-blue-02: #526570;
+  --b2b-brand-blue-03: #9cb0bc;
+  --b2b-brand-blue-05: #d8dfe4;
+  --b2b-brand-blue-06: #e8ebed;
+  --b2b-brand-blue-07: #f5f6f7;
+  --b2b-brand-red-01:  #df0027;
+  --b2b-white:         #ffffff;
+
+  --font-family: 'DM Sans', system-ui, sans-serif;
+
+  --layout-padding: 72px;
+}
+
+/* ── Reset / base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-family);
+  background: var(--b2b-brand-blue-07);
+  color: var(--b2b-brand-blue-01);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Site header ────────────────────────────────────────────── */
+/*
+   Matches Figma node 201-41733:
+   bg white, px 72px, py 24px, flex row, justify-between, align-center
+*/
+.site-header {
+  background: var(--b2b-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px var(--layout-padding);
+  flex-shrink: 0;
+  /* No box-shadow in Figma — clean white bar */
+}
+
+.site-header__logos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.site-header__logos:hover { opacity: 0.85; }
+
+.site-header__mapfre {
+  height: 19px;
+  width: auto;
+}
+
+.site-header__sep {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--b2b-brand-blue-03);
+  line-height: 1;
+}
+
+.site-header__zeus {
+  height: 24px;
+  width: auto;
+}
+
+/* Right side functions */
+.site-header__functions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Search icon button */
+.site-header__icon-btn {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* User avatar circle */
+.site-header__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--b2b-brand-blue-02);
+  color: var(--b2b-white);
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.site-header__avatar-dot {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--b2b-brand-red-01);
+}
+
+/* Language action link */
+.site-header__lang {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--b2b-brand-blue-02);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Back link used in inner pages */
+.site-header__back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--b2b-brand-blue-02);
+  text-decoration: none;
+}
+
+.site-header__back:hover { color: var(--b2b-brand-blue-01); }
+
+/* ── Site footer ────────────────────────────────────────────── */
+/*
+   Matches Figma node 14:5047/14:5048:
+   bg white, px layout-padding, 72px tall, divider top, text left
+*/
+.site-footer {
+  background: var(--b2b-white);
+  padding: 0 var(--layout-padding);
+  height: 72px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: auto;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--layout-padding);
+  right: var(--layout-padding);
+  height: 1px;
+  background: var(--b2b-brand-blue-05);
+}
+
+.site-footer__text {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--b2b-brand-blue-02);
+}

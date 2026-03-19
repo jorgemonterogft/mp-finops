@@ -201,53 +201,167 @@ body {
   .charts-grid { grid-template-columns: 1fr; padding: var(--space-16); }
 }
 
-/* ─── CHART CARD ─────────────────────────────────────────────────────────── */
+/* ─── CHART CARD (MAPFRE Design System — Container/Desktop) ─────────────── */
+/*
+  Figma spec: outer card has padding:24px, gap:24px (flex column).
+  Divider and tabs border span only the padded content width — NOT edge-to-edge.
+  Structure: .chart-card > .chart-card__inner > header / divider / tabs / body / resumen
+*/
 .chart-card {
-  background: var(--color-bg-primary);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  background: #FFFFFF;
+  border: 0.5px solid #D8DFE4;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px 0px rgba(82, 101, 112, 0.2);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   transition: box-shadow .15s ease;
 }
 
 .chart-card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: 0px 4px 16px 0px rgba(82, 101, 112, 0.25);
 }
 
+/* Inner padded flex column — all content sits here */
+.chart-card__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  flex: 1;
+}
+
+/* Header: title left, icons right */
 .chart-card__header {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
-  padding: var(--space-16) var(--space-16) var(--space-8);
-  border-bottom: 1px solid var(--color-border-subtle);
-}
-
-.chart-card__icon {
-  font-size: 18px;
-  line-height: 1;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .chart-card__title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  line-height: 1.2;
+  font-size: 20px;
+  font-weight: 500;
+  color: #2D373D;
+  line-height: 24px;
+  flex: 1;
 }
 
-.chart-card__desc {
-  font-size: 12px;
-  color: var(--color-text-secondary);
-  margin-top: 1px;
+/* Right-side actions: refresh + toggle */
+.chart-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
 }
 
+.chart-card__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 4px;
+  transition: background .12s ease;
+}
+
+.chart-card__action-btn:hover {
+  background: #E8EBED;
+}
+
+.chart-card__view-toggle {
+  display: flex;
+  align-items: center;
+  background: #E8EBED;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chart-card__view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #E8EBED;
+  border: none;
+  cursor: pointer;
+  color: #526570;
+  transition: background .12s ease, color .12s ease;
+  padding: 0;
+}
+
+.chart-card__view-btn--active {
+  background: #526570;
+  color: #FFFFFF;
+}
+
+.chart-card__view-btn:not(.chart-card__view-btn--active):hover {
+  background: #D8DFE4;
+}
+
+/* Divider — contained within padded area (matches Figma: not edge-to-edge) */
+.chart-card__divider {
+  height: 1px;
+  background: #D8DFE4;
+  flex-shrink: 0;
+}
+
+/* Tabs — auto width, divider at bottom, active tab overlaps with red border */
+.chart-card__tabs {
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 1px solid #D9D9D9;
+  flex-shrink: 0;
+}
+
+/*
+ * Figma tab structure (1624-2721):
+ *   tab  (flex-col, pt:8, pb:12, border-bottom:4px solid #DF0027 when active)
+ *     └── Content  (px:24)   ← padding wraps text only
+ *           └── label text
+ *
+ * Active state: border-bottom: 4px solid #DF0027 on the button itself,
+ * which sits on top of the nav's 1px divider (margin-bottom: -1px).
+ */
+.chart-card__tab {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 24px 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 4px solid transparent;
+  cursor: pointer;
+  font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1A1A1A;
+  white-space: nowrap;
+  /* Sit on top of the nav's 1px divider so active border covers it */
+  margin-bottom: -1px;
+  transition: color .12s ease, border-color .12s ease;
+}
+
+.chart-card__tab--active {
+  font-weight: 500;
+  border-bottom-color: #DF0027;
+}
+
+.chart-card__tab:not(.chart-card__tab--active):hover {
+  color: #526570;
+}
+
+/* Chart body */
 .chart-card__body {
   position: relative;
-  padding: var(--space-16);
   flex: 1;
-  min-height: 300px;
+  min-height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,20 +372,20 @@ body {
   max-height: 100%;
 }
 
-.chart-card__footer {
-  display: flex;
-  align-items: center;
-  gap: var(--space-8);
-  padding: var(--space-12) var(--space-16);
-  border-top: 1px solid var(--color-border-subtle);
-  background: var(--color-bg-secondary);
-  flex-wrap: wrap;
+/* Resumen box */
+.chart-card__resumen {
+  padding: 8px;
+  background: #E8EBED;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #526570;
+  line-height: 1.5;
+  flex-shrink: 0;
 }
 
-.chart-card__caption {
-  font-size: 12px;
-  color: var(--color-text-secondary);
-  font-style: italic;
+.chart-card__resumen-label {
+  font-weight: 500;
+  color: #526570;
 }
 
 .select-control {

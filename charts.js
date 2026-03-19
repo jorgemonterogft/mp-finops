@@ -118,23 +118,18 @@ const barDatasets = {
     { label:'Auto',  data:[20,25,30,22,35,40], backgroundColor:alpha(ALIAS.chart_c3,0.85), borderColor:ALIAS.chart_c3, borderWidth:1, borderRadius:4 },
   ],
   stacked: [
-    { label:'Vida',  data:[55,60,75,65,80,90], backgroundColor:alpha(ALIAS.chart_c1,0.85), borderColor:ALIAS.chart_c1, borderWidth:1 },
-    { label:'Hogar', data:[30,40,35,50,45,55], backgroundColor:alpha(ALIAS.chart_c2,0.85), borderColor:ALIAS.chart_c2, borderWidth:1 },
-    { label:'Auto',  data:[20,25,30,22,35,40], backgroundColor:alpha(ALIAS.chart_c3,0.85), borderColor:ALIAS.chart_c3, borderWidth:1 },
+    { label:'Vida',  data:[55,60,75,65,80,90], backgroundColor:alpha(ALIAS.chart_c1,0.85), borderColor:'#fff', borderWidth:2 },
+    { label:'Hogar', data:[30,40,35,50,45,55], backgroundColor:alpha(ALIAS.chart_c2,0.85), borderColor:'#fff', borderWidth:2 },
+    { label:'Auto',  data:[20,25,30,22,35,40], backgroundColor:alpha(ALIAS.chart_c3,0.85), borderColor:'#fff', borderWidth:2 },
   ],
 };
 
 document.querySelectorAll('[data-chart="bar"]').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (!btn.dataset.mode) return;
     const mode = btn.dataset.mode;
-    document.querySelectorAll('[data-chart="bar"]').forEach(b => b.classList.remove('btn--active'));
-    btn.classList.add('btn--active');
-    document.querySelectorAll('[data-chart="bar"]').forEach(b => {
-      b.classList.remove('btn--primary');
-      b.classList.add('btn--ghost');
-    });
-    btn.classList.remove('btn--ghost');
-    btn.classList.add('btn--primary');
+    document.querySelectorAll('[data-chart="bar"][data-mode]').forEach(b => b.classList.remove('chart-card__tab--active'));
+    btn.classList.add('chart-card__tab--active');
 
     barChart.data.datasets = barDatasets[mode];
     barChart.options.scales.x.stacked = mode === 'stacked';
@@ -190,13 +185,10 @@ const lineDatasets = {
 
 document.querySelectorAll('[data-chart="line"]').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (!btn.dataset.mode) return;
     const mode = btn.dataset.mode;
-    document.querySelectorAll('[data-chart="line"]').forEach(b => {
-      b.classList.remove('btn--active','btn--primary');
-      b.classList.add('btn--ghost');
-    });
-    btn.classList.remove('btn--ghost');
-    btn.classList.add('btn--primary','btn--active');
+    document.querySelectorAll('[data-chart="line"][data-mode]').forEach(b => b.classList.remove('chart-card__tab--active'));
+    btn.classList.add('chart-card__tab--active');
     lineChart.data.datasets = lineDatasets[mode];
     lineChart.update();
   });
@@ -230,13 +222,10 @@ const pieChart = new Chart(pieCtx, {
 
 document.querySelectorAll('[data-chart="pie"]').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (!btn.dataset.mode) return;
     const pos = btn.dataset.mode === 'right' ? 'right' : 'bottom';
-    document.querySelectorAll('[data-chart="pie"]').forEach(b => {
-      b.classList.remove('btn--active','btn--primary');
-      b.classList.add('btn--ghost');
-    });
-    btn.classList.remove('btn--ghost');
-    btn.classList.add('btn--primary','btn--active');
+    document.querySelectorAll('[data-chart="pie"][data-mode]').forEach(b => b.classList.remove('chart-card__tab--active'));
+    btn.classList.add('chart-card__tab--active');
     pieChart.options.plugins.legend.position = pos;
     pieChart.update();
   });
@@ -271,11 +260,16 @@ const doughnutChart = new Chart(doughnutCtx, {
   }
 });
 
-document.getElementById('doughnutSelect').addEventListener('change', (e) => {
-  const key = e.target.value;
-  doughnutChart.data.labels = doughnutData[key].labels;
-  doughnutChart.data.datasets[0].data = doughnutData[key].data;
-  doughnutChart.update();
+document.querySelectorAll('[data-chart="doughnut"]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (!btn.dataset.mode) return;
+    const key = btn.dataset.mode;
+    document.querySelectorAll('[data-chart="doughnut"][data-mode]').forEach(b => b.classList.remove('chart-card__tab--active'));
+    btn.classList.add('chart-card__tab--active');
+    doughnutChart.data.labels = doughnutData[key].labels;
+    doughnutChart.data.datasets[0].data = doughnutData[key].data;
+    doughnutChart.update();
+  });
 });
 
 /* ─── 5. RADAR CHART ────────────────────────────────────────────────────── */
@@ -324,13 +318,10 @@ const radarDatasets = {
 
 document.querySelectorAll('[data-chart="radar"]').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (!btn.dataset.mode) return;
     const mode = btn.dataset.mode;
-    document.querySelectorAll('[data-chart="radar"]').forEach(b => {
-      b.classList.remove('btn--active','btn--primary');
-      b.classList.add('btn--ghost');
-    });
-    btn.classList.remove('btn--ghost');
-    btn.classList.add('btn--primary','btn--active');
+    document.querySelectorAll('[data-chart="radar"][data-mode]').forEach(b => b.classList.remove('chart-card__tab--active'));
+    btn.classList.add('chart-card__tab--active');
     radarChart.data.datasets = radarDatasets[mode];
     radarChart.update();
   });
@@ -369,13 +360,10 @@ const scatterChart = new Chart(scatterCtx, {
 
 document.querySelectorAll('[data-chart="scatter"]').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (!btn.dataset.mode) return;
     const mode = btn.dataset.mode;
-    document.querySelectorAll('[data-chart="scatter"]').forEach(b => {
-      b.classList.remove('btn--active','btn--primary');
-      b.classList.add('btn--ghost');
-    });
-    btn.classList.remove('btn--ghost');
-    btn.classList.add('btn--primary','btn--active');
+    document.querySelectorAll('[data-chart="scatter"][data-mode]').forEach(b => b.classList.remove('chart-card__tab--active'));
+    btn.classList.add('chart-card__tab--active');
 
     if (mode === 'basic') {
       scatterChart.data.datasets = [{
@@ -437,13 +425,10 @@ const areaDatasets = {
 
 document.querySelectorAll('[data-chart="area"]').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (!btn.dataset.mode) return;
     const mode = btn.dataset.mode;
-    document.querySelectorAll('[data-chart="area"]').forEach(b => {
-      b.classList.remove('btn--active','btn--primary');
-      b.classList.add('btn--ghost');
-    });
-    btn.classList.remove('btn--ghost');
-    btn.classList.add('btn--primary','btn--active');
+    document.querySelectorAll('[data-chart="area"][data-mode]').forEach(b => b.classList.remove('chart-card__tab--active'));
+    btn.classList.add('chart-card__tab--active');
     areaChart.data.datasets = areaDatasets[mode];
     areaChart.update();
   });
@@ -489,13 +474,10 @@ const hbarDatasets = {
 
 document.querySelectorAll('[data-chart="hbar"]').forEach(btn => {
   btn.addEventListener('click', () => {
+    if (!btn.dataset.mode) return;
     const mode = btn.dataset.mode;
-    document.querySelectorAll('[data-chart="hbar"]').forEach(b => {
-      b.classList.remove('btn--active','btn--primary');
-      b.classList.add('btn--ghost');
-    });
-    btn.classList.remove('btn--ghost');
-    btn.classList.add('btn--primary','btn--active');
+    document.querySelectorAll('[data-chart="hbar"][data-mode]').forEach(b => b.classList.remove('chart-card__tab--active'));
+    btn.classList.add('chart-card__tab--active');
     hbarChart.data.datasets = hbarDatasets[mode];
     hbarChart.update();
   });

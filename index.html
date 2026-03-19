@@ -3,252 +3,244 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chart.js Showcase — Mapfre Design System</title>
-  <link rel="stylesheet" href="charts.css" />
+  <title>Prototipos — ZEUS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="common.css" />
+  <style>
+    /* ── Home-specific layout ──────────────────────────────── */
+    .home-main {
+      flex: 1;
+      background: var(--b2b-brand-blue-07);
+      padding: 40px var(--layout-padding);
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .home-page-header {
+      display: flex;
+      align-items: center;
+    }
+
+    .home-page-header__title {
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--b2b-brand-blue-01);
+      line-height: 40px;
+    }
+
+    /* Cards row */
+    .home-cards {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    /* Card/Icon Desktop — Figma node 201:42410 */
+    .proto-card {
+      background: var(--b2b-white);
+      border-radius: 8px;
+      width: 392px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .proto-card:hover {
+      box-shadow: 0px 8px 24px 0px rgba(82, 101, 112, 0.18);
+      transform: translateY(-2px);
+      border-color: var(--b2b-brand-blue-05);
+    }
+
+    .proto-card:focus-visible {
+      outline: 2px solid var(--b2b-brand-red-01);
+      outline-offset: 2px;
+    }
+
+    .proto-card--disabled {
+      opacity: 0.6;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* Icon area */
+    .proto-card__icon-wrap {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .proto-card__icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .proto-card__icon--blue   { background: #EEF6FB; }
+    .proto-card__icon--green  { background: #EAF5E9; }
+    .proto-card__icon--yellow { background: #FEF9E7; }
+
+    /* Text section */
+    .proto-card__text {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .proto-card__title {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--b2b-brand-blue-01);
+      line-height: 28px;
+    }
+
+    .proto-card__desc {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--b2b-brand-blue-02);
+      line-height: 1.5;
+    }
+
+    /* Action link */
+    .proto-card__action {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--b2b-brand-red-01);
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ─── HEADER ─────────────────────────────────────────────────────────── -->
-  <header class="page-header">
-    <div class="page-header__logo">
-      <span class="page-header__logo-badge">M</span>
-      <div>
-        <h1 class="page-header__title">Chart.js Showcase</h1>
-        <p class="page-header__subtitle">Mapfre Design System — Gráficos Interactivos</p>
-      </div>
-    </div>
-    <div class="page-header__rule"></div>
-    <a href="documentation.html" class="btn btn--sm btn--secondary" style="margin-left: auto; margin-right: 0;">
-      📖 Documentación
+  <!-- ─── HEADER ───────────────────────────────────────────── -->
+  <header class="site-header">
+    <a href="index.html" class="site-header__logos" aria-label="Ir a inicio">
+      <img src="assets/mapfre.svg" alt="MAPFRE" class="site-header__mapfre" />
+      <span class="site-header__sep">/</span>
+      <img src="assets/Zeus.svg" alt="ZEUS" class="site-header__zeus" />
     </a>
+    <div class="site-header__functions">
+      <button class="site-header__icon-btn" title="Buscar" aria-label="Buscar">
+        <img src="assets/Search.svg" alt="" width="24" height="24" />
+      </button>
+      <div class="site-header__avatar" aria-label="Usuario NA">
+        NA
+        <span class="site-header__avatar-dot"></span>
+      </div>
+      <span class="site-header__lang">
+        ES
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M6 9l6 6 6-6" stroke="#526570" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
   </header>
 
-  <!-- ─── ALIAS LEGEND ────────────────────────────────────────────────────── -->
-  <section class="alias-legend">
-    <div class="alias-legend__inner">
-      <span class="alias-swatch alias-swatch--brand-primary">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-brand-primary (botones de acción)</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-1">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-1: support-blue-05</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-2">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-2: pink-400</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-3">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-3: support-green-05</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-4">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-4: support-yellow-05</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-5">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-5: support-blue-06</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-6">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-6: pink-500</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-7">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-7: support-green-06</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-8">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-8: support-yellow-06</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-9">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-9: pink-600</span>
-      </span>
-      <span class="alias-swatch alias-swatch--chart-10">
-        <span class="alias-swatch__dot"></span>
-        <span class="alias-swatch__label">—color-chart-10: support-blue-07</span>
-      </span>
+  <!-- ─── MAIN ─────────────────────────────────────────────── -->
+  <main class="home-main">
+
+    <div class="home-page-header">
+      <h1 class="home-page-header__title">Prototipos</h1>
     </div>
-  </section>
 
-  <!-- ─── CHARTS GRID ─────────────────────────────────────────────────────── -->
-  <main class="charts-grid">
+    <div class="home-cards">
 
-    <!-- 1. Bar Chart -->
-    <article class="chart-card" id="card-bar">
-      <header class="chart-card__header">
-        <span class="chart-card__icon">📊</span>
-        <div>
-          <h2 class="chart-card__title">Bar Chart</h2>
-          <p class="chart-card__desc">Barras verticales</p>
+      <!-- Card 1 — Chart.js Showcase -->
+      <a class="proto-card" href="showcase.html">
+        <div class="proto-card__icon-wrap">
+          <div class="proto-card__icon proto-card__icon--blue">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="8"  y="24" width="8" height="16" rx="2" fill="#3B9FD4"/>
+              <rect x="20" y="16" width="8" height="24" rx="2" fill="#3B9FD4" opacity=".75"/>
+              <rect x="32" y="8"  width="8" height="32" rx="2" fill="#3B9FD4" opacity=".5"/>
+            </svg>
+          </div>
         </div>
-      </header>
-      <div class="chart-card__body">
-        <canvas id="barChart"></canvas>
-      </div>
-      <footer class="chart-card__footer">
-        <button class="btn btn--primary btn--sm btn--active" data-chart="bar" data-mode="basic">Básico</button>
-        <button class="btn btn--ghost btn--sm" data-chart="bar" data-mode="multi">Multi-Dataset</button>
-        <button class="btn btn--ghost btn--sm" data-chart="bar" data-mode="stacked">Apilado</button>
-      </footer>
-    </article>
-
-    <!-- 2. Line Chart -->
-    <article class="chart-card" id="card-line">
-      <header class="chart-card__header">
-        <span class="chart-card__icon">📈</span>
-        <div>
-          <h2 class="chart-card__title">Line Chart</h2>
-          <p class="chart-card__desc">Gráfico de líneas</p>
+        <div class="proto-card__text">
+          <p class="proto-card__title">Chart.js Showcase</p>
+          <p class="proto-card__desc">Explorador interactivo de tipos de gráficos con el sistema de diseño Mapfre. Bar, Line, Pie, Doughnut, Radar, Scatter y más.</p>
         </div>
-      </header>
-      <div class="chart-card__body">
-        <canvas id="lineChart"></canvas>
-      </div>
-      <footer class="chart-card__footer">
-        <button class="btn btn--primary btn--sm btn--active" data-chart="line" data-mode="basic">Básico</button>
-        <button class="btn btn--ghost btn--sm" data-chart="line" data-mode="multiline">Multi-Línea</button>
-        <button class="btn btn--ghost btn--sm" data-chart="line" data-mode="area">Áreas</button>
-      </footer>
-    </article>
-
-    <!-- 3. Pie Chart -->
-    <article class="chart-card" id="card-pie">
-      <header class="chart-card__header">
-        <span class="chart-card__icon">🥧</span>
-        <div>
-          <h2 class="chart-card__title">Pie Chart</h2>
-          <p class="chart-card__desc">Proporciones circulares</p>
+        <div class="proto-card__action">
+          Abrir showcase
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18l6-6-6-6" stroke="#df0027" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-      </header>
-      <div class="chart-card__body">
-        <canvas id="pieChart"></canvas>
-      </div>
-      <footer class="chart-card__footer">
-        <button class="btn btn--primary btn--sm btn--active" data-chart="pie" data-mode="right">Leyenda derecha</button>
-        <button class="btn btn--ghost btn--sm" data-chart="pie" data-mode="bottom">Leyenda abajo</button>
-      </footer>
-    </article>
+      </a>
 
-    <!-- 4. Doughnut Chart -->
-    <article class="chart-card" id="card-doughnut">
-      <header class="chart-card__header">
-        <span class="chart-card__icon">🍩</span>
-        <div>
-          <h2 class="chart-card__title">Doughnut Chart</h2>
-          <p class="chart-card__desc">Gráfico de donut</p>
+      <!-- Card 2 — Pluto 365 · Global Brand -->
+      <a class="proto-card" href="finops.html">
+        <div class="proto-card__icon-wrap">
+          <div class="proto-card__icon proto-card__icon--green">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M36 30a8 8 0 0 0-4-15 12 12 0 0 0-23 4 8 8 0 0 0 4 15h23z" stroke="#3A9E5F" stroke-width="2.5" stroke-linejoin="round" fill="#3A9E5F" fill-opacity=".15"/>
+              <path d="M24 22v8M20 26l4 4 4-4" stroke="#3A9E5F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
-      </header>
-      <div class="chart-card__body">
-        <canvas id="doughnutChart"></canvas>
-      </div>
-      <footer class="chart-card__footer">
-        <label for="doughnutSelect" class="chart-card__caption">Datos de:</label>
-        <select class="select-control" id="doughnutSelect">
-          <option value="seguros">Seguros</option>
-          <option value="inversiones">Inversiones</option>
-        </select>
-      </footer>
-    </article>
-
-    <!-- 5. Radar Chart -->
-    <article class="chart-card" id="card-radar">
-      <header class="chart-card__header">
-        <span class="chart-card__icon">🕸️</span>
-        <div>
-          <h2 class="chart-card__title">Radar Chart</h2>
-          <p class="chart-card__desc">Multidimensional</p>
+        <div class="proto-card__text">
+          <p class="proto-card__title">Pluto 365 · Global Brand</p>
+          <p class="proto-card__desc">Dashboard FinOps con colores de marca global. Visualización de costes cloud, KPIs y desglose por plataforma y proveedor.</p>
         </div>
-      </header>
-      <div class="chart-card__body">
-        <canvas id="radarChart"></canvas>
-      </div>
-      <footer class="chart-card__footer">
-        <button class="btn btn--primary btn--sm btn--active" data-chart="radar" data-mode="simple">Simple</button>
-        <button class="btn btn--ghost btn--sm" data-chart="radar" data-mode="comparative">Comparativo</button>
-      </footer>
-    </article>
-
-    <!-- 6. Scatter Chart -->
-    <article class="chart-card" id="card-scatter">
-      <header class="chart-card__header">
-        <span class="chart-card__icon">🔵</span>
-        <div>
-          <h2 class="chart-card__title">Scatter Chart</h2>
-          <p class="chart-card__desc">Dispersión de puntos</p>
+        <div class="proto-card__action">
+          Abrir dashboard
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18l6-6-6-6" stroke="#df0027" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
-      </header>
-      <div class="chart-card__body">
-        <canvas id="scatterChart"></canvas>
-      </div>
-      <footer class="chart-card__footer">
-        <button class="btn btn--primary btn--sm btn--active" data-chart="scatter" data-mode="basic">Básico</button>
-        <button class="btn btn--ghost btn--sm" data-chart="scatter" data-mode="multi">Multi-Dataset</button>
-      </footer>
-    </article>
+      </a>
 
-    <!-- 7. Area Chart -->
-    <article class="chart-card" id="card-area">
-      <header class="chart-card__header">
-        <span class="chart-card__icon">📉</span>
-        <div>
-          <h2 class="chart-card__title">Area Chart</h2>
-          <p class="chart-card__desc">Área bajo la Curva</p>
+      <!-- Card 3 — Pluto 365 · New Colors (coming soon) -->
+      <a class="proto-card proto-card--disabled" href="finops-new.html" tabindex="-1" aria-disabled="true">
+        <div class="proto-card__icon-wrap">
+          <div class="proto-card__icon proto-card__icon--yellow">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="14" stroke="#D4A017" stroke-width="2.5" fill="#D4A017" fill-opacity=".15"/>
+              <circle cx="18" cy="20" r="3" fill="#D4A017"/>
+              <circle cx="30" cy="20" r="3" fill="#D4A017" opacity=".7"/>
+              <circle cx="24" cy="30" r="3" fill="#D4A017" opacity=".4"/>
+            </svg>
+          </div>
         </div>
-      </header>
-      <div class="chart-card__body">
-        <canvas id="areaChart"></canvas>
-      </div>
-      <footer class="chart-card__footer">
-        <button class="btn btn--primary btn--sm btn--active" data-chart="area" data-mode="simple">Simple</button>
-        <button class="btn btn--ghost btn--sm" data-chart="area" data-mode="stacked">Apilada</button>
-      </footer>
-    </article>
-
-    <!-- 8. Horizontal Bar -->
-    <article class="chart-card" id="card-hbar">
-      <header class="chart-card__header">
-        <span class="chart-card__icon">📊</span>
-        <div>
-          <h2 class="chart-card__title">Horizontal Bar</h2>
-          <p class="chart-card__desc">Barras horizontales</p>
+        <div class="proto-card__text">
+          <p class="proto-card__title">Pluto 365 · New Colors</p>
+          <p class="proto-card__desc">Variante del dashboard FinOps con la nueva paleta de colores. Prueba A/B de identidad visual para Pluto 365.</p>
         </div>
-      </header>
-      <div class="chart-card__body">
-        <canvas id="hbarChart"></canvas>
-      </div>
-      <footer class="chart-card__footer">
-        <button class="btn btn--primary btn--sm btn--active" data-chart="hbar" data-mode="simple">Simple</button>
-        <button class="btn btn--ghost btn--sm" data-chart="hbar" data-mode="comparative">Comparativo</button>
-      </footer>
-    </article>
+        <div class="proto-card__action" style="opacity:.5;">
+          Próximamente
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18l6-6-6-6" stroke="#df0027" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
 
+    </div>
   </main>
 
-  <!-- ─── CODE LAB ─────────────────────────────────────────────────────────── -->
-  <section class="code-lab">
-    <h2 class="code-lab__title">Laboratorio de código</h2>
-    <p class="code-lab__desc">Edita y pulsa <strong>Renderizar</strong>. Usa el objeto <code>ALIAS</code> para los colores del sistema.<br>
-      Ej: <code>ALIAS.chart_c1</code> → <code>--color-chart-1</code> (azul Mapfre)</p>
-    <div class="code-lab__toolbar">
-      <button class="btn btn--primary btn--sm" id="btnRender">▶ Renderizar</button>
-      <button class="btn btn--ghost btn--sm" id="btnRestore">↺ Restaurar</button>
-      <button class="btn btn--ghost btn--sm" id="btnDownload">⬇ Descargar</button>
-    </div>
-    <div class="code-lab__workspace">
-      <div class="code-lab__editor-wrap">
-        <textarea class="code-lab__editor" id="codeEditor" spellcheck="false"></textarea>
-      </div>
-      <div class="code-lab__preview">
-        <canvas id="labChart"></canvas>
-      </div>
-    </div>
-  </section>
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p class="site-footer__text">ZEUS #OneTeam © 2025</p>
+  </footer>
 
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-  <script src="charts.js"></script>
 </body>
 </html>
