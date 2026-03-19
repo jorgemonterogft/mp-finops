@@ -1274,11 +1274,6 @@ body {
 }
 
 /* ── Data Table Component ─────────────────────────────────── */
-.table-wrapper {
-  padding: 24px;
-  overflow-x: auto;
-}
-
 .data-table {
   width: 100%;
   border-collapse: collapse;

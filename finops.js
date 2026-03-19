@@ -109,13 +109,13 @@ function generateRankingTable() {
     {name: 'Otros', cost: 37000, pct: 3}
   ];
   
-  let html = '<div class="table-wrapper"><table class="data-table">';
+  let html = '<table class="data-table">';
   html += '<thead><tr><th>Product/Domain</th><th class="align-right">Cost</th><th class="align-right">% of Total</th></tr></thead>';
   html += '<tbody>';
   products.forEach(p => {
     html += `<tr><td class="strong">${p.name}</td><td class="align-right">${fmt(p.cost)}</td><td class="align-right">${pct(p.pct)}</td></tr>`;
   });
-  html += '</tbody></table></div>';
+  html += '</tbody></table>';
   return html;
 }
 
@@ -125,14 +125,14 @@ function generateCostsTable() {
   const dc = [25,25,27,27,28,27,28,28,27,27,27,24];
   const saas = [9,10,10,11,11,11,11,11,11,11,12,12];
   
-  let html = '<div class="table-wrapper"><table class="data-table">';
+  let html = '<table class="data-table">';
   html += '<thead><tr><th>Month</th><th class="align-right">Cloud</th><th class="align-right">Datacenter</th><th class="align-right">SaaS</th><th class="align-right">Total</th></tr></thead>';
   html += '<tbody>';
   months.forEach((m, i) => {
     const total = cloud[i] + dc[i] + saas[i];
     html += `<tr><td class="strong">${m}</td><td class="align-right">${fmt(cloud[i], '€')}</td><td class="align-right">${fmt(dc[i], '€')}</td><td class="align-right">${fmt(saas[i], '€')}</td><td class="align-right strong">${fmt(total, '€')}</td></tr>`;
   });
-  html += '</tbody></table></div>';
+  html += '</tbody></table>';
   return html;
 }
 
@@ -145,15 +145,13 @@ function generateTrackerTable() {
     {name: 'Networking', cost: 50000, pct: 8}
   ];
   
-  let html = '<div class="table-wrapper">';
-  html += '<h4 style="margin-bottom:16px;font-size:14px;font-weight:600;color:var(--b2b-brand-blue-01);">Top Cloud Services</h4>';
-  html += '<table class="data-table">';
+  let html = '<table class="data-table">';
   html += '<thead><tr><th>Service</th><th class="align-right">Cost</th><th class="align-right">% of Cloud</th></tr></thead>';
   html += '<tbody>';
   services.forEach(s => {
     html += `<tr><td class="strong">${s.name}</td><td class="align-right">${fmt(s.cost)}</td><td class="align-right">${pct(s.pct)}</td></tr>`;
   });
-  html += '</tbody></table></div>';
+  html += '</tbody></table>';
   return html;
 }
 
@@ -169,7 +167,7 @@ function generateOptimizerTable() {
     {name: 'BYOL', exec: 0, managed: 5, pending: 95}
   ];
   
-  let html = '<div class="table-wrapper"><table class="data-table">';
+  let html = '<table class="data-table">';
   html += '<thead><tr><th>FinOps Action</th>';
   html += '<th class="align-right"><span class="color-dot" style="background:var(--b2b-state-success-01);"></span>Executed (%)</th>';
   html += '<th class="align-right"><span class="color-dot" style="background:var(--b2b-state-info-01);"></span>Managed (%)</th>';
@@ -178,7 +176,7 @@ function generateOptimizerTable() {
   actions.forEach(a => {
     html += `<tr><td class="strong">${a.name}</td><td class="align-right">${pct(a.exec)}</td><td class="align-right">${pct(a.managed)}</td><td class="align-right">${pct(a.pending)}</td></tr>`;
   });
-  html += '</tbody></table></div>';
+  html += '</tbody></table>';
   return html;
 }
 
@@ -190,13 +188,13 @@ function generateDCTable() {
     {name: 'Services', cost: 5000, pct: 2}
   ];
   
-  let html = '<div class="table-wrapper"><table class="data-table">';
+  let html = '<table class="data-table">';
   html += '<thead><tr><th>Category</th><th class="align-right">Cost</th><th class="align-right">% of Total</th></tr></thead>';
   html += '<tbody>';
   categories.forEach(c => {
     html += `<tr><td class="strong">${c.name}</td><td class="align-right">${fmt(c.cost)}</td><td class="align-right">${pct(c.pct)}</td></tr>`;
   });
-  html += '</tbody></table></div>';
+  html += '</tbody></table>';
   return html;
 }
 
@@ -207,13 +205,13 @@ function generateSAASTable() {
     {name: 'GitHub Actions', provider: 'DevOps', cost: 20000, pct: 15}
   ];
   
-  let html = '<div class="table-wrapper"><table class="data-table">';
+  let html = '<table class="data-table">';
   html += '<thead><tr><th>Service</th><th>Provider</th><th class="align-right">Cost</th><th class="align-right">% of Total</th></tr></thead>';
   html += '<tbody>';
   services.forEach(s => {
     html += `<tr><td class="strong">${s.name}</td><td>${s.provider}</td><td class="align-right">${fmt(s.cost)}</td><td class="align-right">${pct(s.pct)}</td></tr>`;
   });
-  html += '</tbody></table></div>';
+  html += '</tbody></table>';
   return html;
 }
 
@@ -241,14 +239,14 @@ function generateDCostsTable() {
     {period: 'Jul 26', type: 'Forecast', cost: 640}
   ];
   
-  let html = '<div class="table-wrapper"><table class="data-table">';
+  let html = '<table class="data-table">';
   html += '<thead><tr><th>Period</th><th>Type</th><th class="align-right">Cost ($M)</th></tr></thead>';
   html += '<tbody>';
   data.forEach(d => {
     const badge = d.type === 'Forecast' ? 'info' : '';
     html += `<tr><td class="strong">${d.period}</td><td>${badge ? '<span class="badge '+badge+'">'+d.type+'</span>' : d.type}</td><td class="align-right">${fmt(d.cost, '$')}</td></tr>`;
   });
-  html += '</tbody></table></div>';
+  html += '</tbody></table>';
   return html;
 }
 
@@ -261,13 +259,13 @@ function generateDRankingTable() {
     {name: 'AI', pct: 2, amount: 45400}
   ];
   
-  let html = '<div class="table-wrapper"><table class="data-table">';
+  let html = '<table class="data-table">';
   html += '<thead><tr><th>Category</th><th class="align-right">Percentage</th><th class="align-right">Amount</th></tr></thead>';
   html += '<tbody>';
   categories.forEach(c => {
     html += `<tr><td class="strong">${c.name}</td><td class="align-right">${pct(c.pct)}</td><td class="align-right">${fmt(c.amount, '$')}</td></tr>`;
   });
-  html += '</tbody></table></div>';
+  html += '</tbody></table>';
   return html;
 }
 
@@ -283,7 +281,7 @@ function generateDSavingsTable() {
     {name: 'BYOL', exec: 0, pot: 0.08}
   ];
   
-  let html = '<div class="table-wrapper"><table class="data-table">';
+  let html = '<table class="data-table">';
   html += '<thead><tr><th>FinOps Action</th>';
   html += '<th class="align-right"><span class="color-dot" style="background:var(--b2b-state-success-01);"></span>Executed (%)</th>';
   html += '<th class="align-right"><span class="color-dot" style="background:var(--b2b-state-alert-01);"></span>Potential (%)</th>';
@@ -293,13 +291,17 @@ function generateDSavingsTable() {
     const total = a.exec + a.pot;
     html += `<tr><td class="strong">${a.name}</td><td class="align-right">${a.exec.toFixed(2)}%</td><td class="align-right">${a.pot.toFixed(2)}%</td><td class="align-right strong">${total.toFixed(2)}%</td></tr>`;
   });
-  html += '</tbody></table></div>';
+  html += '</tbody></table>';
   return html;
 }
 
 function fpToggle(id, btn) {
   const body = document.getElementById('body-' + id);
   if (!body) return;
+  
+  const panel = body.closest('.panel__inner');
+  const resumen = panel ? panel.querySelector('.resumen') : null;
+  
   const toggleGroup = btn.closest('.panel-toggle');
   const btns = toggleGroup ? Array.from(toggleGroup.querySelectorAll('.panel-toggle__btn')) : [];
   const btnIndex = btns.indexOf(btn);
@@ -313,16 +315,13 @@ function fpToggle(id, btn) {
   _tableViews[id] = isTableBtn;
 
   if (isTableBtn) {
-    body.style.display = 'none';
+    // Store original HTML if not already stored
+    if (!body.dataset.originalHtml) {
+      body.dataset.originalHtml = body.innerHTML;
+    }
     
-    // Remove old table if exists
-    const oldTable = document.getElementById('table-' + id);
-    if (oldTable) oldTable.remove();
-    
-    // Generate new table
-    const tableDiv = document.createElement('div');
-    tableDiv.id = 'table-' + id;
-    tableDiv.style.cssText = 'background:var(--b2b-white);';
+    // Hide resumen
+    if (resumen) resumen.style.display = 'none';
     
     // Route to appropriate generator
     const generators = {
@@ -337,13 +336,17 @@ function fpToggle(id, btn) {
       'd-savings': generateDSavingsTable
     };
     
-    tableDiv.innerHTML = generators[id] ? generators[id]() : '<div style="padding:24px;color:var(--b2b-brand-blue-02);"><em>Table view not configured for this panel.</em></div>';
-    body.parentNode.insertBefore(tableDiv, body.nextSibling);
+    // Replace body content with table
+    body.innerHTML = generators[id] ? generators[id]() : '<div style="padding:24px;color:var(--b2b-brand-blue-02);"><em>Table view not configured for this panel.</em></div>';
     
   } else {
-    const tbl = document.getElementById('table-' + id);
-    if (tbl) tbl.remove();
-    body.style.display = '';
+    // Restore original content
+    if (body.dataset.originalHtml) {
+      body.innerHTML = body.dataset.originalHtml;
+    }
+    
+    // Show resumen
+    if (resumen) resumen.style.display = '';
   }
 }
 
