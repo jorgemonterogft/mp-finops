@@ -929,7 +929,7 @@ function initDRanking() {
 
   const CATEGORIES = ['Other','Compute','Networking','Storage','AI'];
   const VALUES      = [63, 16, 10, 6, 2];   // %
-  const COLORS      = [C.c8, C.c4, C.c5, C.c2, Z.brand4];  // red, blue, green, purple, grey
+  const COLORS      = [C.c8, C.c4, C.c5, C.cloud, Z.brand4];  // red, blue, green, purple, grey
   const TOTAL_LABEL = '2.27M';
 
   const centrePlugin = {

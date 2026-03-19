@@ -14,7 +14,7 @@
 
     .domain-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 3fr 2fr;
       gap: 24px;
       width: 100%;
     }
@@ -60,7 +60,7 @@
   <!-- Logos: MAPFRE / ZEUS -->
   <a href="index.html" class="site-header__logos" aria-label="Ir a inicio">
     <!-- MAPFRE wordmark -->
-    <img src="assets/mapfre.svg" alt="MAPFRE" class="site-header__mapfre">
+    <img src="assets/mp-new-logo.svg" alt="MAPFRE" class="site-header__mapfre">
     <!-- Separator slash -->
     <span class="site-header__sep">/</span>
     <!-- ZEUS icon + label -->
@@ -96,7 +96,6 @@
 <!-- NAV BAR -->
 <nav class="site-navbar">
   <div class="site-navbar__menu">
-    <a class="site-navbar__item" href="finops-v1-product.html">Inicio</a>
     <a class="site-navbar__item site-navbar__item--active" href="finops-v1-domain.html">Dominios</a>
     <a class="site-navbar__item" href="finops-v1-product.html">Productos</a>
   </div>
@@ -148,14 +147,14 @@
           <button class="export-menu__item" role="menuitem">JSON</button>
         </div>
       </div>
-      <button class="page-header__icon-btn" data-tooltip="Filtros">
+      <button class="page-header__icon-btn" data-tooltip="Filtros" onclick="document.querySelector('.filter-bar').classList.toggle('hidden')">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
       </button>
       <div class="page-header__toggle">
-        <button class="page-header__toggle-btn active" data-tooltip="Gráfico">
+        <button class="page-header__toggle-btn active" data-tooltip="Gráfico" onclick="fpToggleAll(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="12" width="4" height="10"/><rect x="10" y="6" width="4" height="16"/><rect x="18" y="2" width="4" height="20"/></svg>
         </button>
-        <button class="page-header__toggle-btn" data-tooltip="Tabla">
+        <button class="page-header__toggle-btn" data-tooltip="Tabla" onclick="fpToggleAll(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1.5"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>
         </button>
       </div>
@@ -164,7 +163,7 @@
 
   <!-- FILTER BAR -->
   <div class="filter-bar">
-    <div class="filter-bar__header">
+    <div class="filter-bar__header" onclick="this.closest('.filter-bar').classList.toggle('collapsed')">
       <span class="filter-bar__title">Filtros</span>
       <button class="filter-bar__toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
     </div>
@@ -241,37 +240,37 @@
   <div class="kpi-row">
     <div class="kpi-card">
       <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+        <div class="kpi-card__label">Total Costs</div>
+        <div class="kpi-card__value">$1.97M</div>
+        <div class="kpi-card__period">in the last 30 days</div>
       </div>
     </div>
     <div class="kpi-card">
       <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+        <div class="kpi-card__label">Identified Savings</div>
+        <div class="kpi-card__value">$143.68K</div>
+        <div class="kpi-card__period">potential cost reduction 30 days</div>
       </div>
     </div>
     <div class="kpi-card">
       <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+        <div class="kpi-card__label">Executed Savings</div>
+        <div class="kpi-card__value">$92.86K</div>
+        <div class="kpi-card__period">in the last 30 days</div>
       </div>
     </div>
     <div class="kpi-card">
       <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+        <div class="kpi-card__label"># Accounts</div>
+        <div class="kpi-card__value">1489</div>
+        <div class="kpi-card__period">incurring Cloud Spend</div>
       </div>
     </div>
     <div class="kpi-card">
       <div class="kpi-card__center">
-        <div class="kpi-card__label">KPI</div>
-        <div class="kpi-card__value">€00.000M</div>
-        <div class="kpi-card__period">Period</div>
+        <div class="kpi-card__label"># Services</div>
+        <div class="kpi-card__value">105</div>
+        <div class="kpi-card__period">with Associated Costs</div>
       </div>
     </div>
   </div>
@@ -366,9 +365,126 @@
         </div>
         <div class="panel__divider"></div>
         <div class="panel__body" id="body-d-anomaly">
-          <div class="domain-chart-placeholder">Próximamente</div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>ENV</th>
+                  <th>Account</th>
+                  <th class="text-right">Cost</th>
+                  <th class="text-right">Threshold</th>
+                  <th class="text-right">Deviation</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jan 5, 2026</td>
+                  <td><span class="badge info">POC</span></td>
+                  <td>aws-dev-solucionestronimpagos-mapfretech</td>
+                  <td class="text-right">2.640,82</td>
+                  <td class="text-right">303,04</td>
+                  <td class="text-right">771%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+                <tr>
+                  <td>Jan 12, 2026</td>
+                  <td><span class="badge info">POC</span></td>
+                  <td>aws-avm-poc-npia1-maptech</td>
+                  <td class="text-right">2.592,14</td>
+                  <td class="text-right">303,04</td>
+                  <td class="text-right">755%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+                <tr>
+                  <td>Jan 19, 2026</td>
+                  <td><span class="badge info">POC</span></td>
+                  <td>aws-avm-dev-blaze-mapfrebr</td>
+                  <td class="text-right">2.574,8</td>
+                  <td class="text-right">303,04</td>
+                  <td class="text-right">750%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+                <tr>
+                  <td>Jan 19, 2026</td>
+                  <td><span class="badge alert">PRE</span></td>
+                  <td>aws-avm-pro-appsec-mapfresa</td>
+                  <td class="text-right">494,45</td>
+                  <td class="text-right">63,84</td>
+                  <td class="text-right">674%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+                <tr>
+                  <td>Jan 19, 2026</td>
+                  <td><span class="badge success">DEV</span></td>
+                  <td>aws-avm-pre-ccacc-mapfrere</td>
+                  <td class="text-right">12.333,69</td>
+                  <td class="text-right">927,57</td>
+                  <td class="text-right">1.230%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+                <tr>
+                  <td>Jan 5, 2026</td>
+                  <td><span class="badge info">POC</span></td>
+                  <td>aws-avm-pre-esp-reefvida-maptech</td>
+                  <td class="text-right">229,6</td>
+                  <td class="text-right">48,21</td>
+                  <td class="text-right">376%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+                <tr>
+                  <td>Jan 19, 2026</td>
+                  <td><span class="badge info">POC</span></td>
+                  <td>aws-avm-dev-socgcert-mapfresa</td>
+                  <td class="text-right">1.605,51</td>
+                  <td class="text-right">344,86</td>
+                  <td class="text-right">366%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+                <tr>
+                  <td>Jan 12, 2026</td>
+                  <td><span class="badge info">POC</span></td>
+                  <td>aws-avm-dev-vdacorp-ciavde-maptech</td>
+                  <td class="text-right">218,59</td>
+                  <td class="text-right">48,21</td>
+                  <td class="text-right">353%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+                <tr>
+                  <td>Jan 19, 2026</td>
+                  <td><span class="badge success">DEV</span></td>
+                  <td>aws-avm-pre-ccacc-mapfrere</td>
+                  <td class="text-right">217,89</td>
+                  <td class="text-right">48,21</td>
+                  <td class="text-right">352%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+                <tr>
+                  <td>Jan 19, 2026</td>
+                  <td><span class="badge alert">PRE</span></td>
+                  <td>aws-avm-pro-appsec-mapfresa</td>
+                  <td class="text-right">460,41</td>
+                  <td class="text-right">102,51</td>
+                  <td class="text-right">349%</td>
+                  <td>Outlier</td>
+                  <td class="text-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18.66 17H1.34L10 2Z" fill="#E46B15" stroke="#E46B15" stroke-width="1"/><text x="10" y="14.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">!</text></svg></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="resumen"><strong>Resumen:</strong> Lorem ipsum dolor amet</div>
+        <div class="resumen"><strong>Resumen:</strong> 10 anomalies detected · Highest deviation: 1.230% (aws-avm-pre-ccacc-mapfrere) · Most affected env: POC</div>
       </div>
     </div>
 
