@@ -106,8 +106,10 @@ function generateRankingTable() {
     {name: 'Analytics', cost: 92000, pct: 8},
     {name: 'MAPFRE Internacional', cost: 78000, pct: 7},
     {name: 'Data Platform', cost: 65000, pct: 6},
-    {name: 'Otros', cost: 37000, pct: 3}
+    {name: 'DevOps Tools', cost: 8000, pct: 2.0}
   ];
+  
+  const total = products.reduce((sum, p) => sum + p.cost, 0);
   
   let html = '<table class="data-table">';
   html += '<thead><tr><th>Product/Domain</th><th class="align-right">Cost</th><th class="align-right">% of Total</th></tr></thead>';
@@ -115,6 +117,7 @@ function generateRankingTable() {
   products.forEach(p => {
     html += `<tr><td class="strong">${p.name}</td><td class="align-right">${fmt(p.cost)}</td><td class="align-right">${pct(p.pct)}</td></tr>`;
   });
+  html += `<tr class="row-total"><td>Total</td><td class="align-right">${fmt(total)}</td><td class="align-right">100%</td></tr>`;
   html += '</tbody></table>';
   return html;
 }
@@ -128,10 +131,16 @@ function generateCostsTable() {
   let html = '<table class="data-table">';
   html += '<thead><tr><th>Month</th><th class="align-right">Cloud</th><th class="align-right">Datacenter</th><th class="align-right">SaaS</th><th class="align-right">Total</th></tr></thead>';
   html += '<tbody>';
+  let totalCloud = 0, totalDC = 0, totalSaaS = 0;
   months.forEach((m, i) => {
     const total = cloud[i] + dc[i] + saas[i];
+    totalCloud += cloud[i];
+    totalDC += dc[i];
+    totalSaaS += saas[i];
     html += `<tr><td class="strong">${m}</td><td class="align-right">${fmt(cloud[i], '€')}</td><td class="align-right">${fmt(dc[i], '€')}</td><td class="align-right">${fmt(saas[i], '€')}</td><td class="align-right strong">${fmt(total, '€')}</td></tr>`;
   });
+  const grandTotal = totalCloud + totalDC + totalSaaS;
+  html += `<tr class="row-total"><td>Total</td><td class="align-right">${fmt(totalCloud, '€')}</td><td class="align-right">${fmt(totalDC, '€')}</td><td class="align-right">${fmt(totalSaaS, '€')}</td><td class="align-right">${fmt(grandTotal, '€')}</td></tr>`;
   html += '</tbody></table>';
   return html;
 }
@@ -145,12 +154,15 @@ function generateTrackerTable() {
     {name: 'Networking', cost: 50000, pct: 8}
   ];
   
+  const total = services.reduce((sum, s) => sum + s.cost, 0);
+  
   let html = '<table class="data-table">';
   html += '<thead><tr><th>Service</th><th class="align-right">Cost</th><th class="align-right">% of Cloud</th></tr></thead>';
   html += '<tbody>';
   services.forEach(s => {
     html += `<tr><td class="strong">${s.name}</td><td class="align-right">${fmt(s.cost)}</td><td class="align-right">${pct(s.pct)}</td></tr>`;
   });
+  html += `<tr class="row-total"><td>Total</td><td class="align-right">${fmt(total)}</td><td class="align-right">99%</td></tr>`;
   html += '</tbody></table>';
   return html;
 }
@@ -188,12 +200,15 @@ function generateDCTable() {
     {name: 'Services', cost: 5000, pct: 2}
   ];
   
+  const total = categories.reduce((sum, c) => sum + c.cost, 0);
+  
   let html = '<table class="data-table">';
   html += '<thead><tr><th>Category</th><th class="align-right">Cost</th><th class="align-right">% of Total</th></tr></thead>';
   html += '<tbody>';
   categories.forEach(c => {
     html += `<tr><td class="strong">${c.name}</td><td class="align-right">${fmt(c.cost)}</td><td class="align-right">${pct(c.pct)}</td></tr>`;
   });
+  html += `<tr class="row-total"><td>Total</td><td class="align-right">${fmt(total)}</td><td class="align-right">100%</td></tr>`;
   html += '</tbody></table>';
   return html;
 }
@@ -205,12 +220,15 @@ function generateSAASTable() {
     {name: 'GitHub Actions', provider: 'DevOps', cost: 20000, pct: 15}
   ];
   
+  const total = services.reduce((sum, s) => sum + s.cost, 0);
+  
   let html = '<table class="data-table">';
   html += '<thead><tr><th>Service</th><th>Provider</th><th class="align-right">Cost</th><th class="align-right">% of Total</th></tr></thead>';
   html += '<tbody>';
   services.forEach(s => {
     html += `<tr><td class="strong">${s.name}</td><td>${s.provider}</td><td class="align-right">${fmt(s.cost)}</td><td class="align-right">${pct(s.pct)}</td></tr>`;
   });
+  html += `<tr class="row-total"><td>Total</td><td></td><td class="align-right">${fmt(total)}</td><td class="align-right">100%</td></tr>`;
   html += '</tbody></table>';
   return html;
 }
@@ -256,8 +274,10 @@ function generateDRankingTable() {
     {name: 'Compute', pct: 16, amount: 363200},
     {name: 'Networking', pct: 10, amount: 227000},
     {name: 'Storage', pct: 6, amount: 136200},
-    {name: 'AI', pct: 2, amount: 45400}
+    {name: 'Others', pct: 14, amount: 170000}
   ];
+  
+  const total = categories.reduce((sum, c) => sum + c.amount, 0);
   
   let html = '<table class="data-table">';
   html += '<thead><tr><th>Category</th><th class="align-right">Percentage</th><th class="align-right">Amount</th></tr></thead>';
@@ -265,6 +285,7 @@ function generateDRankingTable() {
   categories.forEach(c => {
     html += `<tr><td class="strong">${c.name}</td><td class="align-right">${pct(c.pct)}</td><td class="align-right">${fmt(c.amount, '$')}</td></tr>`;
   });
+  html += `<tr class="row-total"><td>Total</td><td class="align-right">100%</td><td class="align-right">${fmt(total, '$')}</td></tr>`;
   html += '</tbody></table>';
   return html;
 }
