@@ -36,6 +36,7 @@ const Z = {
 };
 
 const IS_NEW_COLORS_THEME = /finops-new-(product|domain)\.html$/i.test(window.location.pathname);
+const IS_V3_THEME = /finops-v3-(product|domain)\.html$/i.test(window.location.pathname);
 
 if (IS_NEW_COLORS_THEME) {
   C = {
@@ -51,6 +52,29 @@ if (IS_NEW_COLORS_THEME) {
   };
 }
 
+const V3 = {
+  blue: {
+    fills: ['#E7F2F8', '#B8DDEE', '#75B9D9', '#3E99C7', '#0D82BD'],
+    borders: ['#8CBFD9', '#5BA3C9', '#2E8AB6', '#0A6A99', '#08567D'],
+  },
+  green: {
+    fills: ['#E6F6EA', '#C6EFD1', '#A3EDB5', '#5AC97F', '#008C47'],
+    borders: ['#9BD3AA', '#6FBF88', '#3B9E5F', '#15722B', '#0D5B22'],
+  },
+  pink: {
+    fills: ['#FDE8F2', '#FFCFE0', '#FFACCE', '#E86AA3', '#A51783'],
+    borders: ['#DFA6BF', '#C97C9F', '#901A4D', '#7A153F', '#5E0F30'],
+  },
+  yellow: {
+    fills: ['#FFF8DF', '#FFEFBF', '#FFEAA6', '#E1C45B', '#AC9316'],
+    borders: ['#D2C17D', '#BEA64F', '#907215', '#776012', '#5D4C0E'],
+  },
+  grey: {
+    fills: ['#F2F2F2', '#D9D9D9', '#B3B3B3', '#808080', '#404040'],
+    borders: ['#C2C2C2', '#A6A6A6', '#8C8C8C', '#666666', '#1A1A1A'],
+  },
+};
+
 const C_BORDER = {
   c1: IS_NEW_COLORS_THEME ? '#1D6F70' : C.white,
   c3: IS_NEW_COLORS_THEME ? '#E46B15' : C.white,
@@ -62,8 +86,8 @@ const C_BORDER = {
   saas: IS_NEW_COLORS_THEME ? '#907215' : C.white,
   white: IS_NEW_COLORS_THEME ? '#D9D9D9' : Z.brand5,
 };
-const BAR_BORDER_WIDTH = IS_NEW_COLORS_THEME ? 2 : 0;
-const STACKED_BAR_BORDER_SKIPPED = IS_NEW_COLORS_THEME ? false : ['left', 'top', 'bottom'];
+const BAR_BORDER_WIDTH = (IS_NEW_COLORS_THEME || IS_V3_THEME) ? 2 : 0;
+const STACKED_BAR_BORDER_SKIPPED = (IS_NEW_COLORS_THEME || IS_V3_THEME) ? false : ['left', 'top', 'bottom'];
 
 function alpha(hex, a) {
   const r = parseInt(hex.slice(1,3),16);
@@ -475,14 +499,21 @@ function initMonthly() {
   setH('chart-monthly', 360);
   const ctx = document.getElementById('chart-monthly');
   if (!ctx) return;
+  const monthlyFills = IS_V3_THEME
+    ? [V3.blue.fills[1], V3.blue.fills[2], V3.blue.fills[3]]
+    : [C.cloud, C.dc, C.saas];
+  const monthlyBorders = IS_V3_THEME
+    ? [V3.blue.borders[4], V3.blue.borders[4], V3.blue.borders[4]]
+    : [C_BORDER.cloud, C_BORDER.dc, C_BORDER.saas];
+
   new Chart(ctx, {
     type: 'bar',
     data: {
       labels: MONTHS,
       datasets: [
-        { label: 'Cloud',       data: MONTHLY_CLOUD, backgroundColor: C.cloud, borderWidth: 2, borderColor: C_BORDER.cloud, borderSkipped: false, stack: 'stack' },
-        { label: 'Datacenter',  data: MONTHLY_DC,    backgroundColor: C.dc, borderWidth: 2, borderColor: C_BORDER.dc, borderSkipped: false, stack: 'stack' },
-        { label: 'SaaS',        data: MONTHLY_SAAS,  backgroundColor: C.saas, borderWidth: 2, borderColor: C_BORDER.saas, borderSkipped: false, stack: 'stack' },
+        { label: 'Cloud',       data: MONTHLY_CLOUD, backgroundColor: monthlyFills[0], borderWidth: 2, borderColor: monthlyBorders[0], borderSkipped: false, stack: 'stack' },
+        { label: 'Datacenter',  data: MONTHLY_DC,    backgroundColor: monthlyFills[1], borderWidth: 2, borderColor: monthlyBorders[1], borderSkipped: false, stack: 'stack' },
+        { label: 'SaaS',        data: MONTHLY_SAAS,  backgroundColor: monthlyFills[2], borderWidth: 2, borderColor: monthlyBorders[2], borderSkipped: false, stack: 'stack' },
       ],
     },
     options: {
@@ -509,6 +540,13 @@ function initRanking() {
   setH('chart-ranking', 360);
   const ctx = document.getElementById('chart-ranking');
   if (!ctx) return;
+  const rankingFills = IS_V3_THEME
+    ? V3.yellow.fills[2]
+    : C.cloud;
+  const rankingBorders = IS_V3_THEME
+    ? V3.yellow.borders[4]
+    : C_BORDER.cloud;
+
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -516,9 +554,9 @@ function initRanking() {
       datasets: [{
         label: 'Cost',
         data: RANKING_VALUES,
-        backgroundColor: C.cloud,
+        backgroundColor: rankingFills,
         borderWidth: BAR_BORDER_WIDTH,
-        borderColor: C_BORDER.cloud,
+        borderColor: rankingBorders,
       }],
     },
     options: {
@@ -567,6 +605,13 @@ function initTrackerServices() {
   
   if (trackerServicesChart) trackerServicesChart.destroy();
 
+  const serviceColors = IS_V3_THEME
+    ? V3.blue.fills[2]
+    : SERVICE_COLORS;
+  const serviceBorders = IS_V3_THEME
+    ? V3.blue.borders[4]
+    : C_BORDER.c4;
+
   trackerServicesChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -574,9 +619,9 @@ function initTrackerServices() {
       datasets: [{
         label: 'Cost',
         data: SERVICE_VALUES,
-        backgroundColor: SERVICE_COLORS,
+        backgroundColor: serviceColors,
         borderWidth: BAR_BORDER_WIDTH,
-        borderColor: C_BORDER.c4,
+        borderColor: serviceBorders,
       }],
     },
     options: {
@@ -600,7 +645,13 @@ function initOptimizer() {
   setH('chart-optimizer', 180);
   const ctx = document.getElementById('chart-optimizer');
   if (!ctx) return;
-  const pendingColor = C.dc;
+  const pendingColor = IS_V3_THEME ? V3.green.fills[1] : C.dc;
+  const optimizerColors = IS_V3_THEME
+    ? [V3.green.fills[4], V3.green.fills[2], pendingColor]
+    : [C.c5, C.c4, pendingColor];
+  const optimizerBorders = IS_V3_THEME
+    ? [V3.green.borders[4], V3.green.borders[4], V3.green.borders[4]]
+    : [C_BORDER.c5, C_BORDER.c4, C_BORDER.dc];
 
   // Draw centre text plugin
   const plugin = {
@@ -629,9 +680,9 @@ function initOptimizer() {
       labels: ['Executed','Managed','Pending'],
       datasets: [{
         data: [45, 15, 40],
-        backgroundColor: [C.c5, C.c4, pendingColor],
+        backgroundColor: optimizerColors,
         borderWidth: 2,
-        borderColor: [C_BORDER.c5, C_BORDER.c4, C_BORDER.dc],
+        borderColor: optimizerBorders,
         cutout: '68%',
       }],
     },
@@ -662,9 +713,9 @@ function initOptimizer() {
     data: {
       labels: ACTIONS,
       datasets: [
-        { label: 'Executed', data: [45,20,30,15,25,35,40,10], backgroundColor: C.c5, borderWidth: 2, borderColor: C_BORDER.c5, borderSkipped: STACKED_BAR_BORDER_SKIPPED, stack: 'opt' },
-        { label: 'Managed',  data: [15,10,5,8,12,10,8,5],     backgroundColor: C.c4, borderWidth: 2, borderColor: C_BORDER.c4, borderSkipped: STACKED_BAR_BORDER_SKIPPED, stack: 'opt' },
-        { label: 'Pending',  data: [40,70,65,77,63,55,52,85], backgroundColor: pendingColor, borderWidth: 2, borderColor: C_BORDER.dc, borderSkipped: STACKED_BAR_BORDER_SKIPPED, stack: 'opt' },
+        { label: 'Executed', data: [45,20,30,15,25,35,40,10], backgroundColor: optimizerColors[0], borderWidth: 2, borderColor: optimizerBorders[0], borderSkipped: STACKED_BAR_BORDER_SKIPPED, stack: 'opt' },
+        { label: 'Managed',  data: [15,10,5,8,12,10,8,5],     backgroundColor: optimizerColors[1], borderWidth: 2, borderColor: optimizerBorders[1], borderSkipped: STACKED_BAR_BORDER_SKIPPED, stack: 'opt' },
+        { label: 'Pending',  data: [40,70,65,77,63,55,52,85], backgroundColor: optimizerColors[2], borderWidth: 2, borderColor: optimizerBorders[2], borderSkipped: STACKED_BAR_BORDER_SKIPPED, stack: 'opt' },
       ],
     },
     options: {
@@ -691,12 +742,19 @@ function initDC() {
   const ctx = document.getElementById('chart-dc');
   if (!ctx) return;
 
-  const DC_DATA = [
-    { label: 'Infrastructure', value: 150, color: Z.brand1  },  // --b2b-brand-blue-01 #2D373D
-    { label: 'Database',       value: 120, color: Z.brand2  },  // --b2b-brand-blue-02 #526570
-    { label: 'Licences',       value: 50,  color: Z.brand4  },  // --b2b-brand-blue-03 #9CB0BC
-    { label: 'Services',       value: 5,   color: Z.brand5  },  // --b2b-brand-blue-05 #D8DFE4
-  ];
+  const DC_DATA = (IS_NEW_COLORS_THEME || IS_V3_THEME)
+    ? [
+        { label: 'Infrastructure', value: 150, color: '#404040' },
+        { label: 'Database',       value: 120, color: '#666666' },
+        { label: 'Licences',       value: 50,  color: '#8D8D8D' },
+        { label: 'Services',       value: 5,   color: '#B3B3B3' },
+      ]
+    : [
+        { label: 'Infrastructure', value: 150, color: Z.brand1  },  // --b2b-brand-blue-01 #2D373D
+        { label: 'Database',       value: 120, color: Z.brand2  },  // --b2b-brand-blue-02 #526570
+        { label: 'Licences',       value: 50,  color: Z.brand4  },  // --b2b-brand-blue-03 #9CB0BC
+        { label: 'Services',       value: 5,   color: Z.brand5  },  // --b2b-brand-blue-05 #D8DFE4
+      ];
   const total = DC_DATA.reduce((s, d) => s + d.value, 0);
 
   new Chart(ctx, {
@@ -707,7 +765,7 @@ function initDC() {
         tree: DC_DATA.map(d => ({ ...d })),
         key: 'value',
         borderWidth: 2,
-        borderColor: C_BORDER.white,
+        borderColor: (IS_NEW_COLORS_THEME || IS_V3_THEME) ? '#1A1A1A' : C_BORDER.white,
         spacing: 2,
         backgroundColor(ctx) {
           const item = ctx.raw?._data;
@@ -720,6 +778,7 @@ function initDC() {
           align: 'center',
           position: 'middle',
           color(ctx) {
+            if (IS_NEW_COLORS_THEME || IS_V3_THEME) return C.white;
             // tiles claros (blue-03, blue-05) → texto oscuro; tiles oscuros → blanco
             const item = ctx.raw?._data;
             const found = item ? DC_DATA.find(d => d.label === item.label) : null;
@@ -777,8 +836,11 @@ function initSaas() {
   const SAAS_DEVOPS = 55;
   const SAAS_TOTAL = SAAS_MONGO + SAAS_DEVOPS;
   const SAAS_MONGO_PCT = Math.round((SAAS_MONGO / SAAS_TOTAL) * 100);
-  const COLOR_MONGO = C.c3;
-  const COLOR_DEVOPS = C.saas;
+  const COLOR_MONGO = IS_V3_THEME ? V3.pink.fills[2] : C.c3;
+  const COLOR_DEVOPS = IS_V3_THEME ? V3.pink.fills[4] : C.saas;
+  const SAAS_BORDERS = IS_V3_THEME
+    ? [V3.pink.borders[4], V3.pink.borders[4]]
+    : [C_BORDER.c3, C_BORDER.saas];
 
   const plugin = {
     id: 'saasCentre',
@@ -804,7 +866,7 @@ function initSaas() {
         data: [SAAS_MONGO, SAAS_DEVOPS],
         backgroundColor: [COLOR_MONGO, COLOR_DEVOPS],
         borderWidth: 2,
-        borderColor: [C_BORDER.c3, C_BORDER.saas],
+        borderColor: SAAS_BORDERS,
         cutout: '68%',
       }],
     },
@@ -840,9 +902,13 @@ function initSaas() {
       datasets: [{
         label: 'Cost',
         data: [75, 35, 20],
-        backgroundColor: [COLOR_MONGO, COLOR_DEVOPS, COLOR_DEVOPS],
+        backgroundColor: [COLOR_MONGO, COLOR_DEVOPS, IS_V3_THEME ? V3.pink.fills[3] : COLOR_DEVOPS],
         borderWidth: BAR_BORDER_WIDTH,
-        borderColor: [C_BORDER.c3, C_BORDER.saas, C_BORDER.saas],
+        borderColor: [
+          IS_V3_THEME ? V3.pink.borders[4] : C_BORDER.c3,
+          IS_V3_THEME ? V3.pink.borders[4] : C_BORDER.saas,
+          IS_V3_THEME ? V3.pink.borders[4] : C_BORDER.saas,
+        ],
       }],
     },
     options: {
@@ -914,17 +980,17 @@ function initDCosts() {
         {
           label: 'Historical',
           data: historical,
-          backgroundColor: C.c4,    // blue
+          backgroundColor: IS_V3_THEME ? V3.pink.fills[2] : C.c4,
           borderWidth: BAR_BORDER_WIDTH,
-          borderColor: C_BORDER.c4,
+          borderColor: IS_V3_THEME ? V3.pink.borders[4] : C_BORDER.c4,
           order: 1,
         },
         {
           label: 'Forecast',
           data: forecast,
-          backgroundColor: C.c8,    // red
+          backgroundColor: IS_V3_THEME ? V3.pink.fills[4] : C.c8,
           borderWidth: BAR_BORDER_WIDTH,
-          borderColor: C_BORDER.c8,
+          borderColor: IS_V3_THEME ? V3.pink.borders[4] : C_BORDER.c8,
           order: 2,
         },
       ],
@@ -966,8 +1032,12 @@ function initDRanking() {
 
   const CATEGORIES = ['Other','Compute','Networking','Storage','AI'];
   const VALUES      = [63, 16, 10, 6, 2];   // %
-  const COLORS      = [C.c8, C.c4, C.c5, C.cloud, C.dc];
-  const BORDERS     = [C_BORDER.c8, C_BORDER.c4, C_BORDER.c5, C_BORDER.cloud, C_BORDER.dc];
+  const COLORS      = IS_V3_THEME
+    ? [V3.green.fills[4], V3.green.fills[3], V3.green.fills[2], V3.green.fills[1], V3.green.fills[0]]
+    : [C.c8, C.c4, C.c5, C.cloud, C.dc];
+  const BORDERS     = IS_V3_THEME
+    ? [V3.green.borders[4], V3.green.borders[4], V3.green.borders[4], V3.green.borders[4], V3.green.borders[4]]
+    : [C_BORDER.c8, C_BORDER.c4, C_BORDER.c5, C_BORDER.cloud, C_BORDER.dc];
   const TOTAL_LABEL = '2.27M';
 
   const centrePlugin = {
@@ -1041,18 +1111,18 @@ function initDSavings() {
         {
           label: 'Executed',
           data: EXECUTED,
-          backgroundColor: C.c5,
+          backgroundColor: IS_V3_THEME ? V3.blue.fills[3] : C.c5,
           borderWidth: 2,
-          borderColor: C_BORDER.c5,
+          borderColor: IS_V3_THEME ? V3.blue.borders[4] : C_BORDER.c5,
           borderSkipped: false,
           stack: 'savings',
         },
         {
           label: 'Potential',
           data: POTENTIAL,
-          backgroundColor: C.c3,
+          backgroundColor: IS_V3_THEME ? V3.blue.fills[1] : C.c3,
           borderWidth: 2,
-          borderColor: C_BORDER.c3,
+          borderColor: IS_V3_THEME ? V3.blue.borders[4] : C_BORDER.c3,
           borderSkipped: false,
           stack: 'savings',
         },
