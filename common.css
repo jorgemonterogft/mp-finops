@@ -1134,6 +1134,13 @@ body {
   justify-content: center;
   gap: 6px;
 }
+.optimizer-stat__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  border: 2px solid transparent;
+  flex-shrink: 0;
+}
 .optimizer-total {
   font-size: 14px;
   color: var(--b2b-brand-blue-02);
@@ -1255,9 +1262,10 @@ body {
   gap: 6px;
 }
 .saas-legend-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 2px;
+  border: 2px solid transparent;
   flex-shrink: 0;
 }
 .saas-breakdown {

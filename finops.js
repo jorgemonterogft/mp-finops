@@ -16,7 +16,7 @@
 // --b2b-support-08-purple: #a51783  →  C.cloud  purple (Cloud brand)
 // --b2b-customer-gold: #ac9316  →  C.saas  gold (SaaS brand, DevOps Azure)
 // --b2b-customer-platinum: #7994a4  →  C.dc  platinum (Datacenter brand, AI)
-const C = {
+let C = {
   c1: '#0CA6B3',  // teal (Mongo)
   c3: '#E46B15',  // orange (alert/potential)
   c4: '#0D82BD',  // blue (info/managed/compute/historical)
@@ -35,6 +35,36 @@ const Z = {
   brand6: '#E8EBED',  // blue-06 (light backgrounds)
 };
 
+const IS_NEW_COLORS_THEME = /finops-new-(product|domain)\.html$/i.test(window.location.pathname);
+
+if (IS_NEW_COLORS_THEME) {
+  C = {
+    ...C,
+    c3: '#FCF0E8',   // alert transparent
+    c8: '#FBEAEA',   // error transparent
+    c4: '#E7F2F8',   // info transparent
+    dc: '#E8E8E8',   // neutral transparent
+    c1: '#ABE8EA',   // support blue transparent
+    cloud: '#FFACCE',// support pink transparent
+    saas: '#FFEAA6', // support yellow transparent
+    c5: '#A3EDB5',   // support green transparent
+  };
+}
+
+const C_BORDER = {
+  c1: IS_NEW_COLORS_THEME ? '#1D6F70' : C.white,
+  c3: IS_NEW_COLORS_THEME ? '#E46B15' : C.white,
+  c4: IS_NEW_COLORS_THEME ? '#0D82BD' : C.white,
+  c5: IS_NEW_COLORS_THEME ? '#15722B' : C.white,
+  c8: IS_NEW_COLORS_THEME ? '#DA2A2A' : C.white,
+  cloud: IS_NEW_COLORS_THEME ? '#901A4D' : C.white,
+  dc: IS_NEW_COLORS_THEME ? '#666666' : C.white,
+  saas: IS_NEW_COLORS_THEME ? '#907215' : C.white,
+  white: IS_NEW_COLORS_THEME ? '#D9D9D9' : Z.brand5,
+};
+const BAR_BORDER_WIDTH = IS_NEW_COLORS_THEME ? 2 : 0;
+const STACKED_BAR_BORDER_SKIPPED = IS_NEW_COLORS_THEME ? false : ['left', 'top', 'bottom'];
+
 function alpha(hex, a) {
   const r = parseInt(hex.slice(1,3),16);
   const g = parseInt(hex.slice(3,5),16);
@@ -52,7 +82,7 @@ Chart.defaults.color       = Z.brand2;
 
 const TOOLTIP_OPTS = {
   backgroundColor: C.white,
-  borderColor: Z.brand5,
+  borderColor: C_BORDER.white,
   borderWidth: 1,
   titleColor: Z.brand1,
   bodyColor: Z.brand2,
@@ -450,9 +480,9 @@ function initMonthly() {
     data: {
       labels: MONTHS,
       datasets: [
-        { label: 'Cloud',       data: MONTHLY_CLOUD, backgroundColor: C.cloud, borderWidth: 2, borderColor: C.white, borderSkipped: false, stack: 'stack' },
-        { label: 'Datacenter',  data: MONTHLY_DC,    backgroundColor: C.dc, borderWidth: 2, borderColor: C.white, borderSkipped: false, stack: 'stack' },
-        { label: 'SaaS',        data: MONTHLY_SAAS,  backgroundColor: C.saas, borderWidth: 2, borderColor: C.white, borderSkipped: false, stack: 'stack' },
+        { label: 'Cloud',       data: MONTHLY_CLOUD, backgroundColor: C.cloud, borderWidth: 2, borderColor: C_BORDER.cloud, borderSkipped: false, stack: 'stack' },
+        { label: 'Datacenter',  data: MONTHLY_DC,    backgroundColor: C.dc, borderWidth: 2, borderColor: C_BORDER.dc, borderSkipped: false, stack: 'stack' },
+        { label: 'SaaS',        data: MONTHLY_SAAS,  backgroundColor: C.saas, borderWidth: 2, borderColor: C_BORDER.saas, borderSkipped: false, stack: 'stack' },
       ],
     },
     options: {
@@ -487,6 +517,8 @@ function initRanking() {
         label: 'Cost',
         data: RANKING_VALUES,
         backgroundColor: C.cloud,
+        borderWidth: BAR_BORDER_WIDTH,
+        borderColor: C_BORDER.cloud,
       }],
     },
     options: {
@@ -543,6 +575,8 @@ function initTrackerServices() {
         label: 'Cost',
         data: SERVICE_VALUES,
         backgroundColor: SERVICE_COLORS,
+        borderWidth: BAR_BORDER_WIDTH,
+        borderColor: C_BORDER.c4,
       }],
     },
     options: {
@@ -566,8 +600,7 @@ function initOptimizer() {
   setH('chart-optimizer', 180);
   const ctx = document.getElementById('chart-optimizer');
   if (!ctx) return;
-  const cssVars = getComputedStyle(document.documentElement);
-  const pendingColor = cssVars.getPropertyValue('--Customer-Platinium').trim() || C.dc;
+  const pendingColor = C.dc;
 
   // Draw centre text plugin
   const plugin = {
@@ -598,7 +631,7 @@ function initOptimizer() {
         data: [45, 15, 40],
         backgroundColor: [C.c5, C.c4, pendingColor],
         borderWidth: 2,
-        borderColor: C.white,
+        borderColor: [C_BORDER.c5, C_BORDER.c4, C_BORDER.dc],
         cutout: '68%',
       }],
     },
@@ -629,9 +662,9 @@ function initOptimizer() {
     data: {
       labels: ACTIONS,
       datasets: [
-        { label: 'Executed', data: [45,20,30,15,25,35,40,10], backgroundColor: C.c5, borderWidth: 2, borderColor: C.white, borderSkipped: ['left', 'top', 'bottom'], stack: 'opt' },
-        { label: 'Managed',  data: [15,10,5,8,12,10,8,5],     backgroundColor: C.c4, borderWidth: 2, borderColor: C.white, borderSkipped: ['left', 'top', 'bottom'], stack: 'opt' },
-        { label: 'Pending',  data: [40,70,65,77,63,55,52,85], backgroundColor: pendingColor, borderWidth: 2, borderColor: C.white, borderSkipped: ['left', 'top', 'bottom'], stack: 'opt' },
+        { label: 'Executed', data: [45,20,30,15,25,35,40,10], backgroundColor: C.c5, borderWidth: 2, borderColor: C_BORDER.c5, borderSkipped: STACKED_BAR_BORDER_SKIPPED, stack: 'opt' },
+        { label: 'Managed',  data: [15,10,5,8,12,10,8,5],     backgroundColor: C.c4, borderWidth: 2, borderColor: C_BORDER.c4, borderSkipped: STACKED_BAR_BORDER_SKIPPED, stack: 'opt' },
+        { label: 'Pending',  data: [40,70,65,77,63,55,52,85], backgroundColor: pendingColor, borderWidth: 2, borderColor: C_BORDER.dc, borderSkipped: STACKED_BAR_BORDER_SKIPPED, stack: 'opt' },
       ],
     },
     options: {
@@ -674,7 +707,7 @@ function initDC() {
         tree: DC_DATA.map(d => ({ ...d })),
         key: 'value',
         borderWidth: 2,
-        borderColor: C.white,
+        borderColor: C_BORDER.white,
         spacing: 2,
         backgroundColor(ctx) {
           const item = ctx.raw?._data;
@@ -771,7 +804,7 @@ function initSaas() {
         data: [SAAS_MONGO, SAAS_DEVOPS],
         backgroundColor: [COLOR_MONGO, COLOR_DEVOPS],
         borderWidth: 2,
-        borderColor: C.white,
+        borderColor: [C_BORDER.c3, C_BORDER.saas],
         cutout: '68%',
       }],
     },
@@ -808,6 +841,8 @@ function initSaas() {
         label: 'Cost',
         data: [75, 35, 20],
         backgroundColor: [COLOR_MONGO, COLOR_DEVOPS, COLOR_DEVOPS],
+        borderWidth: BAR_BORDER_WIDTH,
+        borderColor: [C_BORDER.c3, C_BORDER.saas, C_BORDER.saas],
       }],
     },
     options: {
@@ -880,14 +915,16 @@ function initDCosts() {
           label: 'Historical',
           data: historical,
           backgroundColor: C.c4,    // blue
-          borderWidth: 0,
+          borderWidth: BAR_BORDER_WIDTH,
+          borderColor: C_BORDER.c4,
           order: 1,
         },
         {
           label: 'Forecast',
           data: forecast,
           backgroundColor: C.c8,    // red
-          borderWidth: 0,
+          borderWidth: BAR_BORDER_WIDTH,
+          borderColor: C_BORDER.c8,
           order: 2,
         },
       ],
@@ -929,7 +966,8 @@ function initDRanking() {
 
   const CATEGORIES = ['Other','Compute','Networking','Storage','AI'];
   const VALUES      = [63, 16, 10, 6, 2];   // %
-  const COLORS      = [C.c8, C.c4, C.c5, C.cloud, Z.brand4];  // red, blue, green, purple, grey
+  const COLORS      = [C.c8, C.c4, C.c5, C.cloud, C.dc];
+  const BORDERS     = [C_BORDER.c8, C_BORDER.c4, C_BORDER.c5, C_BORDER.cloud, C_BORDER.dc];
   const TOTAL_LABEL = '2.27M';
 
   const centrePlugin = {
@@ -956,7 +994,7 @@ function initDRanking() {
         data: VALUES,
         backgroundColor: COLORS,
         borderWidth: 2,
-        borderColor: C.white,
+        borderColor: BORDERS,
         cutout: '65%',
       }],
     },
@@ -977,7 +1015,7 @@ function initDRanking() {
   if (!legendEl) return;
   legendEl.innerHTML = CATEGORIES.map((cat, i) => `
     <div class="d-ranking-legend__item">
-      <span class="d-ranking-legend__swatch" style="background:${COLORS[i]}"></span>
+      <span class="d-ranking-legend__swatch" style="background:${COLORS[i]};border-color:${BORDERS[i]}"></span>
       <span class="d-ranking-legend__name">${cat}</span>
       <span class="d-ranking-legend__pct">${VALUES[i]}%</span>
     </div>
@@ -1005,7 +1043,7 @@ function initDSavings() {
           data: EXECUTED,
           backgroundColor: C.c5,
           borderWidth: 2,
-          borderColor: C.white,
+          borderColor: C_BORDER.c5,
           borderSkipped: false,
           stack: 'savings',
         },
@@ -1014,7 +1052,7 @@ function initDSavings() {
           data: POTENTIAL,
           backgroundColor: C.c3,
           borderWidth: 2,
-          borderColor: C.white,
+          borderColor: C_BORDER.c3,
           borderSkipped: false,
           stack: 'savings',
         },
