@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,7 +58,7 @@
 <!-- HEADER -->
 <header class="site-header">
   <!-- Logos: MAPFRE / ZEUS -->
-  <a href="index.html" class="site-header__logos" aria-label="Ir a inicio">
+  <a href="index.html" class="site-header__logos" aria-label="Go to home">
     <!-- MAPFRE wordmark -->
     <img src="assets/mp-new-logo.svg" alt="MAPFRE" class="site-header__mapfre">
     <!-- Separator slash -->
@@ -96,8 +96,8 @@
 <!-- NAV BAR -->
 <nav class="site-navbar">
   <div class="site-navbar__menu">
-    <a class="site-navbar__item site-navbar__item--active" href="finops-v1-domain.html">Dominios</a>
-    <a class="site-navbar__item" href="finops-v1-product.html">Productos</a>
+    <a class="site-navbar__item site-navbar__item--active" href="finops-v1-domain.html">Domains</a>
+    <a class="site-navbar__item" href="finops-v1-product.html">Products</a>
   </div>
   <a class="site-navbar__support" href="#">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--b2b-brand-red-01)" stroke-width="1.5">
@@ -130,7 +130,7 @@
   <div class="page-header">
     <span class="page-header__title">Dashboard</span>
     <div class="page-header__actions">
-      <div class="page-header__tag">Actualizado: 30/01/2026 14:00GMT</div>
+      <div class="page-header__tag">Updated: 30/01/2026 14:00GMT</div>
       <button class="page-header__btn">
         <img src="assets/Icon.svg" width="24" height="24" alt="">
         Actualizar
@@ -151,10 +151,10 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
       </button>
       <div class="page-header__toggle">
-        <button class="page-header__toggle-btn active" data-tooltip="Gráfico" onclick="fpToggleAll(this)">
+        <button class="page-header__toggle-btn active" data-tooltip="Chart" onclick="fpToggleAll(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="12" width="4" height="10"/><rect x="10" y="6" width="4" height="16"/><rect x="18" y="2" width="4" height="20"/></svg>
         </button>
-        <button class="page-header__toggle-btn" data-tooltip="Tabla" onclick="fpToggleAll(this)">
+        <button class="page-header__toggle-btn" data-tooltip="Table" onclick="fpToggleAll(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1.5"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>
         </button>
       </div>
@@ -164,7 +164,7 @@
   <!-- FILTER BAR -->
   <div class="filter-bar">
     <div class="filter-bar__header" onclick="this.closest('.filter-bar').classList.toggle('collapsed')">
-      <span class="filter-bar__title">Filtros</span>
+      <span class="filter-bar__title">Filters</span>
       <button class="filter-bar__toggle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
     </div>
     <div class="filter-bar__fields">
@@ -172,7 +172,7 @@
         <span class="filter-field__label">Period</span>
         <div class="filter-field__control">
           <span class="filter-field__value">Last 12 Months</span>
-          <button class="filter-field__clear" data-tooltip="Limpiar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          <button class="filter-field__clear" data-tooltip="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           <span class="filter-field__arrow"><img src="assets/icon-simple-arrow-down.svg" width="24" height="24" alt=""></span>
         </div>
       </div>
@@ -180,7 +180,7 @@
         <span class="filter-field__label">Platform</span>
         <div class="filter-field__control">
           <span class="filter-field__value">Zeus</span>
-          <button class="filter-field__clear" data-tooltip="Limpiar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          <button class="filter-field__clear" data-tooltip="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           <span class="filter-field__arrow"><img src="assets/icon-simple-arrow-down.svg" width="24" height="24" alt=""></span>
         </div>
       </div>
@@ -188,7 +188,7 @@
         <span class="filter-field__label">Entity</span>
         <div class="filter-field__control">
           <span class="filter-field__value">All entities</span>
-          <button class="filter-field__clear" data-tooltip="Limpiar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          <button class="filter-field__clear" data-tooltip="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           <span class="filter-field__arrow"><img src="assets/icon-simple-arrow-down.svg" width="24" height="24" alt=""></span>
         </div>
       </div>
@@ -196,7 +196,7 @@
         <span class="filter-field__label">Provider</span>
         <div class="filter-field__control">
           <span class="filter-field__value">All providers</span>
-          <button class="filter-field__clear" data-tooltip="Limpiar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+          <button class="filter-field__clear" data-tooltip="Clear"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           <span class="filter-field__arrow"><img src="assets/icon-simple-arrow-down.svg" width="24" height="24" alt=""></span>
         </div>
       </div>
@@ -214,11 +214,11 @@
         <div class="applied-filters__chips">
           <div class="chip">
             Period: Last 12 Months
-            <button class="chip__remove" title="Quitar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></button>
+            <button class="chip__remove" title="Remove"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></button>
           </div>
           <div class="chip">
             Platform: Zeus
-            <button class="chip__remove" title="Quitar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></button>
+            <button class="chip__remove" title="Remove"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></button>
           </div>
         </div>
       </div>
@@ -226,8 +226,8 @@
       <div class="applied-filters__group">
         <span class="applied-filters__label">Ver:</span>
         <div class="applied-filters__chips">
-          <div class="chip chip--plain">Todos</div>
-          <div class="chip chip--plain chip--active">Mis Productos</div>
+          <div class="chip chip--plain">All</div>
+          <div class="chip chip--plain chip--active">My Products</div>
         </div>
       </div>
     </div>
@@ -284,9 +284,9 @@
         <div class="panel__header">
           <span class="panel__title">Total Costs and Forecasting for the next 6 months</span>
           <div class="panel__actions">
-            <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
+            <button class="btn-icon" data-tooltip="View in Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
             <div class="export-dropdown">
-              <button class="btn-icon" data-tooltip="Descargar" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
+              <button class="btn-icon" data-tooltip="Download" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
               <div class="export-menu" role="menu">
                 <button class="export-menu__item" role="menuitem">PDF</button>
                 <button class="export-menu__item" role="menuitem">CSV</button>
@@ -296,7 +296,7 @@
             </div>
             <div class="panel-toggle">
               <button class="panel-toggle__btn active" data-tooltip="Gráfico de barras" onclick="fpToggle('d-costs',this)"><img src="assets/icon-bars-toggle.svg" alt=""></button>
-              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('d-costs',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn" data-tooltip="Table" onclick="fpToggle('d-costs',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
             </div>
           </div>
         </div>
@@ -306,7 +306,7 @@
             <canvas id="chart-d-costs"></canvas>
           </div>
         </div>
-        <div class="resumen"><strong>Resumen:</strong> Total costs last 30 days: <strong>$1.97M</strong> · Forecasted peak in Dec 2025 · Avg. monthly: $1.46M</div>
+        <div class="resumen"><strong>Summary:</strong> Total costs last 30 days: <strong>$1.97M</strong> · Forecasted peak in Dec 2025 · Avg. monthly: $1.46M</div>
       </div>
     </div>
 
@@ -316,9 +316,9 @@
         <div class="panel__header">
           <span class="panel__title">Consumption Ranking by Category</span>
           <div class="panel__actions">
-            <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
+            <button class="btn-icon" data-tooltip="View in Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
             <div class="export-dropdown">
-              <button class="btn-icon" data-tooltip="Descargar" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
+              <button class="btn-icon" data-tooltip="Download" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
               <div class="export-menu" role="menu">
                 <button class="export-menu__item" role="menuitem">PDF</button>
                 <button class="export-menu__item" role="menuitem">CSV</button>
@@ -327,8 +327,8 @@
               </div>
             </div>
             <div class="panel-toggle">
-              <button class="panel-toggle__btn active" data-tooltip="Gráfico" onclick="fpToggle('d-ranking',this)"><img src="assets/icon-chart-toggle.svg" alt=""></button>
-              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('d-ranking',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn active" data-tooltip="Chart" onclick="fpToggle('d-ranking',this)"><img src="assets/icon-chart-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn" data-tooltip="Table" onclick="fpToggle('d-ranking',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
             </div>
           </div>
         </div>
@@ -341,7 +341,7 @@
             <div class="d-ranking-legend" id="d-ranking-legend"></div>
           </div>
         </div>
-        <div class="resumen"><strong>Resumen:</strong> Total consumption: <strong>2.27M</strong> · Largest category: Other (63%) · Compute 16%</div>
+        <div class="resumen"><strong>Summary:</strong> Total consumption: <strong>2.27M</strong> · Largest category: Other (63%) · Compute 16%</div>
       </div>
     </div>
 
@@ -351,9 +351,9 @@
         <div class="panel__header">
           <span class="panel__title">Account Anomaly Detection last 30 days</span>
           <div class="panel__actions">
-            <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
+            <button class="btn-icon" data-tooltip="View in Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
             <div class="export-dropdown">
-              <button class="btn-icon" data-tooltip="Descargar" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
+              <button class="btn-icon" data-tooltip="Download" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
               <div class="export-menu" role="menu">
                 <button class="export-menu__item" role="menuitem">PDF</button>
                 <button class="export-menu__item" role="menuitem">CSV</button>
@@ -484,7 +484,7 @@
             </table>
           </div>
         </div>
-        <div class="resumen"><strong>Resumen:</strong> 10 anomalies detected · Highest deviation: 1.230% (aws-avm-pre-ccacc-mapfrere) · Most affected env: POC</div>
+        <div class="resumen"><strong>Summary:</strong> 10 anomalies detected · Highest deviation: 1.230% (aws-avm-pre-ccacc-mapfrere) · Most affected env: POC</div>
       </div>
     </div>
 
@@ -494,9 +494,9 @@
         <div class="panel__header">
           <span class="panel__title">Savings Distribution by FinOps Action</span>
           <div class="panel__actions">
-            <button class="btn-icon" data-tooltip="Ver en Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
+            <button class="btn-icon" data-tooltip="View in Pluto 365"><img src="assets/icon-pluto-action.svg" alt=""></button>
             <div class="export-dropdown">
-              <button class="btn-icon" data-tooltip="Descargar" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
+              <button class="btn-icon" data-tooltip="Download" aria-haspopup="true" aria-expanded="false"><img src="assets/Export.svg" alt=""></button>
               <div class="export-menu" role="menu">
                 <button class="export-menu__item" role="menuitem">PDF</button>
                 <button class="export-menu__item" role="menuitem">CSV</button>
@@ -506,7 +506,7 @@
             </div>
             <div class="panel-toggle">
               <button class="panel-toggle__btn active" data-tooltip="Gráfico de barras" onclick="fpToggle('d-savings',this)"><img src="assets/icon-bars-toggle.svg" alt=""></button>
-              <button class="panel-toggle__btn" data-tooltip="Tabla" onclick="fpToggle('d-savings',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
+              <button class="panel-toggle__btn" data-tooltip="Table" onclick="fpToggle('d-savings',this)"><img src="assets/icon-table-toggle.svg" alt=""></button>
             </div>
           </div>
         </div>
@@ -526,7 +526,7 @@
             </ul>
           </div>
         </div>
-        <div class="resumen"><strong>Resumen:</strong> Wasted Resources lead at 11.64% · Top action: Shut down PoC accounts</div>
+        <div class="resumen"><strong>Summary:</strong> Wasted Resources lead at 11.64% · Top action: Shut down PoC accounts</div>
       </div>
     </div>
 

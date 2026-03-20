@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,7 +14,7 @@
 
   <!-- ─── HEADER ─────────────────────────────────────────────────────────── -->
   <header class="site-header">
-    <a href="index.html" class="site-header__logos" aria-label="Ir a inicio">
+    <a href="index.html" class="site-header__logos" aria-label="Go to home">
       <img src="assets/mp-new-logo.svg" alt="MAPFRE" class="site-header__mapfre" />
       <span class="site-header__sep">/</span>
       <img src="assets/Zeus.svg" alt="ZEUS" class="site-header__zeus" />
@@ -86,7 +86,7 @@
         <header class="chart-card__header">
           <h2 class="chart-card__title">Bar Chart</h2>
           <div class="chart-card__actions">
-            <button class="chart-card__action-btn" title="Actualizar">
+            <button class="chart-card__action-btn" title="Refresh">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.65 2.35A8 8 0 1 0 15 8h-1.5a6.5 6.5 0 1 1-1.1-3.6L10 6h5V1l-1.35 1.35z" fill="#526570"/></svg>
             </button>
             <div class="chart-card__view-toggle">
@@ -101,9 +101,9 @@
         </header>
         <div class="chart-card__divider"></div>
         <nav class="chart-card__tabs">
-          <button class="chart-card__tab chart-card__tab--active" data-chart="bar" data-mode="basic">Básico</button>
+          <button class="chart-card__tab chart-card__tab--active" data-chart="bar" data-mode="basic">Basic</button>
           <button class="chart-card__tab" data-chart="bar" data-mode="multi">Multi-Dataset</button>
-          <button class="chart-card__tab" data-chart="bar" data-mode="stacked">Apilado</button>
+          <button class="chart-card__tab" data-chart="bar" data-mode="stacked">Stacked</button>
         </nav>
         <div class="chart-card__body">
           <canvas id="barChart"></canvas>
@@ -120,7 +120,7 @@
         <header class="chart-card__header">
           <h2 class="chart-card__title">Line Chart</h2>
           <div class="chart-card__actions">
-            <button class="chart-card__action-btn" title="Actualizar">
+            <button class="chart-card__action-btn" title="Refresh">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.65 2.35A8 8 0 1 0 15 8h-1.5a6.5 6.5 0 1 1-1.1-3.6L10 6h5V1l-1.35 1.35z" fill="#526570"/></svg>
             </button>
             <div class="chart-card__view-toggle">
@@ -135,7 +135,7 @@
         </header>
         <div class="chart-card__divider"></div>
         <nav class="chart-card__tabs">
-          <button class="chart-card__tab chart-card__tab--active" data-chart="line" data-mode="basic">Básico</button>
+          <button class="chart-card__tab chart-card__tab--active" data-chart="line" data-mode="basic">Basic</button>
           <button class="chart-card__tab" data-chart="line" data-mode="multiline">Multi-Línea</button>
           <button class="chart-card__tab" data-chart="line" data-mode="area">Áreas</button>
         </nav>
@@ -154,7 +154,7 @@
         <header class="chart-card__header">
           <h2 class="chart-card__title">Pie Chart</h2>
           <div class="chart-card__actions">
-            <button class="chart-card__action-btn" title="Actualizar">
+            <button class="chart-card__action-btn" title="Refresh">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.65 2.35A8 8 0 1 0 15 8h-1.5a6.5 6.5 0 1 1-1.1-3.6L10 6h5V1l-1.35 1.35z" fill="#526570"/></svg>
             </button>
             <div class="chart-card__view-toggle">
@@ -169,8 +169,8 @@
         </header>
         <div class="chart-card__divider"></div>
         <nav class="chart-card__tabs">
-          <button class="chart-card__tab chart-card__tab--active" data-chart="pie" data-mode="right">Leyenda derecha</button>
-          <button class="chart-card__tab" data-chart="pie" data-mode="bottom">Leyenda abajo</button>
+          <button class="chart-card__tab chart-card__tab--active" data-chart="pie" data-mode="right">Legend right</button>
+          <button class="chart-card__tab" data-chart="pie" data-mode="bottom">Legend bottom</button>
         </nav>
         <div class="chart-card__body">
           <canvas id="pieChart"></canvas>
@@ -187,7 +187,7 @@
         <header class="chart-card__header">
           <h2 class="chart-card__title">Doughnut Chart</h2>
           <div class="chart-card__actions">
-            <button class="chart-card__action-btn" title="Actualizar">
+            <button class="chart-card__action-btn" title="Refresh">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.65 2.35A8 8 0 1 0 15 8h-1.5a6.5 6.5 0 1 1-1.1-3.6L10 6h5V1l-1.35 1.35z" fill="#526570"/></svg>
             </button>
             <div class="chart-card__view-toggle">
@@ -220,7 +220,7 @@
         <header class="chart-card__header">
           <h2 class="chart-card__title">Radar Chart</h2>
           <div class="chart-card__actions">
-            <button class="chart-card__action-btn" title="Actualizar">
+            <button class="chart-card__action-btn" title="Refresh">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.65 2.35A8 8 0 1 0 15 8h-1.5a6.5 6.5 0 1 1-1.1-3.6L10 6h5V1l-1.35 1.35z" fill="#526570"/></svg>
             </button>
             <div class="chart-card__view-toggle">
@@ -236,7 +236,7 @@
         <div class="chart-card__divider"></div>
         <nav class="chart-card__tabs">
           <button class="chart-card__tab chart-card__tab--active" data-chart="radar" data-mode="simple">Simple</button>
-          <button class="chart-card__tab" data-chart="radar" data-mode="comparative">Comparativo</button>
+          <button class="chart-card__tab" data-chart="radar" data-mode="comparative">Comparative</button>
         </nav>
         <div class="chart-card__body">
           <canvas id="radarChart"></canvas>
@@ -253,7 +253,7 @@
         <header class="chart-card__header">
           <h2 class="chart-card__title">Scatter Chart</h2>
           <div class="chart-card__actions">
-            <button class="chart-card__action-btn" title="Actualizar">
+            <button class="chart-card__action-btn" title="Refresh">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.65 2.35A8 8 0 1 0 15 8h-1.5a6.5 6.5 0 1 1-1.1-3.6L10 6h5V1l-1.35 1.35z" fill="#526570"/></svg>
             </button>
             <div class="chart-card__view-toggle">
@@ -268,7 +268,7 @@
         </header>
         <div class="chart-card__divider"></div>
         <nav class="chart-card__tabs">
-          <button class="chart-card__tab chart-card__tab--active" data-chart="scatter" data-mode="basic">Básico</button>
+          <button class="chart-card__tab chart-card__tab--active" data-chart="scatter" data-mode="basic">Basic</button>
           <button class="chart-card__tab" data-chart="scatter" data-mode="multi">Multi-Dataset</button>
         </nav>
         <div class="chart-card__body">
@@ -286,7 +286,7 @@
         <header class="chart-card__header">
           <h2 class="chart-card__title">Area Chart</h2>
           <div class="chart-card__actions">
-            <button class="chart-card__action-btn" title="Actualizar">
+            <button class="chart-card__action-btn" title="Refresh">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.65 2.35A8 8 0 1 0 15 8h-1.5a6.5 6.5 0 1 1-1.1-3.6L10 6h5V1l-1.35 1.35z" fill="#526570"/></svg>
             </button>
             <div class="chart-card__view-toggle">
@@ -302,7 +302,7 @@
         <div class="chart-card__divider"></div>
         <nav class="chart-card__tabs">
           <button class="chart-card__tab chart-card__tab--active" data-chart="area" data-mode="simple">Simple</button>
-          <button class="chart-card__tab" data-chart="area" data-mode="stacked">Apilada</button>
+          <button class="chart-card__tab" data-chart="area" data-mode="stacked">Stacked</button>
         </nav>
         <div class="chart-card__body">
           <canvas id="areaChart"></canvas>
@@ -319,7 +319,7 @@
         <header class="chart-card__header">
           <h2 class="chart-card__title">Horizontal Bar</h2>
           <div class="chart-card__actions">
-            <button class="chart-card__action-btn" title="Actualizar">
+            <button class="chart-card__action-btn" title="Refresh">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.65 2.35A8 8 0 1 0 15 8h-1.5a6.5 6.5 0 1 1-1.1-3.6L10 6h5V1l-1.35 1.35z" fill="#526570"/></svg>
             </button>
             <div class="chart-card__view-toggle">
@@ -335,7 +335,7 @@
         <div class="chart-card__divider"></div>
         <nav class="chart-card__tabs">
           <button class="chart-card__tab chart-card__tab--active" data-chart="hbar" data-mode="simple">Simple</button>
-          <button class="chart-card__tab" data-chart="hbar" data-mode="comparative">Comparativo</button>
+          <button class="chart-card__tab" data-chart="hbar" data-mode="comparative">Comparative</button>
         </nav>
         <div class="chart-card__body">
           <canvas id="hbarChart"></canvas>
