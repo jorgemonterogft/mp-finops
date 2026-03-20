@@ -1,6 +1,6 @@
 (function () {
   const AUTH_KEY = 'mp_finops_auth';
-  const PASSWORD_HASH = 'b6684862de447e7abab76cf520d103e7d75fd0d2be8c08ad6eef9172c92e18df';
+  const PASSWORD_HASH = 'e6069d7fa184caeaf2a55561b29404522af12a64bb44b09614f40ae20221fa5c';
   const LOGIN_PAGE = 'login.html';
 
   function currentPage() {
