@@ -35,12 +35,12 @@
       color: var(--b2b-support-08-purple);
     }
 
-    /* ── Panel 2: Doughnut + legend layout ────────────────── */
-    .d-ranking-layout { display: flex; gap: 24px; align-items: center; }
-    .d-ranking-donut  { position: relative; width: 260px; height: 260px; flex-shrink: 0; }
+    /* ── Panel 2: Doughnut + legend layout ──────────────── */
+    .d-ranking-layout { display: flex; gap: 24px; align-items: stretch; }
+    .d-ranking-donut  { position: relative; flex: 0 0 auto; aspect-ratio: 1; max-width: 100%; }
     .d-ranking-donut canvas { display: block; width: 100% !important; height: 100% !important; }
     .d-ranking-legend { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-    .d-ranking-legend__item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .d-ranking-legend__item { display: flex; align-items: center; gap: 8px; font-size: 14px; }
     .d-ranking-legend__swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
     .d-ranking-legend__name  { flex: 1; color: var(--b2b-brand-blue-02); }
     .d-ranking-legend__pct   { font-weight: 500; color: var(--b2b-brand-blue-01); min-width: 36px; text-align: right; }
