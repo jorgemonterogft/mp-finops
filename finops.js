@@ -130,6 +130,126 @@ const BASE_SCALES = {
   y: { grid: { color: Z.brand6, drawBorder: false }, ticks: { color: Z.brand2 } },
 };
 
+const V3_OUTER_WHITE_STROKE_PLUGIN = {
+  id: 'v3OuterWhiteStroke',
+  afterDatasetsDraw(chart) {
+    if (!IS_V3_THEME) return;
+
+    const ctx = chart.ctx;
+
+    const getElementBorderColor = (element, dataset, dataIndex) => {
+      const resolved = element?.options?.borderColor;
+      if (typeof resolved === 'string') return resolved;
+      if (Array.isArray(resolved)) return resolved[dataIndex] || resolved[0] || '#1A1A1A';
+
+      const raw = dataset?.borderColor;
+      if (typeof raw === 'string') return raw;
+      if (Array.isArray(raw)) return raw[dataIndex] || raw[0] || '#1A1A1A';
+      return '#1A1A1A';
+    };
+
+    const strokeBar = (element, strokeColor, strokeWidth, datasetHorizontal) => {
+      if (!element || typeof element.getProps !== 'function') return false;
+      const p = element.getProps(['x', 'y', 'base', 'width', 'height', 'horizontal'], true);
+
+      const isHorizontal = typeof p.horizontal === 'boolean' ? p.horizontal : !!datasetHorizontal;
+      const hasBase = Number.isFinite(p.x) && Number.isFinite(p.y) && Number.isFinite(p.base);
+      if (!hasBase) return false;
+
+      let left;
+      let right;
+      let top;
+      let bottom;
+
+      if (isHorizontal) {
+        if (!Number.isFinite(p.height) || p.height <= 0) return false;
+        left = Math.min(p.base, p.x);
+        right = Math.max(p.base, p.x);
+        top = p.y - p.height / 2;
+        bottom = p.y + p.height / 2;
+      } else {
+        if (!Number.isFinite(p.width) || p.width <= 0) return false;
+        left = p.x - p.width / 2;
+        right = p.x + p.width / 2;
+        top = Math.min(p.y, p.base);
+        bottom = Math.max(p.y, p.base);
+      }
+
+      const width = right - left;
+      const height = bottom - top;
+      if (!(width > 0 && height > 0)) return false;
+
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = strokeWidth;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.strokeRect(left, top, width, height);
+      return true;
+    };
+
+    const strokeArc = (element, strokeColor, strokeWidth) => {
+      if (!element || typeof element.getProps !== 'function') return false;
+      const p = element.getProps(['x', 'y', 'innerRadius', 'outerRadius', 'startAngle', 'endAngle'], true);
+
+      const valid =
+        Number.isFinite(p.x) &&
+        Number.isFinite(p.y) &&
+        Number.isFinite(p.outerRadius) &&
+        p.outerRadius > 0 &&
+        Number.isFinite(p.startAngle) &&
+        Number.isFinite(p.endAngle);
+      if (!valid) return false;
+
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = strokeWidth;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.outerRadius, p.startAngle, p.endAngle);
+      if (Number.isFinite(p.innerRadius) && p.innerRadius > 0) {
+        ctx.arc(p.x, p.y, p.innerRadius, p.endAngle, p.startAngle, true);
+      }
+      ctx.closePath();
+      ctx.stroke();
+      return true;
+    };
+
+    ctx.save();
+
+    chart.data.datasets.forEach((dataset, datasetIndex) => {
+      const meta = chart.getDatasetMeta(datasetIndex);
+      if (!meta || meta.hidden) return;
+
+      const isBar = meta.type === 'bar';
+      const isArc = meta.type === 'doughnut' || meta.type === 'pie' || meta.type === 'polarArea';
+      if (!isBar && !isArc) return;
+
+      const datasetHorizontal = dataset?.indexAxis === 'y' || chart?.options?.indexAxis === 'y';
+
+      meta.data.forEach((element, dataIndex) => {
+        const borderDark = getElementBorderColor(element, dataset, dataIndex);
+
+        const drew = isBar
+          ? strokeBar(element, '#FFFFFF', 6, datasetHorizontal)
+          : strokeArc(element, '#FFFFFF', 6);
+
+        if (!drew) return;
+
+        if (isBar) {
+          strokeBar(element, borderDark, 2, datasetHorizontal);
+        } else {
+          strokeArc(element, borderDark, 2);
+        }
+      });
+    });
+
+    ctx.restore();
+  },
+};
+
+Chart.register(V3_OUTER_WHITE_STROKE_PLUGIN);
+
 /* ── Toggle chart ↔ table ─────────────────────────────────── */
 const _tableViews = {};
 
