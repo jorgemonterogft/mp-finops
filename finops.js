@@ -230,18 +230,11 @@ const V3_OUTER_WHITE_STROKE_PLUGIN = {
       meta.data.forEach((element, dataIndex) => {
         const borderDark = getElementBorderColor(element, dataset, dataIndex);
 
-        // Draw dark border first (inner stroke)
-        const drew1 = isBar
-          ? strokeBar(element, borderDark, 2, datasetHorizontal)
-          : strokeArc(element, borderDark, 2);
-
-        if (!drew1) return;
-
-        // Draw white border on top (outer stroke)
+        // Draw dark border only
         if (isBar) {
-          strokeBar(element, '#FFFFFF', 2, datasetHorizontal);
+          strokeBar(element, borderDark, 2, datasetHorizontal);
         } else {
-          strokeArc(element, '#FFFFFF', 2);
+          strokeArc(element, borderDark, 2);
         }
       });
     });
